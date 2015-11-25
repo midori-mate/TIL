@@ -1,0 +1,168 @@
+<!-- *******************
+replace()は全部やってくれない
+******************** -->
+<script type="text/javascript">
+"aaa".replace("a", "b") // baa
+"aaa".replace(/a/g, "b") // 正規表現を使え
+</script>
+
+<!-- *******************
+整数変換parseInt()には第二引数を入れろ
+******************** -->
+<script type="text/javascript">
+parseInt("011") // 9になる 先頭が0のときは8進数になる
+parseInt("011", 10) // 11になる
+</script>
+
+<!-- *******************
+nullは計算できるけどundefinedはダメ
+******************** -->
+<script type="text/javascript">
+null + 1 // 1
+undefined + 1 // NaN
+</script>
+
+<!-- *******************
+array.sort()を数値順にソートしたいとき
+******************** -->
+<script type="text/javascript">
+var l = [3,2,1,10,100];
+list.sort(function(a,b) {return a-b}); // [1,2,3,10,100]
+</script>
+
+<!-- *******************
+array.lengthはキーが数字以外の文字列だとカウントしてくれねえ
+******************** -->
+<script type="text/javascript">
+var l = [0,1,2];
+l["3"] = 3; l.length; // 4つだと言われる
+l["a"] = 4; l.length; // これも4つだと言われる
+</script>
+
+<!-- *******************
+jsのarrayはキモい
+******************** -->
+<script type="text/javascript">
+var l = [0,1];
+l.length // 2 うむ。
+l[100] = 100;
+l.length // 101 なぬ…
+</script>
+
+<!-- *******************
+IE8もキモい
+******************** -->
+<script type="text/javascript">
+var l = ["a", "b",];
+l.length // 普通は2だけどIE8だと3になる
+</script>
+
+<!-- *******************
+Date.getMonth()は-1されてる
+******************** -->
+<script type="text/javascript">
+var d = new Date("Nov 01 2012");
+d.getMonth(); // 10になる 英語圏では1月、なんて言わないもんね
+</script>
+
+<!-- *******************
+Date.getYear()は1900年からの差分
+******************** -->
+<script type="text/javascript">
+var d = new Date(2012, 0, 1);
+d.getYear(); // 112 ただしIE8だと西暦
+d.getFullYear(); // 2012
+</script>
+
+<!-- *******************
+Date.parse()はIETF標準日付構文を受けつける
+******************** -->
+<script type="text/javascript">
+Date.parse("Thu, 1 Nov 2012 01:23:45 GMT+0900"); // 1351700625000
+</script>
+
+<!-- *******************
+三項演算子の、TrueとFalseの判定
+PHPと判定結果が違う場合があるってハナシだけど、俺にとってはまず三項演算子って何って感じだ
+{真偽値式} ? {真のとき評価する} : {偽のとき評価する}
+******************** -->
+<script type="text/javascript">
+var res = null ? true : false // false
+var res = undefined ? true : false // false
+var res = "" ? true : false // false
+var res = 0 ? true : false // false
+var res = {} ? true : false // true
+var res = "0" ? true : false // true
+var res = [] ? true : false // true
+</script>
+
+<!-- *******************
+条件付きの関数定義
+functionはスクリプトに存在するだけで最初に読まれるから、ifとか関係ない!
+******************** -->
+<script type="text/javascript">
+if (true) {
+    function foo() {return "AAA";}
+} else {
+    function foo() {return "BBB";}
+}
+foo() // BBBになる firefoxではAAAになるとか
+</script>
+
+<!-- *******************
+無名関数なら大丈夫
+これは、functionはスクリプト開始時に全部読まれるってことだ。
+ただしfirefoxでは、functionがif文の中にあるときは分岐にしたがって読まれる。
+なおpythonもphpもfirefoxと同じ動きをする。
+ちなみにpythonとphpにもfunctionまわりでは違いがあり、
+同じ名前の関数をふたつ定義したら、pythonでは下にあるものが優先されて、phpでは多重定義で怒られる。
+******************** -->
+<script type="text/javascript">
+if (true) {
+    var bar = function() {return "AAA";}
+} else {
+    var bar = function() {return "BBB";}
+}
+bar() // "AAA"
+</script>
+
+<!-- *******************
+ループを使った関数定義
+******************** -->
+<script type="text/javascript">
+var funcs = [];
+for (var i = 0; i < 3; i++) {
+    funcs[i] = function() {return i;};
+}
+funcs[0]() // 3
+funcs[1]() // 3
+funcs[2]() // 0 1 2にしたいのにどれも3(最終的なiの値)になってしまう
+</script>
+
+<!-- *******************
+クロージャを使えばよい
+いや何がなんだかわかんねえ。修行してからまた見てみよう
+******************** -->
+<script type="text/javascript">
+var funcs = [];
+for (var i = 0; i < 3, i++) {
+    funcs[i] = function(i) {
+        return function() {
+            return i;
+        };
+    }(i);
+}
+</script>
+
+<!-- *******************
+あるいはこれでも
+******************** -->
+<script type="text/javascript">
+function createfunc(i) {
+    return function() {return i;};
+}
+var funcs = [];
+for (var i  = 0; i < 3; i++) {
+    funcs[i] = createfunc(i);
+}
+</script>
