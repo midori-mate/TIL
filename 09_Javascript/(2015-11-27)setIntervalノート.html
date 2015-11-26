@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<style type="text/css">
+body {
+    background-color:khaki;}
+.title {
+    width:300px;
+    font-size:15px;
+    border-left:2px solid chocolate;
+    border-bottom:1px solid chocolate;
+    padding-left:5px;}
+.script {
+    width:400px;
+    margin-left:50px;
+    margin-top:5px;
+    margin-bottom:10px;
+    border-bottom:1px solid chocolate;
+    padding:5px;}
+</style>
+<title>JavaScript test</title>
+</head>
+<body>
+
+<!-- *******************
+setIntervalで実行する関数に引数を渡したい1
+******************** -->
+<div class="title">無名関数を使って引数を渡す</div>
+<div class="script">
+<script type="text/javascript">
+function foo(x) {
+    document.getElementById("a").innerHTML = x;
+}
+setInterval(function(){x = new Date().getSeconds();}, 1000);
+setInterval(function(){foo(x)}, 1000);
+</script>
+<div id="a"><script>document.write(new Date().getSeconds());</script></div>
+</div>
+
+<!-- *******************
+setIntervalで実行する関数に引数を渡したい2
+******************** -->
+<div class="title">引数を使わない</div>
+<div class="script">
+<script type="text/javascript">
+function baz() {
+    var z = new Date().getSeconds();
+    document.getElementById("c").innerHTML = z;
+}
+setInterval("baz()", 1000);
+</script>
+<div id="c"><script>document.write(new Date().getSeconds());</script></div>
+</div>
+
+
+
+</body>
+</html>
