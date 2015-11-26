@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<style type="text/css">
+body {
+    background-color:khaki;}
+.title {
+    width:300px;
+    font-size:15px;
+    border-left:2px solid chocolate;
+    border-bottom:1px solid chocolate;
+    padding-left:5px;}
+.script {
+    width:400px;
+    margin-left:50px;
+    margin-top:5px;
+    margin-bottom:10px;
+    border-bottom:1px solid chocolate;
+    padding:5px;}
+</style>
+<title>JavaScript test</title>
+</head>
+<body>
+
+<!-- *******************
+DateとかsetInterval()とか
+******************** -->
+<div class="title">フォームの中にリアルタイム時計</div>
+<div class="script">
+<script type="text/javascript">
+function foo() {
+    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = d.getMonth() + 1;
+    var date = d.getDate();
+    var day = d.getDay();
+    var hours = d.getHours();
+    var minutes = d.getMinutes();
+    var seconds = d.getSeconds();
+    var mes0 = year + "/" + month + "/" + date + " " + days[day];
+    var mes1 = hours + ":" + minutes + ":" + seconds;
+    document.a.b.value = mes0;
+    document.a.c.value = mes1;
+}
+</script>
+<form name="a">
+<input type="text" size="13" name="b">
+<input type="text" size="10" name="c">
+</form>
+<script type="text/javascript">
+setInterval("foo()", 1000);
+</script>
+</div>
+
+<!-- *******************
+onclick
+******************** -->
+<div class="title">移動ボタン</div>
+<div class="script">
+<form>
+<input type="button" value="BACK" onclick="history.back()">
+<input type="button" value="RELOAD" onclick="location.reload(true)">
+<input type="button" value="FORWARD" onclick="history.forward()">
+<input type="button" value="TOP PAGE" onclick="location.href='js.html'">
+</form>
+</div>
+
+<!-- *******************
+******************** -->
+<div class="title">点滅する文</div>
+<div class="script">
+<script type="text/javascript">
+var flag = 0;
+function bar() {
+    if (flag == 0) {
+        document.ten.metsu.value = "HELLO!!";
+        flag = 1;
+    } else {
+        document.ten.metsu.value = "";
+        flag = 0;
+    }
+}
+</script>
+<form name="ten">
+<input type="text" size="20" name="metsu">
+</form>
+<script>
+setInterval("bar()", 500);
+</script>
+</div>
+
+<!-- *******************
+一文字ずつ表示する
+substring(開始位置, 終了位置+1)
+******************** -->
+<div class="title">一文字ずつ表示</div>
+<div class="script">
+<script type="text/javascript">
+var ichi = "WRITE MESSAGE BY CHARACTER";
+var jun = 0;
+function baz() {
+    document.form.message.value = ichi.substring(0, jun) + "_";
+    jun = (jun == ichi.length) ? 0 : jun + 1;
+}
+</script>
+<form name="form">
+<input type="text" size="30" name="message">
+</form>
+<script>
+setInterval("baz()",200);
+</script>
+</div>
+
+<!-- *******************
+substring length
+******************** -->
+<div class="title">流れる文字</div>
+<div class="script">
+<script type="text/javascript">
+var welcome = "Hi, WELCOME TO THIS SITE BABE!!!  "
+welcome += welcome;
+welcome_count = 0;
+function qux() {
+    document.welcome_form.welcome_form1.value = welcome.substring(welcome_count, welcome.length);
+    welcome_count = (welcome_count == (welcome.length / 2) - 1) ? 0 : welcome_count + 1;
+}
+</script>
+<form name="welcome_form">
+<input type="text" size="20" name="welcome_form1">
+</form>
+<script>
+setInterval("qux()", 200);
+</script>
+</div>
+
+
+
+
+</body>
+</html>
