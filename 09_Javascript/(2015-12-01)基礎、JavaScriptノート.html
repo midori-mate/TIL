@@ -1,0 +1,251 @@
+
+<!-- *******************
+デフォルトのスクリプト言語の設定と、スクリプトの記述
+******************** -->
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>JS test<title>
+</head>
+<body>
+<script type="text/javascript">
+document.write("<p>JavaScript test</p>");
+</script>
+</body>
+</html>
+
+<!-- *******************
+外部ファイルにスクリプト記述
+外部ファイル内に
+document.write("<p>JavaScript test</p>");
+とだけ書いて、拡張子は.jsが一般的
+******************** -->
+<script type="text/javascript" src="sample.js">
+</script>
+
+<!-- *******************
+外部ファイルがShift_JISで書かれていたら以下。
+<script></script>
+******************** -->
+<script type="text/javascript" src="sample.js" charset="Shift_JIS">
+</script>
+
+<!-- *******************
+JavaScriptがオフになってるとき別のものを表示する
+******************** -->
+<script type="text/javascript" src="samaple.js">
+</script>
+<noscript>
+<p>JSがオフになってるとき表示する部分</p>
+</noscript>
+
+<!-- *******************
+コメントアウトの方法
+******************** -->
+<script type="text/javascript">
+var num = 10;
+num = num + 5; // 変数の値に5を加算
+/*
+これでもいいよ
+*/
+</script>
+
+<!-- *******************
+文字列
+******************** -->
+<script type="text/javascript">
+"びっくりなんだけど、'これで'オッケーなんだって\n改行はこれね\"エスケープもあるよ"
+</script>
+
+<!-- *******************
+数値
+整数も浮動小数点数も同じデータ型
+整数として書いた場合、整数リテラルと呼ばれ、後者なら浮動小数点リテラルと呼ぶ
+十進数で書いても十六進数で書いてもいい
+******************** -->
+<script type="text/javascript">
+var sum = 0x2a + 0xc5; // 239
+</script>
+
+<!-- *******************
+数値定数
+******************** -->
+<script type="text/javascript">
+Number.NaN // Not a Number 0を0で割ったときなど
+Number.POSITIVE_INFINITY // 1/0とか Infinityと出力される
+Number.NEGATIVE_INFINITY // -Infinityと出力される
+Number.MAX_VALUE
+Number.MIN_VALUE // 表現可能な最大の値と最小の値
+</script>
+
+<!-- *******************
+指数の書き方
+******************** -->
+<script type="text/javascript">
+3.2e2 // 3.2 * 10の二乗
+2.4E-3 // 大文字でもよい。これは2.4 * 10のマイナス三乗
+</script>
+
+<!-- *******************
+論理値とif文
+******************** -->
+<script type="text/javascript">
+10 == 10 // true
+15 < 8 // false
+if (15 < 8) {
+    // 
+}
+</script>
+
+<!-- *******************
+NULL、オブジェクト、配列
+******************** -->
+<script type="text/javascript">
+var num = null;
+var person = {name:"Yamada", age:20};
+var a = "age";
+document.write(person.name, person[a]);
+
+var pref = ["Tokyo", "Oosaka", "Hokkaidou"];
+for (var i = 0; i < pref.length; i++) {
+    document.write("<p>" + pref[i] + "</p>");
+};
+</script>
+
+<!-- *******************
+変数宣言
+変数を利用するときは使用する変数を宣言しねーとダメ。データ型はいらないよ
+******************** -->
+<script type="text/javascript">
+var num; // こんなふうに
+var num, name; // これでもいいよ
+</script>
+
+<!-- *******************
+未定義値
+******************** -->
+<script type="text/javascript">
+var str;
+alert(str); // ダイアログに undefined が出る。
+</script>
+
+<!-- *******************
+算術演算子
+******************** -->
+<script type="text/javascript">
+var num;
+num = 1 + 1
+num = 1 - 1
+num = 1 * 1
+num = 1 / 1 // 割る。整数ではなく浮動小数点数となる
+num = 1 % 1 // 余り
+
+var num1 = 7, num2;
+num2 = num1++;
+alert(num1); // 8
+alert(num2); // 7 文が実行されてからインクリメントが起こる
+
+var num3 = 7, num4;
+num4 = ++num3;
+alert(num3); // 8
+alert(num4); // 8 文が実行される前にインクリメントが起こる
+</script>
+
+<!-- *******************
+ビット演算子
+******************** -->
+<script type="text/javascript">
+</script>
+
+<!-- *******************
+オブジェクト
+JSのオブジェクトはPythonのディクショナリみたいなもん(順番はない)
+var obj = {property:value, property:value} って感じ
+******************** -->
+<script type="text/javascript">
+var obj = {width:100, height:80};
+alert(obj.width); // 値はドット演算子を使って出す
+alert(obj["width"]); // 連想配列形式も可能
+delete obj["width"]; // 削除
+</script>
+
+<!-- *******************
+配列
+******************** -->
+<script type="text/javascript">
+var result = new Array(2);
+result[0] = 0;
+result[1] = 1; // こういうふうに作ってもいいし
+var result = [0, 1]; // こういうふうでもいい
+alert(result[0]); // 参照はもちろんこう
+</script>
+
+<!-- *******************
+関数
+******************** -->
+<script type="text/javascript">
+function compare(x, y) {
+    if (x > y) {
+        alert(x + "は" + y + "より大きい");
+    } else if (x < y) {
+        alert(x + "は" + y + "より小さい"); // elif はこう書く
+    } else {
+        alert("同じじゃ");
+    }
+}
+compare(1, 2);
+function foo(x) {
+    return x * x;
+}
+var x2 = foo(2); // return がないときは undefined が戻り値になる
+</script>
+
+<!-- *******************
+関数リテラル
+無名関数のこと
+******************** -->
+<script type="text/javascript">
+var num = (function(x, y){return (x + y);})(1, 2);
+</script>
+
+<!-- *******************
+型変換
+******************** -->
+<script type="text/javascript">
+var str = "num = " + 1; // 演算子の左辺または右辺が文字列なら文字列じゃない値は文字列に変換される
+var num = "1" - 0; // 0を引くと数値になる
+</script>
+
+<!-- *******************
+ラッパークラス
+Numberクラス Stringクラス Booleanクラス Arrayクラス
+******************** -->
+<script type="text/javascript">
+</script>
+
+<!-- *******************
+グローバル関数
+******************** -->
+<script type="text/javascript">
+perseInt("10aaa"); // 10 文字列を整数に変換 数字じゃなかったらNaNになる
+perseFloat("10.1aaa"); // 10.1 浮動小数点数に変換
+isNaN(NaN); // True
+isNaN(10); // False
+isNaN(nudefined); // undefinedは数値に変換するとNaN
+isNaN("10"); // False
+isNaN("10yen"); // True
+isFinite(10); // True
+isFinite(Infinity); // False
+</script>
+
+<!-- *******************
+Objectクラス
+******************** -->
+<script type="text/javascript">
+var obj = new Object();
+var obj = {}; // 上のと下のは同じ
+var num_obj = new Object(10);
+var num_obj = new Number(10); // 上のと下のは同じ
+</script>
+
+
