@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<style type="text/css">
+body {
+    background-color:khaki;}
+.title {
+    width:300px;
+    font-size:15px;
+    border-left:2px solid chocolate;
+    border-bottom:1px solid chocolate;
+    padding-left:5px;}
+.script {
+    width:400px;
+    margin-left:50px;
+    margin-top:5px;
+    margin-bottom:10px;
+    border-bottom:1px solid chocolate;
+    padding:5px;}
+</style>
+<title>JavaScript test</title>
+</head>
+<body>
+
+<!-- *******************
+正規表現ノート
+******************** -->
+<div class="title"></div>
+<div class="script">
+<script type="text/javascript">
+
+var regexp = new RegExp("pattern");
+// RegExpオブジェクトを作る
+
+var regexp = /pattern/;
+// 正規表現リテラルを使ってこうもかける
+
+"str which i wanna check".match(regexp);
+// こうやって調べる
+
+"str which i wanna check".match(/pattern/);
+// もちろんこうでもいい
+
+/pattern/.test("str");
+/pattern/.exec("str");
+// Regexpオブジェクトのメソッドを使う方法もある
+
+"___aaa___".match(/aaa/);
+// ["aaa", index:3, input:"___aaa___"] ってのがコンソで返ってきた
+
+"___aaa___".match(/bbb/);
+// null が返る
+
+/* ********************
+修飾子
+書き方は /pattern/i あるいは new RegExp("pattern", "i");
+i : 大文字小文字を区別しない
+g : グローバルマッチ
+m : 複数行マッチ
+******************** */
+"TeSt".match(/test/i);
+// マッチする
+
+"aaa_aaa_aaa".match(/aaa/g);
+// ["aaa", "aaa", "aaa"] ってのが返ってきた
+
+"aaa_aaa_aaa".match(/aaa/g).length;
+// マッチした数が返ってくる(3) マッチしなかったらnull
+
+"aAa_AAa_AaA".match(/aaa/ig);
+// 修飾子は組み合わせ可能
+
+/* ********************
+ブラケット
+******************** */
+
+"axaya".match(/[xy]/g);
+// xあるいはyとマッチする
+
+"axaya".match(/[^xy]/g);
+// xあるいはy以外とマッチする
+
+"axaya135".match(/[2-4]/g);
+// 範囲指定
+
+"axaya135".match(/[^2-4]/g);
+// 範囲以外
+
+"axaya135".match(/(xa|ya)/g);
+// 単語指定
+
+/* ********************
+メタキャラクタ
+ . : 単一の文字
+\w : 文字と数字
+\W : 文字と数字以外
+\d : 数字
+\D : 数字以外
+\s : 空白記号
+\S : 空白記号以外
+\b : 先頭、末尾指定
+\B : 先頭、末尾指定　以外
+\O : null
+\f : フォームフィード文字
+\n : ラインフィード
+\r : キャリッジリターン
+\t : タブ
+\v : 垂直タブ
+******************** */
+"abc".match(/./g);
+// 単一の文字とマッチ
+
+"abc".match(/..../g);
+// 連続する四文字はないのでnull
+
+"!?a2".match(/\w/g);
+// aと2のみマッチ
+
+"!?a2".match(/\W/g);
+// !と?のみマッチ
+
+"an apple".match(/\bapp/g);
+// appから始まる単語とマッチ
+
+"an apple".match(/le\b/g);
+// 末尾がleの単語とマッチ
+
+/* ********************
+数量詞
+^ : 先頭
+$ : 末尾
+?= : 特定の文字列があとに続いている文字列
+?!n : 特定の文字列があとに続いていない文字列
+n{X} : X回の繰り返しにマッチ
+n{X,} : X回以上の繰り返し
+n{X,Y} : X回以上Y回以下の繰り返し
+n+ : n{1,}と同じ意味
+n* : nの0回以上の繰り返し
+******************** */
+"how are you?".match(/^how/);
+// 先頭ならマッチ
+
+"hey, how are you?".match(/^how/);
+// 先頭じゃないのでマッチしない
+
+"how are you".match(/you$/);
+// 末尾マッチ
+
+"test teaa tebb".match(/te(?=st)/g);
+// testにのみマッチ
+
+"test teaa tebb".match(/te(?!st)/g);
+// teaa tebbにマッチ
+
+"aaabbcc".match(/a{3}/g);
+// aaa
+
+"ab bb a b".match(/ab*/g);
+// abとaのみマッチ
+
+/* ********************
+プロパティ
+global : gがセットされてるかどうかboolで返す
+ignoreCase : iがセットされてるかどうかboolで返す
+multiline : mがセットされてるかどうかboolで返す
+source : 正規表現パターンをstrで返す
+******************** */
+
+/* ********************
+メソッド
+exec() : 引数で与えた文字列とのマッチ ただしgは無意味
+text() : exec()と同じだけど、配列じゃなくboolを返す
+toString() : 正規表現の文字列を返す
+******************** */
+/hello/g.exec("hello hello");
+// ["hello"]
+
+var regexp = /hello/g;
+regexp.source;
+// "hello"
+regexp.toString();
+// "/hello/g"
+
+/* ********************
+使用例 メールアドレスのバリデーション
+******************** */
+var regexp = /^[A-Za-z0-0]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9_.-]{1,}$/;
+// 先頭の一文字を[]指定, 二文字目から@まで[]の中身を0回以上(1文字でもOK), @を一個, .まで[]を一文字以上, []一文字以上が末尾
+
+/* ********************
+使用例 ヒアドキュメント
+******************** */
+var heredoc = (function () {/*
+lalala
+dadada
+*/}).toString().match(/\n([^]*)\n/)[1];
+console.log(heredoc);
+// \n : 改行から
+// ([^]*) : 内容の部分
+// \n : まで
+// つまり、どうやら...()で括った部分がmatch内容になるらしい...?
+// 無名関数を使っているのは、無名関数がこの場合唯一複数行にわたってもいいものだからかな?
+
+</script>
+</div>
+
+</body>
+</html>
