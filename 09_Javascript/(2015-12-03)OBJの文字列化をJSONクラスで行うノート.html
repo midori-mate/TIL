@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<script src="/jquery/jquery-1.11.3.min.js">
+</script>
+<style type="text/css">
+body {
+    background-color:khaki;}
+.title {
+    width:300px;
+    font-size:15px;
+    border-left:2px solid chocolate;
+    border-bottom:1px solid chocolate;
+    padding-left:5px;}
+.script {
+    width:400px;
+    margin-left:50px;
+    margin-top:5px;
+    margin-bottom:10px;
+    border-bottom:1px solid chocolate;
+    padding:5px;}
+</style>
+<title>JavaScript test</title>
+</head>
+<body>
+
+<!-- *******************
+オブジェクトはalertしたりdocument.write()したりすると[object Object]になっちまう
+ちゃんと中身を表示するには?
+******************** -->
+<div class="title">jquery hello</div>
+<div class="script">
+<script type="text/javascript">
+
+var obj = {a:1, b:2};
+
+obj = JSON.stringify(obj);
+// JSON.stringify()で文字列になる
+document.write(obj);
+
+obj = JSON.parse(obj);
+// JSON.parse()でオブジェクトになる
+document.write(obj);
+
+</script>
+</div>
+
+<form action="js.html" method="post" name="a">
+<input type="hidden" name="b" value="1">
+<input type="button" name="c" value="submit" onclick="window_open();">
+</form>
+
+</body>
+</html>
