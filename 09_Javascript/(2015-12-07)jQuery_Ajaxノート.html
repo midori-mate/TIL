@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<script src="/jquery/jquery-1.11.3.min.js">
+</script>
+<style type="text/css">
+body {
+    background-color:khaki;}
+.title {
+    width:300px;
+    font-size:15px;
+    border-left:2px solid chocolate;
+    border-bottom:1px solid chocolate;
+    padding-left:5px;}
+.script {
+    width:400px;
+    margin-left:50px;
+    margin-top:5px;
+    margin-bottom:10px;
+    border-bottom:1px solid chocolate;
+    padding:5px;}
+</style>
+<title>JavaScript test</title>
+</head>
+<body>
+
+<!-- *******************
+jQueryノート
+******************** -->
+<div class="title">jquery hello</div>
+<div class="script">
+<script type="text/javascript">
+
+$(function() {
+    $.post(
+        'ajax.php',
+        {
+            x: $("div.title").text(),
+            y: 'hoge',
+            z: 'who are ?'
+        },
+        function(data) {
+            $('.view').html(data);
+        },
+        'html'
+    )
+});
+
+$(function() {
+    $.ajax({
+        url:"どこか",
+        type:"postかget",
+        data:{
+            "キー":"ヴァリュー",
+            "キー":"ヴァリュー"
+        },
+        dataType:"htmlとかjson"
+    })
+    .done(function(data, textStatus, jqXHR) {
+        // 成功したときの挙動
+    })
+    .fail(function(data, textStatus, errorThrown) {
+        // 失敗したときの挙動
+    })
+    .always(function(data, textStatus, returnedObject) {
+        // finally
+    })
+})
+
+
+
+
+
+
+
+
+</script>
+</div>
+
+<div class="view"></div>
+
+</body>
+</html>
