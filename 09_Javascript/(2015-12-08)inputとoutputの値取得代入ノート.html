@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0,1 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+</script>
+<style type="text/css">
+body {
+    background-color:khaki;}
+.title {
+    width:30,0,px;
+    font-size:15px;
+    border-left:2px solid chocolate;
+    border-bottom:1px solid chocolate;
+    padding-left:5px;}
+.script {
+    width:40,0,px;
+    margin-left:50,px;
+    margin-top:5px;
+    margin-bottom:10,px;
+    border-bottom:1px solid chocolate;
+    padding:5px;}
+</style>
+<title>JavaScript test</title>
+</head>
+<body>
+
+<!-- *******************
+gccsを作ったときには
+inputとoutput、getEleとforms.elementsは「これにはこれ、これにはこれ」があった気がするんだが
+このノートで試す限りではどちらも問題なく動いている
+******************** -->
+<div class="title">getElementByIdとforms.elements</div>
+<div class="script">
+
+</div>
+
+<div>
+<form id="f">
+input ->
+<input type="text" id="i" value="aa">
+output ->
+<output id="o">bb</output>
+</form>
+</div>
+
+<script type="text/javascript">
+function bar() {
+    document.getElementById("i").value = "かわった";
+    document.getElementById("o").value = "かわった";
+}
+function foo() {
+    console.log(document.forms["f"].elements["i"].value);
+    console.log(document.forms["f"].elements["o"].value);
+    console.log(document.getElementById("i").value);
+    console.log(document.getElementById("o").value);
+}
+function baz() {
+    document.forms["f"].elements["i"].value = "またかわった";
+    document.forms["f"].elements["o"].value = "またかわった";
+}
+
+foo();
+bar();
+foo();
+baz();
+foo();
+
+</script>
+
+</body>
+</html>
