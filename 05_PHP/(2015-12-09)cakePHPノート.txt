@@ -1,0 +1,21 @@
+
+まずパッケージ管理ツールComposerを入れる。https://getcomposer.org/
+php.iniのextension=php_intl.dllを有効にする。
+デスクトップでシェル composer create-project --prefer-dist cakephp/app 名前 でプロジェクト作成。
+    composerは自動で正しい場所にファイルを置き、config/app.phpを作ったりしてくれる。
+プロジェクト内でシェル composer install 。
+cakephpのサーバは bin 内で cake server 。
+    アクセスは http://localhost:8765/ 。正常にできてるかチェックできる。
+
+srcフォルダ内の説明
+console ターミナルから実行するプログラム
+controller 全体を制御するプログラム
+model データアクセスのファイル
+shell consoleと同じようなもん
+template 画面表示のテンプレート
+view 画面表示のファイル
+この中にファイルを設置していくことがcakeのプログラミング。
+
+DBとの接続設定
+configフォルダのapp.php、Datasourcesの'default'キーを自分のDBに合わせて書き換える。
+
