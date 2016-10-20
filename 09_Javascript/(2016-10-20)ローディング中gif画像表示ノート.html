@@ -1,0 +1,63 @@
+ローディング中にgifを出すノート。
+
+<style type="text/css">
+    {* ローディング画像のためのCSS *}
+    div#loadingDiv {
+        width                : 100%;
+        height               : 100%;
+        z-index              : 1;
+        position             : fixed;
+        top                  : 0;
+        left                 : 0;
+        background-color     : #000;
+        filter               : alpha(opacity=65);
+        -moz-opacity         : 0.65;
+        -khtml-opacity       : 0.65;
+        opacity              : 0.65;
+        background-image     : url({url_root_path}/image/ajaxloading.gif);
+        background-position  : center center;
+        background-repeat    : no-repeat;
+        background-attachment: fixed;
+    }
+</style>
+
+<script>
+    //{* ajax処理中にローディングgifを表示する。 *}
+    function showLoadingDiv(flag) {
+        $('div#loadingDiv').remove();
+        if (!flag) return;
+        $('<div id="loadingDiv">').appendTo('body');
+    }
+
+    //{* ajax使う関数 *}
+    function ajaxTotal(singleCall)
+    {
+        showLoadingDiv(true);
+        $.ajax({
+            url: '#',
+            type: 'post',
+            data: {
+                'ajax': 'post',
+            },
+            dataType: 'json',
+        })
+        .done(function(data){
+        })
+        .fail(function(data){
+        })
+        .always(function(data){
+            showLoadingDiv(false);
+        });
+    }
+
+</script>
+
+-------------------- あるいは --------------------
+
+<span id="gif" style="display:none;"><img src="{url_root_path}/image/loading.gif"></span>
+<script>
+    {* ボタンが押されたらgifを表示する *}
+    $('button[name=register]').on('click', function() {
+        $('span#gif').show();
+    });
+</script>
