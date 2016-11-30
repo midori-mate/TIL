@@ -1,0 +1,42 @@
+リバースプロキシ設定メモ(検索用ワード:リバプロ vhosts hosts)
+    vhostsとhostsの汎用設定方法DAZE!
+
+
+★LOCALHOST内だけでやりたいとき★
+■ vhosts
+# ドキュメントルートを指定するパート
+<VirtualHost *:80>
+    ServerName {なんでもいい 例:s.info}
+    DocumentRoot "{ドキュメントルートにしたいところ 例:C:/xampp/htdocs/aaa/html-pub}"
+    RewriteEngine On
+</VirtualHost>
+# 実際に使いたいURLを仮URLへつなげるパート
+<VirtualHost *:80>
+    ServerName {実際に使いたいURL 例:localhost.info}
+    DocumentRoot "{リバプロ元 実際にアクセスされるところ /aaa/フォルダも中に用意しとくこと 例:C:/xampp/htdocs/aaa/reverseproxy}"
+    RewriteEngine On
+    <Location "{もし/aaa/とか必要ならここに書く}/">
+        ProxyPass        {上で設定した仮URL}
+        ProxyPassReverse {上で設定した仮URL}
+    </Location>
+</VirtualHost>
+■ hosts
+    127.0.0.1   {仮URL}
+    127.0.0.1   {実際に使いたいURL}
+
+
+★外部サーバへリバプロしたいとき★
+■ vhosts
+<VirtualHost *:80>
+    ServerName {実際に使いたいURL 例:test.ne.jp777}
+    DocumentRoot "{リバプロ元 実際にアクセスされるところ /aaa/フォルダも中に用意しとくこと 例:C:/xampp/htdocs/test}"
+    RewriteEngine On
+    <Location "{もし/aaa/とか必要ならここに書く}/">
+        ProxyPass        {その外部サーバへフツーにアクセスするときのURL 例:http://aaa.facility-info-provider.ss777/}
+        ProxyPassReverse {その外部サーバへフツーにアクセスするときのURL 例:http://aaa.facility-info-provider.ss777/}
+    </Location>
+</VirtualHost>
+■ hosts
+    127.0.0.1   {実際に使いたいURL 例:test.ne.jp777}
+
+
