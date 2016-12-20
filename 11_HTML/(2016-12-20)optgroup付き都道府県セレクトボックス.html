@@ -1,0 +1,134 @@
+<select id="pref" name="pref">
+    <option value="0">都道府県を選択</option>
+    <optgroup label="北海道・東北">
+        <option {if $searchCond.pref_id==75}selected{/if} value="75" >北海道</option>
+        <option {if $searchCond.pref_id==76}selected{/if} value="76" >青森県</option>
+        <option {if $searchCond.pref_id==77}selected{/if} value="77" >岩手県</option>
+        <option {if $searchCond.pref_id==78}selected{/if} value="78" >宮城県</option>
+        <option {if $searchCond.pref_id==79}selected{/if} value="79" >秋田県</option>
+        <option {if $searchCond.pref_id==80}selected{/if} value="80" >山形県</option>
+        <option {if $searchCond.pref_id==81}selected{/if} value="81" >福島県</option>
+    </optgroup>
+    <optgroup label="関東">
+        <option {if $searchCond.pref_id==87}selected{/if} value="87" >東京都</option>
+        <option {if $searchCond.pref_id==88}selected{/if} value="88" >神奈川県</option>
+        <option {if $searchCond.pref_id==85}selected{/if} value="85" >埼玉県</option>
+        <option {if $searchCond.pref_id==86}selected{/if} value="86" >千葉県</option>
+        <option {if $searchCond.pref_id==82}selected{/if} value="82" >茨城県</option>
+        <option {if $searchCond.pref_id==83}selected{/if} value="83" >栃木県</option>
+        <option {if $searchCond.pref_id==84}selected{/if} value="84" >群馬県</option>
+    </optgroup>
+    <optgroup label="甲信越">
+        <option {if $searchCond.pref_id==93}selected{/if} value="93" >山梨県</option>
+        <option {if $searchCond.pref_id==89}selected{/if} value="89" >新潟県</option>
+        <option {if $searchCond.pref_id==94}selected{/if} value="94" >長野県</option>
+        <option {if $searchCond.pref_id==90}selected{/if} value="90" >富山県</option>
+        <option {if $searchCond.pref_id==91}selected{/if} value="91" >石川県</option>
+        <option {if $searchCond.pref_id==92}selected{/if} value="92" >福井県</option>
+    </optgroup>
+    <optgroup label="東海">
+        <option {if $searchCond.pref_id==97}selected{/if} value="97" >愛知県</option>
+        <option {if $searchCond.pref_id==95}selected{/if} value="95" >岐阜県</option>
+        <option {if $searchCond.pref_id==96}selected{/if} value="96" >静岡県</option>
+        <option {if $searchCond.pref_id==98}selected{/if} value="98" >三重県</option>
+    </optgroup>
+    <optgroup label="関西">
+        <option {if $searchCond.pref_id==101}selected{/if} value="101" >大阪府</option>
+        <option {if $searchCond.pref_id==102}selected{/if} value="102" >兵庫県</option>
+        <option {if $searchCond.pref_id==100}selected{/if} value="100" >京都府</option>
+        <option {if $searchCond.pref_id==99}selected{/if} value="99" >滋賀県</option>
+        <option {if $searchCond.pref_id==103}selected{/if} value="103" >奈良県</option>
+        <option {if $searchCond.pref_id==104}selected{/if} value="104" >和歌山県</option>
+    </optgroup>
+    <optgroup label="中国・四国">
+        <option {if $searchCond.pref_id==105}selected{/if} value="105" >鳥取県</option>
+        <option {if $searchCond.pref_id==106}selected{/if} value="106" >島根県</option>
+        <option {if $searchCond.pref_id==107}selected{/if} value="107" >岡山県</option>
+        <option {if $searchCond.pref_id==108}selected{/if} value="108" >広島県</option>
+        <option {if $searchCond.pref_id==109}selected{/if} value="109" >山口県</option>
+        <option {if $searchCond.pref_id==110}selected{/if} value="110" >徳島県</option>
+        <option {if $searchCond.pref_id==111}selected{/if} value="111" >香川県</option>
+        <option {if $searchCond.pref_id==112}selected{/if} value="112" >愛媛県</option>
+        <option {if $searchCond.pref_id==113}selected{/if} value="113" >高知県</option>
+    </optgroup>
+    <optgroup label="九州">
+        <option {if $searchCond.pref_id==114}selected{/if} value="114" >福岡県</option>
+        <option {if $searchCond.pref_id==115}selected{/if} value="115" >佐賀県</option>
+        <option {if $searchCond.pref_id==116}selected{/if} value="116" >長崎県</option>
+        <option {if $searchCond.pref_id==117}selected{/if} value="117" >熊本県</option>
+        <option {if $searchCond.pref_id==118}selected{/if} value="118" >大分県</option>
+        <option {if $searchCond.pref_id==119}selected{/if} value="119" >宮崎県</option>
+        <option {if $searchCond.pref_id==120}selected{/if} value="120" >鹿児島県</option>
+        <option {if $searchCond.pref_id==121}selected{/if} value="121" >沖縄県</option>
+    </optgroup>
+</select>
+
+
+<select name="state" id="state">
+    <option value="" selected="">都道府県を選択してください</option>
+    <optgroup label="北海道・東北地方">
+    <option value="北海道">北海道</option>
+    <option value="青森県">青森県</option>
+    <option value="岩手県">岩手県</option>
+    <option value="秋田県">秋田県</option>
+    <option value="宮城県">宮城県</option>
+    <option value="山形県">山形県</option>
+    <option value="福島県">福島県</option>
+    </optgroup>
+    <optgroup label="関東地方">
+    <option value="東京都">東京都</option>
+    <option value="神奈川県">神奈川県</option>
+    <option value="埼玉県">埼玉県</option>
+    <option value="千葉県">千葉県</option>
+    <option value="茨城県">茨城県</option>
+    <option value="栃木県">栃木県</option>
+    <option value="群馬県">群馬県</option>
+    </optgroup>
+    <optgroup label="甲信越地方">
+    <option value="山梨県">山梨県</option>
+    <option value="長野県">長野県</option>
+    <option value="新潟県">新潟県</option>
+    </optgroup>
+    <optgroup label="東海地方">
+    <option value="静岡県">静岡県</option>
+    <option value="愛知県">愛知県</option>
+    <option value="岐阜県">岐阜県</option>
+    <option value="三重県">三重県</option>
+    </optgroup>
+    <optgroup label="北陸地方">
+    <option value="富山県">富山県</option>
+    <option value="石川県">石川県</option>
+    <option value="福井県">福井県</option>
+    </optgroup>
+    <optgroup label="近畿地方">
+    <option value="大阪府">大阪府</option>
+    <option value="京都府">京都府</option>
+    <option value="奈良県">奈良県</option>
+    <option value="滋賀県">滋賀県</option>
+    <option value="和歌山県">和歌山県</option>
+    <option value="兵庫県">兵庫県</option>
+    </optgroup>
+    <optgroup label="中国地方">
+    <option value="岡山県">岡山県</option>
+    <option value="広島県">広島県</option>
+    <option value="鳥取県">鳥取県</option>
+    <option value="島根県">島根県</option>
+    <option value="山口県">山口県</option>
+    </optgroup>
+    <optgroup label="四国地方">
+    <option value="香川県">香川県</option>
+    <option value="徳島県">徳島県</option>
+    <option value="愛媛県">愛媛県</option>
+    <option value="高知県">高知県</option>
+    </optgroup>
+    <optgroup label="九州・沖縄地方">
+    <option value="福岡県">福岡県</option>
+    <option value="佐賀県">佐賀県</option>
+    <option value="長崎県">長崎県</option>
+    <option value="大分県">大分県</option>
+    <option value="熊本県">熊本県</option>
+    <option value="宮崎県">宮崎県</option>
+    <option value="鹿児島県">鹿児島県</option>
+    <option value="沖縄県">沖縄県</option>
+    </optgroup>
+</select>
