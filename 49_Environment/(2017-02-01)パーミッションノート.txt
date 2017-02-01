@@ -1,0 +1,18 @@
+パーミッションノート
+
+■ 見方
+■ (ファイルタイプ)(所有者権限)(グループ権限)(everyone権限)  (ディレクトリ数) (所有者) (グループ) (バイト数) (日時) (ファイル名)
+    $ ll
+    dr-xr-xr-x   2 username  staff    68  2  1 12:02 new
+    -rw-r--r--@  1 username  staff     0  2  1 12:04 new2
+
+■ 指定方法
+■ chmod 変更対象 変更方法 変更内容 対象ファイル
+    $ chmod u=rwx file    ユーザに全権限
+    $ chmod g=r   folder  グループに読みのみ フォルダはxがないと開けない
+    $ chmod o=r   file    everyoneに読み
+    $ chmod a=rwx file    全部に全権限
+
+イコールを+にすると付与になる。
+
+
