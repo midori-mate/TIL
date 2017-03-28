@@ -1,0 +1,27 @@
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+</head>
+
+レスポンシブiframeノート<br>
+清凉会サンのストリートビューで例。画面横幅を変えてみてネ。<br>
+参考: <a href="http://mae.chab.in/archives/2527">http://mae.chab.in/archives/2527</a><br>
+
+<div style="margin-bottom:20px;width:50%;">
+    <style>
+        #streetview {
+            position:relative;
+            padding-top:calc(450 / 600 * 100%);
+            /*{* 横幅はiframeに合わせてくれるけど高さは合わせてくれないので、横幅に対する高さのパーセンテージを指定して無理やり拡げる。直接56.25%と指定してもOK。 *}*/
+        }
+        #streetview iframe, #streetview object, #streetview embed {
+            position:absolute; /*{* relativeとの組み合わせで親に合わせた配置になる *}*/
+            top:0; /*{* 親にぴったり合わせる *}*/
+            left:0;
+            width:100%; /*{* 両方100%にすると、横幅に合わせて伸び縮みしてくれるようになる *}*/
+            height:100%;
+        }
+    </style>
+    <div id="streetview">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m0!3m2!1sja!2sus!4v1490683187246!6m8!1m7!1s9H6ftjhMapUAAAQ3m93Pgw!2m2!1d35.10251758862223!2d137.0191727272685!3f163.09!4f-13.969999999999999!5f0.7820865974627469" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+</div>
