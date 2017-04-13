@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+'''python日付時刻ノート このノートはそのまま実行できるよ。(python3.6)
+1. 今の時間は?
+2-1. フォーマットで文字列にするには?
+2-2. じゃ数値にするには?
+3. 明日の時間、数分後の時間は?(加算減算)
+4. 時間の差分を求めるには?
+'''
+
+import time
+import datetime
+
+
+# 1. 今の時間は?
+print(datetime.datetime.now())
+
+
+# 2-1. フォーマットで文字列にするには?
+#     注意:マジで原因不明だが、strftime()で作った「日本語含む」文字列はsublimeビルドで表示できねえ。
+#     普通のprint('あ')は大丈夫なんだけどねえ…
+print(datetime.datetime.now().strftime(
+    'YEAR:%Y MONTH:%m DATE:%d 24HOUR:%H MIN:%M SEC:%S DAY:%A UNIXTIME:%s'
+    ))
+print(datetime.datetime.now().strftime(
+    'HMS:%X'
+    ))
+
+
+# 2-2. じゃ数値にするには?
+print(
+    datetime.datetime.now().year,
+    datetime.datetime.now().month,
+    datetime.datetime.now().day,
+    datetime.datetime.now().hour,
+    datetime.datetime.now().minute,
+    datetime.datetime.now().second
+    )
+
+
+# 3. 明日の時間、数分後の時間は?(加算減算)
+print(datetime.datetime.now() + datetime.timedelta(
+        weeks=1, days=1, hours=1, minutes=-1, seconds=-1
+    ))
+
+
+# 4-1. 時間の差分を求めるには?
+a = datetime.datetime.now()
+# /// なんか時間のかかる処理 ///
+for i in range(100000):
+    pass
+# /// ///
+b = datetime.datetime.now()
+print((b - a).total_seconds())
+
+
+# 4-2. 時間の差分、二通りめ
+a = time.time()
+for i in range(100000):
+    pass
+b = time.time()
+print((b - a))
