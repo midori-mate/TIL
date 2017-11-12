@@ -1,0 +1,33 @@
+
+リソース志向アーキテクチャ
+
+
+2017-11-13.Mon
+https://qiita.com/NagaokaKenichi/items/0f3a55e422d5cc9f1b9c
+    このページを見ながらワイワイやったやつ。
+    「このページ書き方わかりづらい!」
+
+リソース志向アーキテクチャにおけるメソッドの使い方
+    GET    ただリソースを取得する
+    POST   リソースに一件追加する
+    PUT    リソースを一件変更する
+    DELETE リソースを一件削除
+それぞれがSQLの SELECT, INSERT, UPDATE, DELETE に対応してる。リソースはテーブルに対応。
+
+普段<form>タグではPOSTやPUTの使い分けをせず全部POSTでリクエストを行っているが、それはPOSTの本来の使い方ではない。
+POSTで飛んできたデータは追加し、PUTで飛んできたデータは変更、DELETEで飛んできたデータは削除するのが本来の使い方。
+    が、実際には<form>にそんな機能がないので何言ってんだお前? って感じ。
+
+実際にウェブページではどう実装するか
+    /members/          GETすることでメンバの一覧を取得。このURLはメンバ一覧が表示される場でありかつ、メンバひとりひとりにとっての親リソースという扱い。
+    /members/create/   このページから/members/へPOSTすることでメンバをひとり追加。
+    /members/update/   このページから/members/へPUTすることでメンバをひとり修正。
+    /members/delete/   このページから/members/へDELETEすることでメンバをひとり削除。
+
+/members/のページのプログラムには、POSTが来たらINSERT処理へ、PUTが来たらUPDATE処理へ、という処理が書いてある。
+前述の通り<form>にPUTやDELETEはないので、以下のような書き方になってしまうが。
+    <form action="/members/" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+    </form>
+
+こんなところ。
