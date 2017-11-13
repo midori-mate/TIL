@@ -1,0 +1,33 @@
+
+CentOSにPHP7を導入したときのノート
+
+■ もとのやつ消す
+    # /etc/init.d/httpd stop
+    # yum remove php-*
+
+■ インストール
+    # yum install --enablerepo=remi,remi-php71 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-pear php-mysql
+    足りないモジュールがあったら、 # yum install php-devel とかやればOKみたい。
+
+■ httpd.conf
+    #LoadModule php5_module        modules/libphp5.so これをコメントアウト
+    LoadModule php7_module        modules/libphp7.so  これを追加
+
+■ apacheスタート
+    # /etc/init.d/httpd start
+
+問題:apacheでは7.1を読んでくれてるんだけど、コマンドラインで # php --version すると5.5のまま……。
+    pcにあるphpというファイルすべてに--versionしてみた。
+        # find / -name "php" -exec echo {} \; -exec {} --version \;
+    これが7だった!
+        /usr/bin/php/usr/bin/php
+        PHP 7.1.11 (cli) (built: Oct 25 2017 10:38:39) ( NTS )
+        Copyright (c) 1997-2017 The PHP Group
+        Zend Engine v3.1.0, Copyright (c) 1998-2017 Zend Technologies
+    現在のwhichの結果は /usr/local/bin/php だ。これを上のパスに変更しよう。
+    try: /usr/local/bin/phpを消せばいいんじゃねーか?
+        php@に改名したが -bash: /usr/local/bin/php: そのようなファイルやディレクトリはありません と出てしまった。
+    try: # alias php="/usr/bin/php"
+        裏技チックだがこれで解決した。
+    解決
+
