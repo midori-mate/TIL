@@ -1,0 +1,85 @@
+
+############### PHPUnitインストール手順 ################
+
+-----必要な拡張モジュール-----
+
+必須拡張モジュール(標準ではすべて有効)
+    dom,json,pcre,reflection,spl
+コードカバレッジをサポートする
+    Xdebug 2.5.0以降(詳細はcoverage設定.txtファイルに記述)
+    tokenizer(php7は標準で有効)
+XML形式で出力する(いらないかも)
+    xmlwriter
+
+----- インストール手順 -----
+
+1.下記にアクセスしたら.pharがダウンロードされる。
+    https://phar.phpunit.de/phpunit.phar
+
+2.それをパスが通っているところに置く
+    もしくは保存したいディレクトリでコマンドラインを開いて
+    $ wget https://phar.phpunit.de/phpunit.phar
+
+3.ファイル名を変更
+    [phpunit.phar] から [phpunit] に
+
+4.確認
+    cmdで
+    $ phpunit --version
+    [PHPUnit 3.7.21 by Sebastian Bergmann.]
+    と表示されれば成功
+
+[発生した問題]
+<問題>
+    4.
+    PHP Warning:  PHP Startup: Unable to load dynamic library 'C:\xampp\php\ext\php_mysql.dll' - 指定されたモジュールが見つかりません。
+     in Unknown on line 0
+    って出てきた。
+    これは phpunit が勝手にこの中に侵入していって、php_mysql.dllってファイルが必要だからとりに行ったら、無かったよってこと。
+    phpunitの中で使うモジュールみたいやね
+        ちなみにdllファイルはモジュール。モジュールは単体としても機能する部品のこと。
+        開いてみると数字の羅列だったのでなんじゃこりゃと思ったが、phpのプログラムを数字だけで書いてあるらしい。
+        つまり、なんらかの機能を持ったphpファイルを数字にしてあるやつっていう認識でいい(はず)
+<解決法>
+    「php_mysql.dll ダウンロード」 でググって、php_mysql.dll を落としてきて、ここのディレクトリの中に入れれば解決する。
+    Explorer > PC右クリック > プロパティ > システムの詳細設定 > 環境変数 > Path
+    でphpのpathを[C:\Program Files (x86)\PHP\v5.6]から[C:\Xammp\php]にしてPHPを7にした。
+    のにも関わらず、まだエラーが治らない！
+    php.iniでphp_mysql.dllをコメントアウトして無効にしたったwwこれで正常起動完了。
+    なにかこれによるエラーが出たらそん時っしょ！！
+
+<問題>
+    phpuni.bat と phpuni を同じフォルダに置かんとダメみたいだった。
+    一回古いやつを消したかったので phpuni.bat を消したら死んだ。
+    それをゴミ箱から復活させて、phpuni だけ最新の奴を落として、 phpuni_6.5.5.phar をphpuniっていう名前にして保存したら成功した。
+    まあできたしいっか...
+
+
+あとはパスの通っているところに[phpunit]を置けば使える。
+(require_onceとかやってないのに使えたのはなんでなんだろう)
+
+
+----- Macでのインストール方法 -----
+
+    最初に書いておくけど pear.phpunit.de はもう廃止されてるから、これを使うって言ってる情報は全部使えない。
+
+    ■ まずcomposerを入れる
+        $ brew tap homebrew/homebrew-php
+        $ brew install PHP71
+        $ brew install homebrew/php/composer
+
+    ■ phpunitのバージョンを確認する
+        https://phpunit.de/manual/current/ja/installation.html
+        今回はPHPUnit6.5にする
+
+    ■ phpunitをインストール
+        $ composer global require "phpunit/phpunit=6.5.*"
+        $ export PATH=$PATH:~/.composer/vendor/bin/
+            これは .bash_profile にも書く。
+        $ phpunit --version
+
+
+
+[PHPUnitマニュアル(ここに使い方全部書いてある。)]
+
+https://phpunit.de/manual/current/ja/index.html
