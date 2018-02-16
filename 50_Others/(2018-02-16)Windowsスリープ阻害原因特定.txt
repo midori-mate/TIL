@@ -1,0 +1,57 @@
+
+■ Windowsスリープ阻害原因特定
+    cmd(管理者)で
+        powercfg /requests
+
+■ そいつらほっといて寝てくれコマンド
+    powercfg -requestsoverride 【[]で囲まれた種類名】 【プロセス名】 【DISPLAYなどの項目名】
+    powercfg -requestsoverride DRIVER srvnet SYSTEM 
+    powercfg -requestsoverride DRIVER "Realtek High Definition Audio" SYSTEM
+
+■ 無効にしたプロセス確認
+    powercfg -requestsoverride
+
+例:
+    $ powercfg /requests
+        DISPLAY:
+        [PROCESS] \Device\HarddiskVolume2\Program Files (x86)\Google\Chrome\Application\chrome.exe
+        Requested By PepperFlash
+
+        SYSTEM:
+        [DRIVER] Realtek High Definition Audio (HDAUDIO\FUNC_01&VEN_10EC&DEV_0887&SUBSYS_10438616&REV_1003\4&24686cee&0&0001)
+        現在 1 つのオーディオ ストリームが使用中です。
+
+        AWAYMODE:
+        なし。
+
+        実行:
+        なし。
+
+        PERFBOOST:
+        なし。
+
+        ACTIVELOCKSCREEN:
+        なし。
+
+    $ powercfg -requestsoverride PROCESS "\Device\HarddiskVolume2\Program Files (x86)\Google\Chrome\Application\chrome.exe Requested By PepperFlash" DISPLAY
+    $ powercfg -requestsoverride DRIVER "HDAUDIO\FUNC_01&VEN_10EC&DEV_0887&SUBSYS_10438616&REV_1003\4&24686cee&0&0001" SYSTEM
+
+
+powercfg -requestsoverride【[]で囲まれた種類名】【プロセス名】【DISPLAYなどの項目名】
+
+
+
+
+
+■ スリープ解除履歴見方
+    コンパネ > 管理ツール > イベントビューア
+    左の Windowsログ > システムを右クリック > 現在のログをフィルター
+    イベントソースから Power-Troubleshooter をチェックしてOK
+
+
+■ UpdateOrchestrator/Reboot
+    スリープ状態の解除元: タイマー - Windows は、スリープ状態の解除を要求したスケジュールされたタスク 'NT TASK\Microsoft\Windows\UpdateOrchestrator\Reboot' を実行します。
+    このタスク、クソなことに変更ができなかった。
+    コンパネ > 電源オプション > プラン設定を変更 > 詳細な電源設定の変更 > スリープ > スリープ解除タイマーの許可 > 無効
+    
+
