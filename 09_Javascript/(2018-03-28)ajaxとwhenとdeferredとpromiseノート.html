@@ -1,0 +1,68 @@
+ローディング中にgifを出すノート。
+
+Deferredにpromiseってのが含まれてて、
+resolvedとrejectedという属性を持つことができる。
+resolvedが「ajax成功したヨ」って合図になる。
+whenの引数内が全部resolvedになったとき、whenのdoneが動き出す。
+
+<script>
+
+    $(window).load(function() {
+        ajaxInitialize();
+    });
+
+    function ajaxInitialize()
+    {
+        $.when(
+            ajaxTotal(false),
+            ajaxThreedays(false)
+        )
+        .done(function() {
+        })
+        .fail(function() {
+        });
+    }
+
+    function ajaxTotal(singleCall)
+    {
+        var d = new $.Deferred;
+        $.ajax({
+            url: '#',
+            type: 'post',
+            data: {
+                'ajax': 'post',
+            },
+            dataType: 'json',
+        })
+        .done(function(data){
+            d.resolve();
+        })
+        .fail(function(data){
+            d.reject();
+        });
+        return d.promise();
+    }
+
+    function ajaxThreedays(singleCall)
+    {
+        var d = new $.Deferred;
+        $.ajax({
+            url: '#',
+            type: 'post',
+            data: {
+                'ajax': 'post',
+            },
+            dataType: 'json',
+        })
+        .done(function(data){
+            d.resolve();
+        })
+        .fail(function(data){
+            d.reject();
+        });
+        return d.promise();
+    }
+
+</script>
+
+
