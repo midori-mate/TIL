@@ -1,0 +1,58 @@
+7つのAJAXを順繰りに実行するノート
+
+ajax関数の詳細については気にしないでね。
+とりあえずこれで可能。
+<script>
+    $.when(ajaxTotal(false))
+    .always(function() {
+        $.when(ajaxToday(false))
+        .always(function() {
+            $.when(ajaxYesterday(false))
+            .always(function() {
+                $.when(ajaxDbyesterday(false))
+                .always(function() {
+                    $.when(ajaxVisitors(false, '{$initialQueries.visitors.startdate}', '{$initialQueries.visitors.enddate}', '{$initialQueries.visitors.visitors_select}'))
+                    .always(function() {
+                        $.when(ajaxPageaccess(false, '{$initialQueries.pageaccess.startdate}', '{$initialQueries.pageaccess.enddate}'))
+                        .always(function() {
+                            $.when(ajaxKeyword(false, '{$initialQueries.keyword.startdate}', '{$initialQueries.keyword.enddate}', '{$initialQueries.keyword.keyword_select}'))
+                            .always(function() {
+                                showLoadingDiv(false);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+</script>
+ただコレだと、7つじゃなくて100個になったとき入れ子がクソみたいな長さになってしまうのが問題。
+
+そこで、再帰関数を使う。
+<script>
+    function ajaxRecursive(i)
+    {
+        var funcList = [
+            function() { return ajaxTotal(false) },
+            function() { return ajaxToday(false) },
+            function() { return ajaxYesterday(false) },
+            function() { return ajaxDbyesterday(false) },
+            function() { return ajaxVisitors(false, '{$initialQueries.visitors.startdate}', '{$initialQueries.visitors.enddate}', '{$initialQueries.visitors.visitors_select}') },
+            function() { return ajaxPageaccess(false, '{$initialQueries.pageaccess.startdate}', '{$initialQueries.pageaccess.enddate}') },
+            function() { return ajaxKeyword(false, '{$initialQueries.keyword.startdate}', '{$initialQueries.keyword.enddate}', '{$initialQueries.keyword.keyword_select}') },
+        ];
+
+        if (i >= funcList.length) {
+            return;
+        }
+
+        $.when(funcList[i]())
+        .done(function() {
+            ajaxRecursive(i + 1);
+        })
+        .always(function() {
+        });
+    }
+</script>
+これで解決★
+
