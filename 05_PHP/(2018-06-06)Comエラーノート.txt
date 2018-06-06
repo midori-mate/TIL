@@ -1,0 +1,7 @@
+
+Hフレームワークでたびたび起こる問題。
+
+new Com というところでエラーが出る。対処法は php.ini にこれを書く。
+
+[PHP_COM_DOTNET]
+extension=php_com_dotnet.dll
