@@ -1,0 +1,43 @@
+
+Vagrant VitualBox ノート
+
+・ 何がしたい
+    1. 実行環境を開発と本番で揃えたい。
+    2. 開発環境を構築する際に個人のローカル環境に依存しないようにしたい。
+    3. すぐに使える仮想環境を構築したい。
+    4. 環境構築を自動化したい。
+    5. チームで同一の環境を簡単に構築したい。
+
+・ Vagrant でよく使う用語
+    ホストOS ぼくのMacのこと
+    ゲストOS VMにしたいCentOSのこと
+
+・ VirtualBox インストール
+    https://www.virtualbox.org/wiki/Downloads
+    OS X hosts ってやつ。
+    確認
+        $ VBoxManage -v
+        5.2.14r123301
+
+・ Vagrant で VBox を操作するための拡張パック。
+    同ページの VirtualBox Extension Pack > All suported platforms
+    サクッとインストールできる。
+    ようこそ VirtualBox へ! って出る。
+
+・ Vagrant インストール
+    https://www.vagrantup.com/downloads.html
+    確認
+        $ vagrant -v
+        Vagrant 2.1.2
+
+・ Vagrantfile を作成
+    $ cd {適当なディレクトリ}
+    $ vagrant plugin repair
+    $ vagrant init
+    Vagrantfile ができる。なんじゃこら。
+
+・ Vagrant を起動
+    Vagrantfile があるところで
+    $ vagrant up
+
+
