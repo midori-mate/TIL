@@ -60,15 +60,16 @@ if __name__ == '__main__':
 
         # executorにタスクをsubmitし、同数だけfutureオブジェクトを得る。
         # わざわざYEAHとかやってんのは引数の渡し方を示したいだけ。
-        futures = [executor.submit(func, 'YEAH') for func in [foo, bar]]
+        futures = [executor.submit(func, 'YEAH') for func in [bar, foo]]
 
         # 各futureの完了を待ち、結果を取得。
+        # こっちは終わった順に拾う。だからfooのほうが先に返ってくる。
         for future in concurrent.futures.as_completed(futures):
             # 各関数の戻り値。
             print(future.result())
 
         # ↑のやつは「終わったやつから拾う」
-        # こっちは呼び出し順に拾う。
+        # こっちは呼び出し順に拾う。だからbarのほうが時間かかるのに先に返ってくる。
         # (done, notdone) = concurrent.futures.wait(futures)
         # for future in futures:
         #     print(future.result())
@@ -90,6 +91,7 @@ if __name__ == '__main__':
 # ================================================
 
 # 待たないのでこっちは時間が測れん。
+print('=================')
 
 # 引数max_workersのデフォルトは、現在のCPUの限界値。
 executor = concurrent.futures.ThreadPoolExecutor()
