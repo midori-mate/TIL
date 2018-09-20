@@ -71,3 +71,7 @@ C#.sublime-build
 // { "keys": ["super+alt+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 { "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 ```
+
+### 04. coffee script のシンタックスハイライト
+
+Better CoffeScript をパッケージインストール。ファイルの種類を Better CoffeeScript に合わせる。
