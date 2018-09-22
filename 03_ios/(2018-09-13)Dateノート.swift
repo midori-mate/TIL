@@ -1,7 +1,7 @@
 //: Playground - noun: a place where people can play
 
 // swift4 Dateノート
-// PlayGroundに貼るとわかりやすいよ!
+// PlayGroundに貼って実行するとわかりやすいよ!
 
 
 // これがないとDateもFormatterも使えん。
@@ -25,5 +25,3 @@ print(nowString, "<- これはちゃんと日本時間が表示されてるは�
 // 時間をずらす。たとえば1時間後。
 let plusHourDate:Date = Date(timeInterval: 60*60, since: nowDate)
 print(plusHourDate, "<- これもDateなのでGMTのはず。")
-
-
