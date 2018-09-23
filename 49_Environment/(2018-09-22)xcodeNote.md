@@ -1,12 +1,30 @@
 
-xcodeノート
+xcodeNote
 ===
+
+xcodeはクソ。
+
+- swiftの仕様バージョンごとに変わりすぎ。ネットのtipsが役に立たない。
+- \*.\* ごとにエラーが出るってどういうことだよ。互換なさすぎ。 
+- エラー文がわけわかんない。ひとつのエラー文に対し問題のバリエーションが多すぎ。
+- メモリ食い過ぎ。
+- 公式ドキュメントが読みづらい。PHPは高望みとしてもPythonくらいにはして。
+    [https://developer.apple.com/documentation](https://developer.apple.com/documentation)
+- 公式にプラグインを入れられない。プラグインを入れるにはアンサインしないといけない。
+- エディタがSublimeに比べて機能貧弱。
+
 
 ## Shortcuts
 
 ### 00. 変更方法
 
 Cmd+, > Key Binding > Key Binding Set > Manage Key Binding > + Duplicate Default で自分専用を増やす。
+
+    Show Previous Tab    Cmd+Opt+←
+    Show Next Tab        Cmd+Opt+→
+    Select Line          Cmd+L
+    Delete Line          Cmd+Shift+X  ほんとは無選択時にCmd+Xで行ごと切り取りがほしいんだよ。なんでねーの。
+                                      無選択時Cmd+Cで行コピーができないのも不便。
 
 ### 01. ビルド
 
