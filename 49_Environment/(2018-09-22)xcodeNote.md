@@ -4,6 +4,10 @@ xcodeノート
 
 ## Shortcuts
 
+### 00. 変更方法
+
+Cmd+, > Key Binding > Key Binding Set > Manage Key Binding > + Duplicate Default で自分専用を増やす。
+
 ### 01. ビルド
 
     Cmd+B          ビルド。
@@ -30,7 +34,7 @@ xcodeノート
     Cmd+Ctr+J         定義に移動。慣れるとClickより速い。
     Cmd+Ctr+←         戻る的な動作のショートカット。→で進める。
     Cmd+T             タブの追加。あらかじめstoryboardは開いておくといい。
-    Cmd+Shift+[or]    タブの移動。
+    Cmd+Shift+[or]    タブの移動。(ぼくは Cmd+Opt+左右 に変更。)
     Cmd+Opt+/         Docコメント。
 
 ### 05. Git
