@@ -28,6 +28,7 @@ Cmd+, > Key Binding > Key Binding Set > Manage Key Binding > + Duplicate Default
     Select Line          Cmd+L
     Delete Line          Cmd+Shift+X  ほんとは無選択時にCmd+Xで行ごと切り取りがほしいんだよ。なんでねーの。
                                       無選択時Cmd+Cで行コピーができないのも不便。
+    Jump to Definition   Cmd+Ctrl+F   定義ジャンプするときはマウス握ってるから左手だけでやりたい。
 
 ### 01. ビルド
 
