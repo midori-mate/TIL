@@ -28,6 +28,7 @@ Cmd+, > Key Binding > Key Binding Set > Manage Key Binding > + Duplicate Default
     Select Line          Cmd+L
     Delete Line          Cmd+Shift+X  ほんとは無選択時にCmd+Xで行ごと切り取りがほしいんだよ。なんでねーの。
                                       無選択時Cmd+Cで行コピーができないのも不便。
+    Jump to Definition   Cmd+Ctrl+F   定義ジャンプするときはマウス握ってるから左手だけでやりたい。
 
 ### 01. ビルド
 
@@ -42,6 +43,7 @@ Cmd+, > Key Binding > Key Binding Set > Manage Key Binding > + Duplicate Default
     Cmd+0~7        ナビゲータエリアの表示/非表示切替は0。
     Cmd+Opt+0~7    ユーティリティエリアの表示/非表示切替は0。
     Cmd+Shift+Y    デバッグエリアの表示/非表示切替。
+    Cmd+Shift+L    ライブラリの表示。storyboardにViewとか置くとき要るやつ。
 
 ### 03. デバッグ
 
