@@ -199,6 +199,13 @@
     $ git rebase HEAD~1 --committer-date-is-author-date
     $ git log --pretty=fuller  # 変わっていること確認したいとき。
 
+### 21. windows10 cmdで日本語が文字化けする
+    $ git config --global core.pager "LESSCHARSET=utf-8 less"
+
+    ・ .gitconfigではこんな感じになる。
+        [core]
+            pager = LESSCHARSET=utf-8 less
+
 
 ***
 
