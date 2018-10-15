@@ -32,18 +32,30 @@ Visual Studio 2017 Note
     Ctrl+,                      ソリューション内ファイル移動
     Ctrl+Alt+pageup,pagedown    タブ移動
     Ctrl+F4                     タブ閉じる
-    Shift+Ctrl+>                フォントサイズ
+
     Ctrl+M,Ctrl+M               アウトライン切り替え  これは使いこなせば便利かな?
+    Ctrl+M,Ctrl+L               すべてのアウトライン切り替え
+
     Ctrl+X                      無選択で行まるごと切り取り  Sublimeと同じだね
+
     Ctrl+K,Ctrl+C               コメント ただし拡張機能で Ctrl+/ にするけどねぼくは
     Ctrl+K,Ctrl+U               コメント解除 同上
+
     F12                         定義へ移動
     Ctrl+F12                    実装へ移動
     Ctrl+-                      ↑から戻る
     Shift+F12                   参照をリストアップ
     Ctrl+Shift+12               エラー箇所へ飛ぶ
 
-### 05. Git
+### 05. TODO管理
+
+- ショートカットは `Ctrl+\,t`
+- 表示 > タスク一覧 でもOK
+- タスクのトークンを追加とかしたいとき ツール > オプション > 環境 > タスク一覧
+    - ここにもともと3つ登録されてるんだけど……こういう意味なんだって。
+    - HACK  : 要改変
+    - TODO  : 未実装
+    - UNDONE: 作業中
 
 ### 06. マルチカーソル(こっちではマルチキャレットと呼ばれてる)
 
@@ -61,6 +73,8 @@ DLしてからVSを全部とじると VSIXインストーラー が出てくる�
 
 Ctrl + / でコメントアウトができる。そりゃコメントアウトのショトカはこれですよねえ。
 
+むしろこれ目当てで拡張機能に手を出した。
+
 ### Custom Document Well
 
 ツール > オプション > Productivity Power Tools > Tab Well Appearance and Behaviour
@@ -70,6 +84,10 @@ Ctrl + / でコメントアウトができる。そりゃコメントアウト�
 ### Git Diff Margin
 
 Git上での変更点をエディタに表示。必須ってわけじゃないけどSublimeで入れてるし、同じ感じにするかと。
+
+### Open on GitHub
+
+プロジェクトが GitHub と連携しているときの話だけど、コード上から GitHub のページを開ける。「ちょいここ見てー」ってときに欲しくなった。
 
 ## 場合別 tips
 
