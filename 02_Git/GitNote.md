@@ -206,6 +206,14 @@ GitNote
         [core]
             pager = LESSCHARSET=utf-8 less
 
+### 22. git をビルトインではなくて brew 版にする
+    $ brew doctor
+    $ brew update
+    $ brew install git
+    これだけだとまだMacデフォルトのやつ /usr/bin/git が呼び出されちゃう。
+    だから .bash_profile に追加
+        export PATH=/usr/local/bin:$PATH
+
 
 ***
 
