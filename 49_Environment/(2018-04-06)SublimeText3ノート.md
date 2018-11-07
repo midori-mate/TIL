@@ -75,3 +75,34 @@ C#.sublime-build
 ### 04. coffee script のシンタックスハイライト
 
 Better CoffeScript をパッケージインストール。ファイルの種類を Better CoffeeScript に合わせる。
+
+### 05. Table Editor パッケージ
+
+CSVを見るためにわざわざ Excel とかいうクソ重ソフトを開いてないか?  Sublimeちゃんでいけるで。
+
+`install > Table Editor`
+
+#### CSV整形
+
+CSVを選択し、 `Ctrl+k Shift+\`
+
+```
+# これが
+a,b,c
+1111111111111,1111111111,22222
+3sdfasd,asfsdaf,fsafa
+```
+
+```
+# こうなる
+| a             | b          | c     |
+| 1111111111111 | 1111111111 | 22222 |
+| 3sdfasd       | asfsdaf    | fsafa |
+```
+
+#### markdown内のTableを整形
+
+`Table Editor: Enable for current syntax`  
+`Table Editor: Set table syntax 'Simple' for current view`
+
+をやった上で、表のなかで tab 押せば整形できるらしいけどキーバインドが競合してできない。キーバインドはとにかく面倒くさいから今はやらない。
