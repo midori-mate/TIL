@@ -136,3 +136,11 @@ Table Editor: Set table syntax 'Simple' for current view
 ```
 
 この中のどっかで `table_editor_next_field`, `table_editor_previous_field`, `table_editor_next_row` に設定したショートカットを打つ。テーブルの上を Excel のように移動できるぞ。
+
+### 06. つーかショートカットがかぶるのマジ面倒くさいんだけど
+
+かぶること自体は防げないが、かぶったあと「何がかぶってんのか」をサクッと見れるパッケージがこれ。
+
+#### FindKeyConflicts
+
+コマンドパレットから `All Conflicts` で一覧が見れる。
