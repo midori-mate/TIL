@@ -82,9 +82,28 @@ CSVを見るためにわざわざ Excel とかいうクソ重ソフトを開い�
 
 `install > Table Editor`
 
+#### まず
+
+こいつはかなり keymap が他とかぶるから変更したほうがいい。
+
+1. `Sublime Text 3/Packages/Table Editor/Default (OSX).sublime-keymap` 作成。
+2. 中身は `Preference > Package Settings > Table Editor > Key Bindings - Default` の内容。
+
+```
+# 変更ガイド
+
+# md の table
+table_editor_next_field     : 次のセルに移動。デフォルトは tab で動作しない。 super+right とかよさげ。
+table_editor_previous_field : 前のセルに移動。 super+left とかよさげ。
+table_editor_next_row       : 次の行に移動。とにかく enter から ctrl+enter とかに変える。
+
+# csv の整形
+table_editor_csv_to_table   : デフォルトは ctrl+k,| なんだがそれはカタカナ変換だ!!!!! 他のキーに変える。
+```
+
 #### CSV整形
 
-CSVを選択し、 `Ctrl+k Shift+\`
+CSVを選択し `table_editor_csv_to_table` に設定してるショートカット。
 
 ```
 # これが
@@ -100,9 +119,20 @@ a,b,c
 | 3sdfasd       | asfsdaf    | fsafa |
 ```
 
-#### markdown内のTableを整形
+#### markdown 内の Table を整形
 
-`Table Editor: Enable for current syntax`  
-`Table Editor: Set table syntax 'Simple' for current view`
+コマンドパレットでこれ打ってから
 
-をやった上で、表のなかで tab 押せば整形できるらしいけどキーバインドが競合してできない。キーバインドはとにかく面倒くさいから今はやらない。
+```
+Table Editor: Enable for current syntax
+Table Editor: Set table syntax 'Simple' for current view
+```
+
+こういうのを用意して
+
+```
+|||
+|-
+```
+
+この中のどっかで `table_editor_next_field`, `table_editor_previous_field`, `table_editor_next_row` に設定したショートカットを打つ。テーブルの上を Excel のように移動できるぞ。
