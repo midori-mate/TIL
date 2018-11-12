@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>notNote</title>
+
+  <style>
+    /* .style-on がついてないdiv以下のみスタイル適用 */
+    div:not(.style-on) ul li {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>普通 CSS は「class付きの要素にデザインを貼る」ものだが、「classのない要素にデザインを貼る」話。</p>
+
+  <div class="">
+    <ul>
+      <li>DIV class なしのリスト 1層目
+        <ul>
+          <li>2層目
+            <ul>
+              <li>3層目</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="style-on">
+    <ul>
+      <li>DIV class=style-on のリスト 1層目
+        <ul>
+          <li>2層目
+            <ul>
+              <li>3層目</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>
