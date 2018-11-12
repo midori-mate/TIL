@@ -3,18 +3,41 @@
 
 <head>
   <title>notNote</title>
-
-  <style>
-    /* .style-on がついてないdiv以下のみスタイル適用 */
-    div:not(.style-on) ul li {
-      list-style: none;
-    }
-  </style>
 </head>
 
 <body>
 
-  <p>普通 CSS は「class付きの要素にデザインを貼る」ものだが、「classのない要素にデザインを貼る」話。</p>
+  <hr />
+
+  <!-- bodyの中の「style-onではない要素」の中のstrong -->
+  <style>
+    /* :not(.style-on)とだけ指定してもできそうなもんだが、要素名divをつけないと反映されない……。 */
+    body div:not(.style-on) strong {
+      color: gray;
+    }
+  </style>
+
+  <div class="">
+    <p>
+      DIV class なしの pタグ そして<strong>strongタグ</strong>
+    </p>
+  </div>
+
+  <div class="style-on">
+    <p>
+      DIV class=style-on の pタグ そして<strong>strongタグ</strong>
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- bodyの中の「style-onではない要素」の中のli -->
+  <style>
+    /* 同じく、要素名まで指定しないと反映されない。 */
+    body div:not(.style-on) li {
+      list-style: none;
+    }
+  </style>
 
   <div class="">
     <ul>
@@ -43,6 +66,7 @@
       </li>
     </ul>
   </div>
+
 </body>
 
 </html>
