@@ -274,6 +274,12 @@ GitNote
         Active にチェック入れる。
         Webhookにさっきのコピーをペースト。
 
+### Issue と MergeRequest のテンプレート
+    `.gitlab/issue_templates/***.md`
+    `.gitlab/merge_request_templates/***.md`
+    ***部分が issue と merge request のところで選べるようになる。
+
+
 ***
 
 ## これを書いてる頃にはもう出会わないんだけど昔のエラーノート
