@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>notNote</title>
+</head>
+
+<body>
+
+  <hr />
+
+  <!-- bodyの中の「style-onではない要素」の中のstrong -->
+  <style>
+    /* :not(.style-on)とだけ指定してもできそうなもんだが、要素名divをつけないと反映されない……。 */
+    body div:not(.style-on) strong {
+      color: gray;
+    }
+  </style>
+
+  <div class="">
+    <p>
+      DIV class なしの pタグ そして<strong>strongタグ</strong>
+    </p>
+  </div>
+
+  <div class="style-on">
+    <p>
+      DIV class=style-on の pタグ そして<strong>strongタグ</strong>
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- bodyの中の「style-onではない要素」の中のli -->
+  <style>
+    /* 同じく、要素名まで指定しないと反映されない。 */
+    body div:not(.style-on) li {
+      list-style: none;
+    }
+  </style>
+
+  <div class="">
+    <ul>
+      <li>DIV class なしのリスト 1層目
+        <ul>
+          <li>2層目
+            <ul>
+              <li>3層目</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="style-on">
+    <ul>
+      <li>DIV class=style-on のリスト 1層目
+        <ul>
+          <li>2層目
+            <ul>
+              <li>3層目</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</body>
+
+</html>
