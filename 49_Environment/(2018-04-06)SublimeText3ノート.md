@@ -87,7 +87,10 @@ CSVを見るためにわざわざ Excel とかいうクソ重ソフトを開い�
 こいつはかなり keymap が他とかぶるから変更したほうがいい。
 
 1. `Sublime Text 3/Packages/Table Editor/Default (OSX).sublime-keymap` 作成。
+    - Windows の場合は `Default (Windows).sublime-keymap` ね。
 2. 中身は `Preference > Package Settings > Table Editor > Key Bindings - Default` の内容。
+    - うまくいかんかったらここにデフォルトのキーマップがおいてある。
+        - [https://github.com/vkocubinsky/SublimeTableEditor](https://github.com/vkocubinsky/SublimeTableEditor)
 
 ```
 # 変更ガイド
@@ -102,6 +105,12 @@ table_editor_csv_to_table   : デフォルトは ctrl+k,| なんだがそれは�
 ```
 
 #### CSV整形
+
+コマンドパレットでこれ打ってから
+
+```
+Table Editor: Enable for current syntax
+```
 
 CSVを選択し `table_editor_csv_to_table` に設定してるショートカット。
 
