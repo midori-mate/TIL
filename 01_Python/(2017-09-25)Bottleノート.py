@@ -4,6 +4,25 @@
 '''BOTTLEノート
 BOTTLEテンプレートノート.tplとペアになってるよ。
 下記スクリプトで読み込んでるテンプレートはPython_Server_Retryプロジェクトのbottleに入ってる。
+
+(2018-11-14)
+問題: かなり時間たったあとにちょっと bottle 使おうーって思ったらエラー出た
+    こんな内容
+        File "/Users/midori/.pyenv/versions/lab-3.7/lib/python3.7/site-packages/bottle.py", line 3158, in run
+            if path[-4:] in ('.pyo', '.pyc'): path = path[:-1]
+        TypeError: 'NoneType' object is not subscriptable
+    一応解決?
+        なんかねえ python のバージョンを3.7から3.6にしたらこのエラーは消えた。
+        $ pyenv global lab-3.6.3
+    OK
+
+(2018-11-16)
+問題: static が読み込めない。なんで?
+    実は上の問題と同時に起きており同じ原因かと思ってたんだが、解決後も読み込めない…。
+    よーし原因わかった。静的ファイルの読み込みメソッドのファイルパスの部分はこうしないといけない。
+        @route('/static/<file_path:path>')
+    これまでは '/static/:file_path' こう書いていたんだが :file_path だと / が含められないようだ。
+    OK
 '''
 
 from bottle import route, run, template, request
@@ -72,7 +91,9 @@ def error_404(error):
 
 
 # 静的ファイル
-@route('/static/:file_path')
+# html のほうでは /static/... って書く。
+# css の中で import するときのパスも /static/ から。
+@route('/static/<file_path:path>')
 def static(file_path):
     return static_file(file_path, root='./static')
 
