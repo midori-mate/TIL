@@ -7,6 +7,7 @@
 2-2. じゃ数値にするには?
 3. 明日の時間、数分後の時間は?(加算減算)
 4. 時間の差分を求めるには?
+5. 日付をタイムスタンプに変換するには?
 '''
 
 import time
@@ -61,3 +62,9 @@ for i in range(100000):
     pass
 b = time.time()
 print((b - a))
+
+
+# 5. 日付をタイムスタンプに変換するには?
+a = datetime.datetime.strptime('2018-11-19', '%Y-%m-%d')  # %Y-%m-%d %H:%M:%S
+print(a)  # type は <class 'datetime.datetime'>
+print(type(time.mktime(a.timetuple())))  # type は <class 'float'>
