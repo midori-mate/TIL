@@ -23,6 +23,13 @@ BOTTLEテンプレートノート.tplとペアになってるよ。
         @route('/static/<file_path:path>')
     これまでは '/static/:file_path' こう書いていたんだが :file_path だと / が含められないようだ。
     OK
+
+(2018-11-26)
+問題: return template('index') でテンプレートがねえと言われる。
+    このときバージョンは 3.6.7 だった。
+    バージョンを 3.6.3 にしたら解決した。
+    bottleさんバージョンの好き嫌い激しすぎるだろ。
+    OK
 '''
 
 from bottle import route, run, template, request
