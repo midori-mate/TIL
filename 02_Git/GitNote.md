@@ -214,6 +214,17 @@ GitNote
     だから .bash_profile に追加
         export PATH=/usr/local/bin:$PATH
 
+### 23. 特定リポジトリのコミットユーザを変更したい
+    ほら、PC全体では本名でコミットしてるが、公開リポジトリではハンドルネームでコミットしたいじゃん?
+    
+    # 対象のリポジトリで
+    $ git config user.name [USER NAME]
+    $ git config user.email [EMAIL]
+
+    # あるいは .git/config にこれを追記
+    [user]
+    name = [USER NAME]
+    email = [EMAIL]
 
 ***
 
