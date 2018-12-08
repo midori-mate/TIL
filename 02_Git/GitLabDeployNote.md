@@ -7,11 +7,7 @@ GitLab Deploy Note
 GitLab の **master ブランチに push したら自動的にサーバにアップされる** ようにする。
 
 - Repository: `https://gitlab.com/midori-mate/ci-cd-test`
-- Server: GCP で借りてるサーバ
-- Deploy: そのサーバの `/var/www/ci-cd-test/` の中へ。
-- 注意: docker を使う方式が一般的みたいなんだけど色々なサイトのスクリプトを試したがどれもうまくいかので shell を使う。
-    - 主なうまくいかんこと: docker の中に clone してメインサーバのディレクトリにコピーすることができない
-        - rsync が無いみたいだし yum すらないし which コマンドを打つとエラー文なしで落ちる。嫌になる。
+- Server: GCP で借りてるサーバ。 ローカルの virtualbox でも試したけどうまくいった。 デプロイはサーバの `/var/www/ci-cd-test/` の中へ行う。
 
 
 ## 1. デプロイ先のディレクトリの準備
@@ -139,7 +135,9 @@ $ sudo /usr/local/bin/gitlab-runner unregister --url https://xxxxx --token xxxxx
 
 ### (2018-12-04)runner の executor を docker にするとうまくいかない。
 
-デプロイ先のディレクトリパスを script にどう書けばいいのかわからない。IP指定とかでやるのかな。だとしても rsync が入ってないし yum もないし which コマンド打つとエラー文なしで落ちるしで面倒くさすぎ。
+実は shell より docker を使う方式のほうが一般的みたいだ。しかし色々なサイトのスクリプトを試したがどれもうまくいかない。とくに……
+
+- デプロイ先のディレクトリパスを script にどう書けばいいのかわからない。 IP指定とかでやる気がするが rsync が入ってないし yum もないし which コマンドを打つとエラー文なしで落ちるのとかが面倒くさすぎ。
 
 マジで意味不明。
 
@@ -147,6 +145,5 @@ $ sudo /usr/local/bin/gitlab-runner unregister --url https://xxxxx --token xxxxx
 $ which yum
 ERROR: Job failed: exit code 1
 ```
-
 
 ### (2018-12-07)ただ普通に clone してコピーをするだけの記事がなさすぎる
