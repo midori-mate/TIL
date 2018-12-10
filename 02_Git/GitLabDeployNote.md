@@ -92,7 +92,7 @@ $ sudo /usr/local/bin/gitlab-runner register
 
 ## 6. .gitlab-ci.yml
 
-リポジトリの `.git` のある階層へ置く。
+`.gitlab-ci.yml` ファイルをリポジトリの `.git` のある階層へ置く。
 
 ```yml
 stages:
@@ -139,9 +139,10 @@ $ sudo /usr/local/bin/gitlab-runner unregister --url https://xxxxx --token xxxxx
 
 - デプロイ先のディレクトリパスを script にどう書けばいいのかわからない。 IP指定とかでやる気がするが rsync が入ってないし yum もないし which コマンドを打つとエラー文なしで落ちるのとかが面倒くさすぎ。
 
-マジで意味不明。
 
 ```
+なんじゃこりゃ。
+
 $ which yum
 ERROR: Job failed: exit code 1
 ```
