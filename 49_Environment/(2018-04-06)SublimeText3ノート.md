@@ -153,3 +153,7 @@ Table Editor: Set table syntax 'Simple' for current view
 #### FindKeyConflicts
 
 コマンドパレットから `All Conflicts` で一覧が見れる。
+
+### 07. シンタックス・セットのショートカット
+
+コマンドパレットから `Set Syntax` であとはわかるだろう。
