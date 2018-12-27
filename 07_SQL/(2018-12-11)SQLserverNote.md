@@ -73,3 +73,17 @@ DELETE FROM table1 WHERE code=@NUM;
 DELETE FROM table2 WHERE code=@NUM;
 DELETE FROM table3 WHERE code=@NUM;
 ```
+
+#### 03. 全テーブルの件数を知りたい
+
+```sql
+SELECT
+    OBJ.name, IND.rows
+FROM sys.objects AS OBJ
+JOIN sys.sysindexes AS IND
+ON OBJ.object_id = IND.id AND IND.indid < 2
+WHERE OBJ.type = 'U'
+ORDER BY OBJ.name;
+```
+
+`type='U'` はユーザテーブル。
