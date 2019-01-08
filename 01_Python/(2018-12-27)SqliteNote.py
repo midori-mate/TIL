@@ -22,27 +22,27 @@ from contextlib import closing
 def foo():
 
     # 接続作成。
-    con = sqlite3.connect(':memory:')
+    with closing(sqlite3.connect(':memory:')) as con:
 
-    # テーブル作成。 これはトランザクションでロールバックされない。
-    con.execute('CREATE TABLE xy(x, y)')
+        # テーブル作成。 これはトランザクションでロールバックされない。
+        con.execute('CREATE TABLE xy(x, y)')
 
-    # 中身をいれてみる。
-    # with で囲わなかったら con が消えるのと同時にロールバックされる。
-    xys = [
-        {'x':'xxx', 'y':'yyy'},
-        {'x':'xxxx', 'y':'yyyy'},
-    ]
-    with con:
-        con.executemany('INSERT INTO xy(x, y) VALUES (:x, :y)', xys)
+        # 中身をいれてみる。
+        # with で囲わなかったら con が消えるのと同時にロールバックされる。
+        xys = [
+            {'x':'xxx', 'y':'yyy'},
+            {'x':'xxxx', 'y':'yyyy'},
+        ]
+        with con:
+            con.executemany('INSERT INTO xy(x, y) VALUES (:x, :y)', xys)
 
-    # いまINSERTしたものをみる。
-    for row in con.execute('SELECT x, y FROM xy'):
-        print(row)
+        # いまINSERTしたものをみる。
+        for row in con.execute('SELECT x, y FROM xy'):
+            print(row)
 
-    # いまINSERTしたものを消してみる。
-    with con:
-        print('I just deleted', con.execute('DELETE FROM xy').rowcount, 'rows')
+        # いまINSERTしたものを消してみる。
+        with con:
+            print('I just deleted', con.execute('DELETE FROM xy').rowcount, 'rows')
 
 
 # 接続。
