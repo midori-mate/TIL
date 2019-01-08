@@ -5,8 +5,8 @@
 ちょっと高度なのを使ってみよう。
 
 実行例:
-    python ArgumentParserNote.py みどりん -a 89 -f 0.12
-    python ArgumentParserNote.py -h
+    python "(2019-01-07)ArgumentParserNote.py" みどりん -a 89 -f 0.12 --true
+    python "(2019-01-07)ArgumentParserNote.py" -h
 """
 
 import argparse
@@ -26,6 +26,8 @@ parser.add_argument('-i', '--int', default=0, help='デフォルトでは0にな
 # 型指定もできます。
 parser.add_argument('-f', '--float', type=float, help='float 限定の引数です。')
 
+# フラグ。
+parser.add_argument('-t', '--true', action='store_true')
 
 # 解析します。 引数のエラーとかはここで出ます。 -h を指定するとここで止まります。
 args = parser.parse_args()
@@ -36,3 +38,4 @@ print(args.name)
 print(args.age)
 print(args.int)
 print(args.float)
+print(args.true)
