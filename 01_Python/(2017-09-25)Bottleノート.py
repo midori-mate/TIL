@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-'''BOTTLEノート
+'''BOTTLEノート BottleNote
 BOTTLEテンプレートノート.tplとペアになってるよ。
 下記スクリプトで読み込んでるテンプレートはPython_Server_Retryプロジェクトのbottleに入ってる。
 
@@ -29,6 +29,17 @@ BOTTLEテンプレートノート.tplとペアになってるよ。
     このときバージョンは 3.6.7 だった。
     バージョンを 3.6.3 にしたら解決した。
     bottleさんバージョンの好き嫌い激しすぎるだろ。
+    OK
+
+(2019-01-09)
+問題: DeprecationWarning: Flags not at the start of the expression
+    Python 3.6.3
+    bottle 0.12.13
+    bottle を更新したら出なくなった。
+        $ pip install bottle -U
+    OK
+問題: Template 'index' not found. って出るー。
+    実行ディレクトリ。
     OK
 '''
 
