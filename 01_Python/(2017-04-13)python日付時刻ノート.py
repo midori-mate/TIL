@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-'''python日付時刻ノート このノートはそのまま実行できるよ。(python3.6)
+'''python日付時刻ノート このノートはそのまま実行できるよ。(python3.6) DatetimeNote
 1. 今の時間は?
 2-1. フォーマットで文字列にするには?
 2-2. じゃ数値にするには?
