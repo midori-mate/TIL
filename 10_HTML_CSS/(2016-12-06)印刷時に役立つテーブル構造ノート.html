@@ -1,0 +1,40 @@
+
+thead,tfoot項目
+    印刷時、つねに表示される(chromeだけフッタは最後にだけ表示される)
+page-break-inside:avoid;
+    印刷時、この要素は分かれない
+
+
+<style>
+div {
+    border: 1px solid gray;
+    border-radius: 4px;
+    margin:10px;
+    padding: 4px;
+    height: 100px;
+
+    page-break-inside: avoid;
+}
+table {
+    width: 100%;
+}
+</style>
+
+<table>
+<thead><tr><td><div>ヘッダ<br>ヘッダ</div></td></tr></thead>
+<tfoot><tr><td><div>フッタ<br>フッタ</div></td></tr></tfoot>
+<tbody>
+<tr><td><div>あああ 1</div></td></tr>
+<tr><td><div>あああ 2</div></td></tr>
+<tr><td><div>あああ 3</div></td></tr>
+<tr><td><div style="height:1500px;">異常にでかいdiv</div></td></tr>
+<tr><td><div>あああ 4</div></td></tr>
+<tr><td><div>あああ 5</div></td></tr>
+<tr><td><div>あああ 6</div></td></tr>
+<tr><td><div>あああ 7</div></td></tr>
+<tr><td><div>あああ 8</div></td></tr>
+<tr><td><div>あああ 9</div></td></tr>
+<tr><td><div>あああ 10</div></td></tr>
+</tbody>
+</table>
+
