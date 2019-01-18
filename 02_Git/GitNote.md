@@ -265,6 +265,16 @@ GitNote
 
 ## Gitlab ノート
 
+GitLab はこれさえ叶えば完璧。
+
+- ユーザフォロー機能入れろ。
+- 好きなプロジェクトをユーザトップに表示させろ。
+
+希望としてはほかにもある。
+
+- サーバの安定性に欠ける。たまにサーバダウンに遭遇するけど、まあぼくはヘビーユーザじゃないし構わない。
+- Github Desktop 的なアプリがほしい。
+
 ### ほかの人をグループ許可
     https://gitlab.com/groups/groupname/-/group_members
     グループのページ > 左サイドバーMembers > Add new memberのところで追加。
