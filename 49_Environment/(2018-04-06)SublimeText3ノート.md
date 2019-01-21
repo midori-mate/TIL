@@ -1,4 +1,5 @@
-# SublimeText3ノート
+SublimeText3Note SublimeNote SublimeTextNote
+===
 
 ## 80ドル
 
