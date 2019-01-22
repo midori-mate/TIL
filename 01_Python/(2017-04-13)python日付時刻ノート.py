@@ -12,6 +12,7 @@
 
 import time
 import datetime
+from dateutil.relativedelta import relativedelta
 
 
 # 1. 今の時間は?
@@ -21,9 +22,10 @@ print(datetime.datetime.now())
 # 2-1. フォーマットで文字列にするには?
 #     注意:マジで原因不明だが、strftime()で作った「日本語含む」文字列はsublimeビルドで表示できねえ。
 #     普通のprint('あ')は大丈夫なんだけどねえ…
-print(datetime.datetime.now().strftime(
-    'YEAR:%Y MONTH:%m DATE:%d 24HOUR:%H MIN:%M SEC:%S DAY:%A UNIXTIME:%s'
-    ))
+# yyyy-mm-dd %Y-%m-%d
+# yyyymmdd %Y%m%d
+# yyyymm %Y%m
+print(datetime.datetime.now().strftime('Year:%Y,month:%m,date:%d,Hour(24):%H,Minute:%M,Second:%S,A(day):%A'))
 print(datetime.datetime.now().strftime(
     'HMS:%X'
     ))
@@ -68,3 +70,11 @@ print((b - a))
 a = datetime.datetime.strptime('2018-11-19', '%Y-%m-%d')  # %Y-%m-%d %H:%M:%S
 print(a)  # type は <class 'datetime.datetime'>
 print(type(time.mktime(a.timetuple())))  # type は <class 'float'>
+
+
+# 6. 月初
+today = datetime.datetime.now()
+print(datetime.datetime(today.year, today.month, 1))
+
+# 7. 月末
+print(datetime.datetime(today.year, today.month, 1) + relativedelta(months=1))
