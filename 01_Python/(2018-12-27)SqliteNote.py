@@ -121,3 +121,24 @@ def insert():
     # こうやって複数 SQL を一気に実行できるよ。
     with con:
         con.executemany(sql, values)
+
+
+# これが欲しいんだろ? テーブル名の一覧と、フィールドの一覧。
+def get_table_info(con):
+    sql = ' '.join([
+        'SELECT',
+            'tbl_name',
+        'FROM sqlite_master',
+        'WHERE type=:type',
+        'ORDER BY tbl_name',
+    ])
+    bind = { 'type': 'table', }
+    tables = [dict(row)['tbl_name'] for row in con.execute(sql, bind)]
+
+    table_info = {}
+    for table in tables:
+        sql = ''.join([
+            f'PRAGMA TABLE_INFO({table})'
+        ])
+        table_info[table] = [dict(row)['name'] for row in con.execute(sql)]
+    return table_info
