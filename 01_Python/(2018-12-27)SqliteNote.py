@@ -1,5 +1,5 @@
 
-"""Sqlite Note
+"""Sqlite Note SqliteNote Sqlite3Note
 
 2018-12-27
     SELECT 時にカラム名を出力してくれないのがずっと不満だった。
