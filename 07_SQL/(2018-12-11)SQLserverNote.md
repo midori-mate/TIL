@@ -87,3 +87,13 @@ ORDER BY OBJ.name;
 ```
 
 `type='U'` はユーザテーブル。
+
+#### 04. SQLの履歴が見たい
+
+```sql
+SELECT creation_time, text
+FROM   sys.dm_exec_query_stats qs
+CROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) st
+WHERE creation_time >= 'yyyy-mm-dd'  -- 別になくてもいいけどね
+ORDER BY creation_time DESC -- 別になくてもいいけどね
+```
