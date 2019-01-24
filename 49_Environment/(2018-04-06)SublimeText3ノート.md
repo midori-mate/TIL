@@ -179,3 +179,8 @@ Table Editor: Set table syntax 'Simple' for current view
 ### 07. シンタックス・セットのショートカット
 
 コマンドパレットから `Set Syntax` であとはわかるだろう。
+
+### 08. 謎現象、ショートカットが効かない
+
+「ライセンス買え」が出ているせいかもしれない。今回は `Ctrl+K,Ctrl+U` が効かなかった。
+
