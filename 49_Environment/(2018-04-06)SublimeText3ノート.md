@@ -18,8 +18,8 @@ SublimeText3Note SublimeNote SublimeTextNote
 | Shift + Ctrl                         | 上下矢印といっしょに複数カーソル                     |
 | Command + Ctrl                       | 上下矢印といっしょに行を移動させる                   |
 | F12                                  | 関数ジャンプ(同ファイル内か、開いているプロジェクト) |
-| Opt + - (てかこれは変えてる)         | カーソル位置を前の場所へ                             |
-| Opt + Shift + - (てかこれは変えてる) | カーソル位置を前の場所へ                             |
+| Opt(Alt) + - (てかこれは変えてる)         | カーソル位置を前の場所へ                             |
+| Opt(Alt) + Shift + - (てかこれは変えてる) | カーソル位置を前の場所へ                             |
 
 
 ## 場合別 tips
@@ -184,3 +184,12 @@ Table Editor: Set table syntax 'Simple' for current view
 
 「ライセンス買え」が出ているせいかもしれない。今回は `Ctrl+K,Ctrl+U` が効かなかった。
 
+### 09. GoToAnything パッケージ
+
+左サイドバーに置いているファイルの中からファイル名で検索。 
+
+|     ShortCut     | Meaning  |
+|------------------|----------|
+| Ctrl,Command + p | File     |
+| Ctrl,Command + r | Function |
+| Ctrl,Command + ; | Variable |
