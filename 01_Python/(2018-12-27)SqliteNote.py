@@ -34,7 +34,10 @@ def foo():
             {'x':'xxxx', 'y':'yyyy'},
         ]
         with con:
-            con.executemany('INSERT INTO xy(x, y) VALUES (:x, :y)', xys)
+            # 返り値はcursor。
+            # 一件だけなら .lastrowid でidが取れる。
+            # executemany だと取れない……。
+            result = con.executemany('INSERT INTO xy(x, y) VALUES (:x, :y)', xys)
 
         # いまINSERTしたものをみる。
         for row in con.execute('SELECT x, y FROM xy'):
