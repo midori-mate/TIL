@@ -51,3 +51,71 @@ ImageField の使い方
 - [Django2で画像を指定サイズで保存する](https://qiita.com/peijipe/items/68292ded4fd3e31a8bfe)
 
 
+### DatetimeField を取得するとき None になるんだが。
+
+原因
+
+- このとき手動でDBに `yyyy-mm-dd` なんつー文字列を入れてた。
+
+解法
+
+- sqlite では `%Y-%m-%d %H:%M:%S.000000` のフォーマットで登録すること。
+- 参考: `datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.000000')`
+
+
+### テンプレート内でディクショナリとかリストのインデックスに変数が使えない。
+
+```html
+{% for i,l in enumerate_lis %}
+    {{lis.i}}
+    {{dic.i}}  どっちも何も表示されない!! まじくそ。最初からこれくらいサポートしておけ。
+{% endfor %}
+```
+
+解法
+
+```python
+# まずテンプレートタグを作成する。
+# manager/templatetags/template_utils.py
+from django import template
+from django.template.defaulttags import register
+
+@register.filter
+def ref_lis(lis, arg):
+    return lis[int(arg)]
+
+@register.filter
+def ref_dic(dic, arg):
+    if arg not in dic:
+        raise KeyError(f'Dictionary doesn\'t have key: {arg}')
+    return dic[arg]
+```
+
+```python
+# settings に追記する。
+TEMPLATES = [
+    {
+        ...
+        'OPTIONS': {
+            'context_processors': [
+                ...
+            ],
+            # これを追記するよ。
+            'libraries': {
+                'lookup': 'manager.templatetags.template_utils',
+            },
+        },
+    },
+]
+```
+
+```html
+<!-- 使いたいテンプレートのてっぺんで読み込む。 -->
+{% load template_utils %}
+
+<!-- こう使う。 -->
+{% for i,l in enumerate_lis %}
+    {{lis|ref_lis:i}}
+    {{dic|ref_dic:i}}
+{% endfor %}
+```
