@@ -2,6 +2,100 @@ DjangoNote
 ===
 
 
+## 作成から heroku デプロイまで。
+
+[DjangoFloare](https://gitlab.com/midori-mate/djangofloare)に以下のとおりの手順でコミットしてある。
+
+```
+下準備
+    mkdir DjangoFloare
+    cd DjangoFloare/
+    gitignore 追加
+    https://github.com/jpadilla/django-project-template/blob/master/.gitignore
+
+Initialize Django
+    django-admin startproject config .
+    こうするとイチイチフォルダ名を config にしなくていい。
+
+Add static folders
+    ベストプラクティスに従って static を配置。
+
+Add templates folders
+    ベストプラクティスに従って templates を配置。
+
+Add app1,2
+    python manage.py startapp app1
+    python manage.py startapp app2
+    ベストプラクティスに従って app1 app2 追加。
+
+Deal with static, templates
+    settings.py に static と templates を扱う設定を追加。
+
+Add apps to setting
+    settings.py に app1,app2 を追加。
+
+Create models
+    models.py にモデルを追加。画像も追加したいけどシンプルにしたいからまたあとで。
+    python manage.py makemigrations
+    python manage.py migrate
+
+Add models to admin
+    admin.py にモデルを追加。admin ページから見れるようになる。
+
+スーパーユーザ作っとく
+    python manage.py createsuperuser
+
+ここらで runserver してみる。
+    python manage.py runserver
+    localhost:8000
+
+admin にいくつか登録してみる
+    localhost:8000/admin/
+
+Create top page
+    トップページ作成。
+
+Create floare page
+    個別ページ作成。
+
+Set timezone
+    忘れてたタイムゾーン。
+
+何のトガったところもない django ができあがった。heroku へ入る。
+
+Create heroku files
+    echo 'web: gunicorn config.wsgi --log-file -' > Procfile
+    pip install gunicorn django-heroku
+    pip freeze > requirements.txt
+    echo 'python-3.6.3' > runtime.txt
+    settings 修正
+
+heroku ci
+    heroku login
+    heroku create django-floare
+    git push heroku master
+    heroku ps:scale web=1
+    heroku run python manage.py migrate
+    heroku run python manage.py createsuperuser
+    heroku open
+
+問題: heroku push heroku master でエラー。
+    failed to push some refs to 'https://git.heroku.com/django-floare.git'
+    これを実行。
+        heroku config:set DISABLE_COLLECTSTATIC=1
+    OK
+
+問題: 開くとエラー。
+    relation "app1_floare" does not exist
+    は? migrate したじゃん。ls してみたら sqlite3 がないからマジで heroku では posgre が疲れてるんかなー。
+    ずっと半信半疑だった、「migrations ファイルは git add するもんなのか問題」にカタがついたみたいだ。絶対 add すること。
+    そして heroku ci の中に makemigrations はいらない。ローカルで作って、リモートで migrate する。
+
+片付け
+    heroku apps:destroy --app django-floare
+```
+
+
 ## 場合別
 
 ### POSTを飛ばすと CSRF verification failed. エラーが出る。
