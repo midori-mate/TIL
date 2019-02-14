@@ -6,6 +6,9 @@ DjangoNote
 
 [DjangoFloare](https://gitlab.com/midori-mate/djangofloare)に以下のとおりの手順でコミットしてある。
 
+
+### 作成
+
 ```
 下準備
     mkdir DjangoFloare
@@ -62,13 +65,18 @@ Set timezone
     忘れてたタイムゾーン。
 
 何のトガったところもない django ができあがった。heroku へ入る。
+```
 
+### heroku デプロイ
+
+```
 Create heroku files
     echo 'web: gunicorn config.wsgi --log-file -' > Procfile
     pip install gunicorn django-heroku
     pip freeze > requirements.txt
     echo 'python-3.6.3' > runtime.txt
     settings 修正
+        https://www.miniwebtool.com/django-secret-key-generator/
 
 heroku ci
     heroku login
@@ -93,6 +101,56 @@ heroku ci
 
 片付け
     heroku apps:destroy --app django-floare
+```
+
+
+## 基礎
+
+### INSERT
+
+```python
+# ひとつ
+Tbl(field1='...', field2='...').save()
+
+# 複数 save いらねーのよ
+Tbl.objects.bulk_create([
+    Tbl(field1='...', field2='...'),
+    Tbl(field1='...', field2='...'),
+])
+```
+
+### UPDATE
+
+```python
+t = Tbl.objects.filter(field1='...').first()
+t.field2 = '...'
+t.save()
+```
+
+### GETSERT
+
+取得、さもなくばINSERT。こんなんあるんだ一度もやろうと思ったことないけど。
+
+```python
+tbl, created = Tbl.objects.get_or_create(
+    field1='...',      # これで検索かける。
+    defaults={
+        field2:'...',  # これをINSERTする。field1は書かなくていいよ。
+    },
+)
+```
+
+### UPSERT
+
+これは欲しいだろー。
+
+```python
+tbl, created = Tbl.objects.get_or_create(
+    field1='...',      # これで検索かける。
+    defaults={
+        field2:'...',  # これでUPDATEかける。
+    },
+)
 ```
 
 
