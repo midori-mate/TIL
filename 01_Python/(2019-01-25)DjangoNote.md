@@ -145,7 +145,7 @@ tbl, created = Tbl.objects.get_or_create(
 これは欲しいだろー。
 
 ```python
-tbl, created = Tbl.objects.get_or_create(
+tbl, created = Tbl.objects.update_or_create(
     field1='...',      # これで検索かける。
     defaults={
         field2:'...',  # これでUPDATEかける。
