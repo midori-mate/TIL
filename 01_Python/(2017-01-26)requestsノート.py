@@ -1,6 +1,6 @@
 # coding: utf-8
 
-'''チョー便利 requestsモジュールノート
+'''チョー便利 requestsモジュールノート RequestsNote
 pip install requests
 '''
 
