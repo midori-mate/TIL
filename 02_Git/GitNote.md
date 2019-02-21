@@ -227,25 +227,42 @@ GitNote
     email = [EMAIL]
 
 
-## GitHub 開発フロー
+## GitHub 開発フロー Flow
 
 ### プロジェクト参加するとき
 
 1. fork
 1. clone
 1. upstream(fork 元リポジトリ)設定
+    - `git remote add upstream https://github.com/...`
 
 ### 開発サイクル
 
 1. Milestone 作成
+    - ひとつの開発サイクルごと。
+    - Milestone と Issue は紐付ける。進捗率の管理と Issue 漏れ防止。
+    - Issue が期限に遅れた場合、積み残しタスクとして別の Milestone に紐づけしなおす。
 1. Issue 作成
+    - 追加機能やバグはすべて Issue で管理。
+    - Milestone と Assignees を設定する。Assignees が実装を行う。
 1. Branch 作成
+    - ブランチ名は `ユーザ名/機能名(_区切り)`
 1. inicom を Push
+    - `git commit --allow-empty -m "[WIP] entry dialog (#1)"`
 1. `[WIP]`(GitHub) `WIP:`(GitLab) をつけて PR
-1. Assignees 設定
+1. PR のレビュアーを Assignees 設定
+    - レビュアーを Assignees に設定することで自分が作業開始したことをレビュアーが知ることができる。
+    - PR には Issue と同じ Milestone と Label を設定する。
 1. Commit, Push
+    - 試行錯誤の過程は除くこと。
+    - コミットメッセージは英語で。
+    - バグ修正は `Fix + 修正内容 + (Issue番号)` `ex. Fix entry dialog (#1)`
+    - 機能追加は `Add + 追加内容 + (Issue番号)` `ex. Add entry dialog (#1)`
 1. `WIP` を外してレビュアーへ mention 送る
 1. レビュー、修正
+1. PR を master へマージ
+    - このとき PR のコメントに `close + Issue番号` をつける。 `ex. close #1`
+    - これでマージと同時に Issue を閉じれるそうだ。
 
 
 ***
