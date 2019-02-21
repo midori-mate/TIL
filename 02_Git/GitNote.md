@@ -226,6 +226,28 @@ GitNote
     name = [USER NAME]
     email = [EMAIL]
 
+
+## GitHub 開発フロー
+
+### プロジェクト参加するとき
+
+1. fork
+1. clone
+1. upstream(fork 元リポジトリ)設定
+
+### 開発サイクル
+
+1. Milestone 作成
+1. Issue 作成
+1. Branch 作成
+1. inicom を Push
+1. `[WIP]`(GitHub) `WIP:`(GitLab) をつけて PR
+1. Assignees 設定
+1. Commit, Push
+1. `WIP` を外してレビュアーへ mention 送る
+1. レビュー、修正
+
+
 ***
 
 ## Gitbucket ノート
