@@ -47,6 +47,8 @@ Visual Studio 2017 Note
     Shift+F12                   参照をリストアップ
     Ctrl+Shift+12               エラー箇所へ飛ぶ
 
+    Ctrl+,                      SublimeのCtrl+Pにあたるやつ 最近多用する
+
 ### 05. TODO管理
 
 - ショートカットは `Ctrl+\,t`
