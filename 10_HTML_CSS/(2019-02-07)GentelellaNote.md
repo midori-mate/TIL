@@ -43,3 +43,27 @@ if (this.locale.cancelLabel.match(/[A-Za-z]/)) {
   dateHtml =  calendar[1][1].format("YYYY") + "年 " + this.locale.monthNames[calendar[1][1].month()]
 }
 ```
+
+
+### Datetimepicker
+
+```html
+<!-- bootstrap-datetimepicker -->
+<link href="../vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<!-- bootstrap-datetimepicker -->
+<script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+```
+
+```javascript
+function init_my_monthpicker() {
+    if( typeof ($.fn.datetimepicker) === 'undefined') {
+        return;
+    }
+
+    $('.__monthpicker').datetimepicker({
+        format: 'YYYY/MM',
+        locale: moment.locale('ja'),  // たぶん moment のインポートが必要、か?
+        maxDate: (new Date()).toLocaleDateString(),
+    });
+}
+```
