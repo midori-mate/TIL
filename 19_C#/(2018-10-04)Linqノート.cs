@@ -15,7 +15,7 @@ namespace cs_lab
         //
         // Linq Note
         //     foreachの強化版だとかいう言い方をされてるけど、
-        //     ぼく的にはpythonの高階関数ができるっていうほうがわかりやすい。
+        //     ぼく的には「pythonの高階関数ができる」っていうほうがわかりやすい。
         //
 
         static void Main(string[] args)
@@ -129,6 +129,12 @@ namespace cs_lab
                     where x % 2 == 0
                     orderby x
                     select x * 3;
+
+            // 2019-02-26
+            // 実際に「[f'"{a}"' for a in array]みたいなことがしたいな」と思って書いたやつ。
+            string[] array = new string[] {"foo", "bar"};
+            array = array.Select(x => "\"" + x + "\"").ToArray();
+            // ToArray をつけないと string[] には格納できないよ。
         }
     }
 }
