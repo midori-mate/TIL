@@ -63,7 +63,7 @@ function init_my_monthpicker() {
     $('.__monthpicker').datetimepicker({
         format: 'YYYY/MM',
         locale: moment.locale('ja'),  // たぶん moment のインポートが必要、か?
-        maxDate: (new Date()).toLocaleDateString(),
+        maxDate: (new Date()).toLocaleDateString(),  // これがあると勝手にデフォルト入力値が上書きされる。今の所解決策見つからず。バグじゃないの?
     });
 }
 ```
