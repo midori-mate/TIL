@@ -193,3 +193,10 @@ Table Editor: Set table syntax 'Simple' for current view
 | Ctrl,Command + p | File     |
 | Ctrl,Command + r | Function |
 | Ctrl,Command + ; | Variable |
+
+### 10. Win のフォントはどうする?
+
+[Myrica](https://nelog.jp/myrica)
+
+なんか `Ricty` はバッククォートがカス。
+
