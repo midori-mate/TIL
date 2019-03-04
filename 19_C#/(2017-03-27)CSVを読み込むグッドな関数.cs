@@ -60,3 +60,38 @@ private void print_2D_array(string[][] array)
         Console.WriteLine(format);
     }
 }
+
+
+// 2019-02-28
+// 
+// asp.net で asp:FileUpload から送られてきたCSVを読み込む場合。
+// 
+
+using Microsoft.VisualBasic.FileIO;
+using System.Text;
+
+// これに詰めるよ。
+List<string[]> data = new List<string[]>();
+if (this.FileUploadCsv.HasFile)
+{
+    // 注意: FileContent は System.IO.Stream なんだけど、一度読み込んだら2度はできないみたい。
+    using (TextFieldParser parser = new TextFieldParser(this.FileUploadCsv.FileContent,
+                                                        Encoding.GetEncoding("Shift_JIS")))
+    {
+        // カンマで区切る設定。
+        parser.TextFieldType = FieldType.Delimited;
+        parser.SetDelimiters(",");
+
+        // フィールドがクォートで囲まれているか。これは別にクォートがついてなくてもエラーにならない。
+        // 数字が 1,000 とかになってることもあるからつけとけ。
+        parser.HasFieldsEnclosedInQuotes = true;
+        // フィールドの空白はトリムするか。
+        parser.TrimWhiteSpace = true;
+
+        // フィールド読み込み。
+        while (!parser.EndOfData)
+        {
+            data.Add(parser.ReadFields());
+        }
+    }
+}
