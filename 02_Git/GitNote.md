@@ -249,6 +249,7 @@ GitNote
     - ブランチ名は `ユーザ名/機能名(_区切り)`
 1. inicom を Push
     - `git commit --allow-empty -m "[WIP] entry dialog (#1)"`
+    - `git commit --allow-empty -m "WIP: entry dialog (#1)"`
 1. `[WIP]`(GitHub) `WIP:`(GitLab) をつけて PR
 1. PR のレビュアーを Assignees 設定
     - レビュアーを Assignees に設定することで自分が作業開始したことをレビュアーが知ることができる。
