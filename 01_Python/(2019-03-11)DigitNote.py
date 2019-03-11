@@ -30,12 +30,12 @@ def get_number_of_digit(num):
 
 if __name__ == '__main__':
     # 下n桁。
-    print( split_last_digit(123456789, 0) )   # 9
+    print( split_last_digit(123456789, 0) )   # 0
     print( split_last_digit(123456789, 5) )   # 56789
     print( split_last_digit(123456789, 15) )  # 123456789
 
     # 上n桁。
-    print( split_first_digit(123456789, 0) )  # 1
+    print( split_first_digit(123456789, 0) )  # 0
     print( split_first_digit(123456789, 5) )  # 12345
     print( split_first_digit(123456789, 15) ) # 123456789
 
