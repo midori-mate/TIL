@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>box-sizing-note BoxSizingNote</title>
+  <style>
+    .bg-mediumseagreen   { background-color:mediumseagreen  ; }
+    .bg-mediumaquamarine { background-color:mediumaquamarine; }
+    .bg-darkseagreen     { background-color:darkseagreen    ; }
+    .bg-aquamarine       { background-color:aquamarine      ; }
+    .bg-palegreen        { background-color:palegreen       ; }
+    .bg-lightgreen       { background-color:lightgreen      ; }
+
+    div    { width : 300px          ; }
+    .bd-10 { border:10px solid black; }
+    .bd-30 { border:30px solid black; }
+    .bd-50 { border:50px solid black; }
+  </style>
+</head>
+
+<body>
+
+  ↓幅300pxって指定してるのに、なんで幅が変わるんだよ!!(borderの太さに影響されるせい。)
+  <div class="bd-10 bg-mediumseagreen   " style="box-sizing:content-box;">
+    幅300px<br>box-sizing=content-box(デフォルト値)
+  </div>
+  <div class="bd-30 bg-darkseagreen     " style="box-sizing:content-box;">
+    幅300px<br>box-sizing=content-box(デフォルト値)
+  </div>
+  <div class="bd-50 bg-palegreen        " style="box-sizing:content-box;">
+    幅300px<br>box-sizing=content-box(デフォルト値)
+  </div>
+
+  ↓border-boxを指定すると、ゼッテー300pxになる!!
+  <div class="bd-10 bg-mediumaquamarine " style="box-sizing:border-box;">
+    幅300px<br>box-sizing=border-box
+  </div>
+  <div class="bd-30 bg-aquamarine       " style="box-sizing:border-box;">
+    幅300px<br>box-sizing=border-box
+  </div>
+  <div class="bd-50 bg-lightgreen       " style="box-sizing:border-box;">
+    幅300px<br>box-sizing=border-box
+  </div>
+</body>
+</html>
