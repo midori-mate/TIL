@@ -39,7 +39,7 @@ if __name__ == '__main__':
     print( split_first_digit(123456789, 5) )  # 12345
     print( split_first_digit(123456789, 15) ) # 123456789
 
-"""参考
+"""以下、参考
 数学の原理
 step1:  x = a*10^n, where n is integer and 1 =< a < 10
 step2:  log10(x) = log10(a*10^n)
@@ -58,3 +58,36 @@ def get_number_of_digits( num: float ) -> int:
     n = int(math.log10(num))
     # a = math.log10(num) - n ## a is required here so it is commented in.
     return n+1 ## 1 is the number of digits of a so the result will be n+1
+
+"""参考その2
+友達が作ってくれた、小数点を含めた桁切り抜き関数。
+"""
+def get_transferred_number( num: float, digits: int ):
+    IsNegative = False
+    if num < 0: num *= -1; IsNegative = True
+    n = int(math.log10(num))
+    result = 0
+    if type(num) == float:
+        if digits > n+1:
+            factor = 10**digits if num < 1 else 10**(digits-(n+1))
+            result = int(num*factor)/factor
+        else:
+            result = num // 10**(digits-(n+1))
+            if n+1 == digits: result = int(result)
+    else:
+        result = num // 10**(n+1-digits)
+    if IsNegative: result *= -1
+    return result
+
+if __name__ == '__main__':
+    cases = [
+        12345678,     # 123
+        123456789999, # 123
+        -123456789,   # -123
+        123.456,      # 123
+        0.13255,      # 0.132
+        12.3456,      # 12.3
+    ]
+    digits = 3
+    for case in cases:
+        print(get_transferred_number( case, digits ))
