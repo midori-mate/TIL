@@ -51,7 +51,7 @@ class Program
     }
 
     /// <summary>
-    /// object を int として取得します。カンマ区切りの文字列も許可します。
+    /// object を int として取得します。カンマ区切りの文字列、小数点付きの文字列も許可します。
     /// </summary>
     /// <param name="value">object.</param>
     /// <returns>int.</returns>
@@ -59,7 +59,8 @@ class Program
     {
         int test = 0;
         if (value == null || value is DBNull || !int.TryParse(value.ToString(),
-                                                              System.Globalization.NumberStyles.AllowThousands,
+                                                              System.Globalization.NumberStyles.AllowThousands
+                                                              | System.Globalization.NumberStyles.AllowDecimalPoint,,
                                                               null,
                                                               out test))
         {
