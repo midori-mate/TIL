@@ -22,14 +22,23 @@ Initialize Django
 
 Add static folders
     ベストプラクティスに従って static を配置。
+        - static
+            - app1/images/.gitkeep
+            - app2/images/.gitkeep
+            - css/.gitkeep
+            - js/.gitkeep
 
 Add templates folders
     ベストプラクティスに従って templates を配置。
+        - templates
+            - .gitkeep
+            - app1/.gitkeep
+            - app2/.gitkeep
 
 Add app1,2
+    ベストプラクティスに従って app1 app2 追加。
     python manage.py startapp app1
     python manage.py startapp app2
-    ベストプラクティスに従って app1 app2 追加。
 
 Deal with static, templates
     settings.py に static と templates を扱う設定を追加。
