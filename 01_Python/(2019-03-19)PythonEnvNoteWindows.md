@@ -24,6 +24,7 @@ workon VERSIONNAME
 ## 前提
 
 - 欲しいバージョンのPythonは予めインストールしておく。
+- [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
 
 例
 
