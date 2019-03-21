@@ -1,4 +1,4 @@
-Vagrant Note
+Vagrant Note VagrantNote
 ===
 
 

@@ -76,6 +76,36 @@ Set timezone
 何のトガったところもない django ができあがった。heroku へ入る。
 ```
 
+### vagrant デプロイ
+
+heroku は色々大変なのでこちらで先に試す。
+
+```
+準備
+    Vagrantfile と vagrant-provision を置く。
+
+vagrant 起動
+    $ vagrant up
+
+django 起動
+    $ vagrant ssh
+    $ python3.6 /vagrant/manage.py runserver 0.0.0.0:8000
+
+DEBUG=False のための準備
+    MIDDLEWARE の SecurityMiddleware の下に
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+        追加。
+    settings.py の一番下に
+        STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Manually added.
+        STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # Manually added.
+        追加。
+    $ python3.6 /vagrant/manage.py collectstatic
+    staticファイルの中に、404があったときはエラーが出るから処理してね。
+```
+
+これで DEBUG=False 許容する。
+
+
 ### heroku デプロイ
 
 ```
