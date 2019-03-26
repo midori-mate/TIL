@@ -310,3 +310,13 @@ TEMPLATES = [
     {{dic|ref_dic:i}}
 {% endfor %}
 ```
+
+### テンプレート内で文字列を連結したりする
+
+```
+文字 'aaa'+variable+'bbb' を連結して変数 string に格納。
+{% with 'aaaa'|add:variable|add:'bbb' as string %}
+  作ったものをここで表示
+  {{string}}
+{% endwith %}
+```
