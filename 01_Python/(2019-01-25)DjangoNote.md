@@ -311,6 +311,7 @@ TEMPLATES = [
 {% endfor %}
 ```
 
+
 ### テンプレート内で文字列を連結したりする
 
 ```
@@ -320,3 +321,171 @@ TEMPLATES = [
   {{string}}
 {% endwith %}
 ```
+
+### heroku 環境変数操作
+
+```
+# みる
+heroku config
+heroku config:get NAME
+
+# 設定
+heroku config:set NAME=VALUE
+
+# 削除
+heroku config:unset NAME
+```
+
+
+### adminページで OperationalError エラー
+
+具体的にはこういうエラーが出る。
+
+```
+attempt to write a readonly database 
+unable to open database file
+```
+
+以下のパーミッションを開ける。
+
+- sqlite ファイル自体。
+- sqlite のあるディレクトリ(プロジェクト本体である場合が多いかな?)
+
+
+### django-markdownx で画像アップできない問題
+
+状況
+
+- localhost での markdownx はうまくいく。(admin画面で書いてアップ)
+- vagrant 内で apache を通してやると画像アップができない。
+
+エラーログを見てみたらパーミッションエラーだった。
+
+```
+PermissionError: [Errno 13] Permission denied: '/vagrant/media/markdownx/ba4befe6-f087-4a81-a953-9581954b490e.png', referer: http://localhost:1992/admin/app1/md/1/change/
+```
+
+media/markdownx のパーミッションを開けたら解決。
+
+
+### Vagrant,Apache,DEBUG=False ではめっちゃ読み込みが遅い
+
+なんなんこれ。
+
+
+### apache 環境、staticfiles が notfound 言われる。
+
+状況
+
+```
+FileNotFoundError: [Errno 2] No such file or directory: '/vagrant/staticfiles/admin/css/widgets.css'
+```
+
+解法
+
+- apache 環境で `STATIC_ROOT` は不要。
+
+```
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+```
+
+
+### apache 環境、admin ページのCSSが404。
+
+そりゃそうね、/static/ 下にないんだもの。
+
+解法
+
+- apache 環境では STATIC_ROOT をナシにしていたが、一度有効にする。
+- collectstatic すれば /staticfiles/ 下に admin のファイルが現れる。
+- それだけパクって /static/ へ移動。staticfiles は消してしまえ。
+
+
+### ↑をやっても markdownx のcssがない。
+
+ないやつ
+
+- /static/markdownx/admin/css/markdownx.css
+- /static/markdownx/js/markdownx.js 
+
+
+### ↑をやってもエラー
+
+```
+Cannot set property 'innerHTML' of null
+```
+
+これは、 markdownx のcssを無理やり引き抜いたことで起こったっぽい。さらにいえば admin の引き抜き(collectstatic して出てきたやつを自前の static に移しちまおう)自体がおかしいってことかな? ちゃんと apache で admin 用の css を引き抜く方法を調べよう。
+
+てかようは markdownx 用の static がないってだけ。適切な方法で admin 用の static は抜き出しましょう。
+
+###### ひとつ見つけた。
+
+「apache の Alias で /static/admin/ のURLで admin の static を直接参照させよう。」
+
+```
+# 例として書かれてたやつ。
+Alias /static/admin/ "/usr/lib/python2.6/site-packages/django/contrib/admin/media"
+```
+
+あーなるほどってなった。つまりぼくの環境ではこうなるわけか。
+
+```
+# admin 用
+Alias /static/admin/ "/Users/username/.pyenv/versions/3.6.3/envs/lab-3.6.3/lib/python3.6/site-packages/django/contrib/admin/static/admin"
+
+# markdownx 用
+Alias /static/markdownx/ "/Users/username/.pyenv/versions/3.6.3/envs/lab-3.6.3/lib/python3.6/site-packages/markdownx/static/markdownx"
+```
+
+ただしもうひとつのほうが正当そう。
+
+###### もうひとつ見つけた。
+
+ご存知 collectstatic を使って、collect 先に Alias を貼る。
+
+```
+# collect 先の例
+STATIC_ROOT = "/var/www/static"
+
+# Alias
+Alias /static/ /var/www/static
+```
+
+だけどこれには疑問。admin はコピーされてたけど markdownx はコピーされてないじゃん。あれ? いまやってみたら staticfiles に現れた。まあよかった。
+
+
+### ↑のあと DEBUG=False で実行したらcss表示されない
+
+`--insecure` で実行したら表示された。
+
+```
+python manage.py runserver --insecure
+```
+
+insecure をつけると STATIC_ROOT のほうを見に行ってくれるようになるんかな?
+
+Django の問題で状況を説明するときは
+
+- どの環境(local, vagrant, apache, heroku)で
+- どの実行方法(runserver, wsgi)で
+- apache なら Alias の設定はどうなってて
+- STATIC_ROOT はどこになってるか
+
+らへんを明記しないとダメだなー。あと django1,2 でちょっと違うから注意。
+
+
+### ↑の作業を終えたあと admin や markdownx のcssは表示されたが MEDIA にアップした画像が404
+
+まあそりゃ apache なら Alias で media のアクセス先を指定できるけど、ローカルではそういうことしてないもんね。そう理解しつつググったら、あったあった。
+
+- [How to serve media file when runserver --insecure?](https://stackoverflow.com/questions/28063089/how-to-serve-media-file-when-runserver-insecure)
+
+ってまて、MEDIAファイルの設定はもう書いてあるよ! なんで?!
+
+
+### ふと思った
+
+Django は「ここはよくわかんないなーまあでもやりたいメインのことじゃないし適当にしとくか」ってほかっておいたことがあとになって必ず襲ってくる感じ。
+>>>>>>> Stashed changes
