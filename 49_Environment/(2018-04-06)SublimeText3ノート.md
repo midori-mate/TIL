@@ -24,7 +24,7 @@ SublimeText3Note SublimeNote SublimeTextNote
 
 ## 場合別 tips
 
-### 01. C#のビルド
+#### 01. C#のビルド
 
 C#.sublime-build
 
@@ -58,7 +58,7 @@ C#.sublime-build
 }
 ```
 
-### 02. OmniMarkupPreviewer でブラウザプレビューしようとしたら404になる問題
+#### 02. OmniMarkupPreviewer でブラウザプレビューしようとしたら404になる問題
 
 基本設定 > Package Settings > OmniMarkupPreviewer > Settings > User
 
@@ -70,7 +70,7 @@ C#.sublime-build
 }
 ```
 
-### 03. Mac キーバインディングの設定
+#### 03. Mac キーバインディングの設定
 
 ・ キーバインドファイルをここにコピー。
 
@@ -94,17 +94,15 @@ C#.sublime-build
 { "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 ```
 
-### 04. coffee script のシンタックスハイライト
+#### 04. coffee script のシンタックスハイライト
 
 Better CoffeScript をパッケージインストール。ファイルの種類を Better CoffeeScript に合わせる。
 
-### 05. Table Editor パッケージ
+#### 05. Table Editor パッケージ
 
 CSVを見るためにわざわざ Excel とかいうクソ重ソフトを開いてないか?  Sublimeちゃんでいけるで。
 
 `install > Table Editor`
-
-#### まず
 
 こいつはかなり keymap が他とかぶるから変更したほうがいい。
 
@@ -125,8 +123,6 @@ table_editor_next_row       : 次の行に移動。とにかく enter から ctr
 # csv の整形
 table_editor_csv_to_table   : デフォルトは ctrl+k,| なんだがそれはカタカナ変換だ!!!!! 他のキーに変える。
 ```
-
-#### CSV整形
 
 コマンドパレットでこれ打ってから
 
@@ -150,8 +146,6 @@ a,b,c
 | 3sdfasd       | asfsdaf    | fsafa |
 ```
 
-#### markdown 内の Table を整形
-
 コマンドパレットでこれ打ってから
 
 ```
@@ -168,7 +162,7 @@ Table Editor: Set table syntax 'Simple' for current view
 
 この中のどっかで `table_editor_next_field`, `table_editor_previous_field`, `table_editor_next_row` に設定したショートカットを打つ。テーブルの上を Excel のように移動できるぞ。
 
-### 06. つーかショートカットがかぶるのマジ面倒くさいんだけど
+#### 06. つーかショートカットがかぶるのマジ面倒くさいんだけど
 
 かぶること自体は防げないが、かぶったあと「何がかぶってんのか」をサクッと見れるパッケージがこれ。
 
@@ -176,15 +170,15 @@ Table Editor: Set table syntax 'Simple' for current view
 
 コマンドパレットから `All Conflicts` で一覧が見れる。
 
-### 07. シンタックス・セットのショートカット
+#### 07. シンタックス・セットのショートカット
 
 コマンドパレットから `Set Syntax` であとはわかるだろう。
 
-### 08. 謎現象、ショートカットが効かない
+#### 08. 謎現象、ショートカットが効かない
 
 「ライセンス買え」が出ているせいかもしれない。今回は `Ctrl+K,Ctrl+U` が効かなかった。
 
-### 09. GoToAnything パッケージ
+#### 09. GoToAnything パッケージ
 
 左サイドバーに置いているファイルの中からファイル名で検索。 
 
@@ -194,9 +188,17 @@ Table Editor: Set table syntax 'Simple' for current view
 | Ctrl,Command + r | Function |
 | Ctrl,Command + ; | Variable |
 
-### 10. Win のフォントはどうする?
+#### 10. Win のフォントはどうする?
 
 [Myrica](https://nelog.jp/myrica)
 
-なんか `Ricty` はバッククォートがカス。
+なんか `Ricty` はバッククォートがカス。等幅じゃないしさー。
 
+#### マルチカーソルのWin,Mac差が面倒なのでこの際統一
+
+こうする。
+
+- Win: Ctrl+Alt
+- Mac: Command+Ctrl
+
+Mac のほうはもともと `swap_line_up` `swap_line_down` があったのでそれは無効化した。(行移動)
