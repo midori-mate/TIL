@@ -17,6 +17,9 @@ pyenv global VERSION
 pyenv install --list
 pyenv install VERSION
 pyenv virtualenv VERSION NEW_NAME
+
+# 新しい環境作ったらこれ、ね。
+pip install --upgrade pip
 ```
 
 
