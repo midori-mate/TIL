@@ -2,6 +2,99 @@ DjangoNote
 ===
 
 
+## 基本形作成
+
+- Add gitignore
+    - [example](https://github.com/jpadilla/django-project-template/blob/master/.gitignore)
+- Initialize Django
+    - django-admin startproject config .
+- Add static folders
+    - static
+        - app1/images/.gitkeep
+        - app2/images/.gitkeep
+        - css/.gitkeep
+        - js/.gitkeep
+- Add template folders
+    - templates
+        - .gitkeep
+        - app1/.gitkeep
+        - app2/.gitkeep
+- Add apps
+    - python manage.py startapp app1
+    - python manage.py startapp app2
+- Migrate
+    - python manage.py makemigrations
+    - python manage.py migrate
+    - python manage.py createsuperuser
+- Run
+    - python manage.py runserver
+
+[localhost:8000](http://localhost:8000/)
+
+
+## 設定ファイル分割
+
+- Create config/settings/settings.py folder
+- Rename it to base.py
+- Modify `BASE_DIR`
+
+```python
+import environ
+ROOT_DIR = environ.Path(__file__) - 3
+```
+
+- Remove some vars from base.py
+    - DEBUG
+    - DATABASE
+    - MEDIA_ROOT等
+    - STATIC_ROOT
+    - LOGGING
+- Add local.py and production.py
+
+```python
+from .base import *
+```
+
+- Make each startup script see different setting file
+
+```python
+# manage.py
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.local')
+
+# wsgi.py
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.production')
+```
+
+
+## Vagrant Apache 環境
+
+Vagrantfile, provision.sh, requirements.txt は作業するはしから改良されているので今のとこ一番新しいやつを参照すること。
+
+なお Windows10, Powershell でやる場合管理者権限で開かないとダメ。
+
+```
+$ vagrant up
+$ vagrant ssh
+```
+
+```
+$ source /vagrant/env3.6/bin/activate
+$ python /vagrant/manage.py migrate
+$ python /vagrant/manage.py createsuperuser
+$ python /vagrant/manage.py collectstatic -c --noinput
+$ sudo apachectl restart
+```
+
+これでアクセスすると404かもしれないけど、それはデフォルトのurlに / へのアクセスがないだけだからね。  
+apache のログをリアルタイムで見る。↑の問題は access_log を見ることで把握できた。
+
+```
+$ sudo tail -f /var/log/httpd/error_log
+$ sudo tail -f /var/log/httpd/access_log
+```
+
+
+
 ## 作成から heroku デプロイまで。
 
 [DjangoFloare](https://gitlab.com/midori-mate/djangofloare)に以下のとおりの手順でコミットしてある。
@@ -10,30 +103,6 @@ DjangoNote
 ### 作成
 
 ```
-下準備
-    mkdir DjangoFloare
-    cd DjangoFloare/
-    gitignore 追加
-    https://github.com/jpadilla/django-project-template/blob/master/.gitignore
-
-Initialize Django
-    django-admin startproject config .
-    こうするとイチイチフォルダ名を config にしなくていい。
-
-Add static folders
-    ベストプラクティスに従って static を配置。
-        - static
-            - app1/images/.gitkeep
-            - app2/images/.gitkeep
-            - css/.gitkeep
-            - js/.gitkeep
-
-Add templates folders
-    ベストプラクティスに従って templates を配置。
-        - templates
-            - .gitkeep
-            - app1/.gitkeep
-            - app2/.gitkeep
 
 Add app1,2
     ベストプラクティスに従って app1 app2 追加。
@@ -497,3 +566,42 @@ Django の問題で状況を説明するときは
 ### ふと思った
 
 Django は「ここはよくわかんないなーまあでもやりたいメインのことじゃないし適当にしとくか」ってほかっておいたことがあとになって必ず襲ってくる感じ。
+
+
+### django-heroku の pip が成功しない。
+
+```
+Command "python setup.py egg_info" failed with error code 1
+```
+
+psycopg2は psycopg2==2.7.1 でinstallしないとダメ。
+
+
+### ImproperlyConfigured エラー
+
+```
+django.core.exceptions.ImproperlyConfigured: SQLite 3.8.3 or later is required (found 3.7.17).
+```
+
+ちょうど Django2.2 がリリースされたところみたい(2019-04-09)。解決法は見つかったけれど([Django2.2で開発サーバー起動時にSQLite3のエラーが出た場合の対応](https://qiita.com/rururu_kenken/items/8202b30b50e3bfa75821))、まあ別に最新バージョンを使わなければいいだけなので requirements.txt をいじる。
+
+```plaintext
+Django==2.1.7
+```
+
+requirements.txt の重要性を強く感じたとさ。
+
+
+### ModuleNotFoundError エラー
+
+```
+# python manage.py *** のときに起こる
+ModuleNotFoundError: No module named 'django.templatetags.static'
+```
+
+なんじゃこりゃ。まあ `/vagrant/env3.6/lib/python3.6/site-packages/django/templatetags/static.py` が存在しないのが原因ではある。けどなんでこれが生成されてねーんだ?
+
+よくわからないが `/vagrant/env3.6/lib/python3.6/site-packages` 内のdjango関係を消し去って `django==2.1.8` をinstallしたら生成された。
+
+
+### Vagrant,Apache 
