@@ -202,3 +202,7 @@ Table Editor: Set table syntax 'Simple' for current view
 - Mac: Command+Ctrl
 
 Mac のほうはもともと `swap_line_up` `swap_line_down` があったのでそれは無効化した。(行移動)
+
+#### HTML の整形
+
+HTMLPrettify
