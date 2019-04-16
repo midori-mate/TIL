@@ -4,6 +4,12 @@ GitNote
 
 2015 年のエンジニアに Git は欠かせない。
 
+```
+git config user.name midori-mate
+git config user.email midori.mate@gmail.com
+```
+
+
 ## 設定編
 
 ### インストール
