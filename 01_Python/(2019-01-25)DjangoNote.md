@@ -604,4 +604,52 @@ ModuleNotFoundError: No module named 'django.templatetags.static'
 よくわからないが `/vagrant/env3.6/lib/python3.6/site-packages` 内のdjango関係を消し去って `django==2.1.8` をinstallしたら生成された。
 
 
-### Vagrant,Apache 
+### Apache 環境で500が出たときの原因がわからねーぞクソが問題の解決
+
+- 500エラーになるとき通るデフォルトのビューをユーザ定義ビューにすげ替える。
+- その中で例外を表示する処理を書く。
+
+```python
+# urls.py
+from django.conf.urls import handler500
+from app import views
+handler500 = views.page_server_error  # 500エラーのデフォルトビューを自作ビューに挿げ替え。
+```
+
+```python
+# views.py
+def page_server_error(request, *args, **kw):
+
+    # 単純にコンソール(つまり /var/log/httpd/error_log)へ表示させたいとき。
+    import traceback
+    print(traceback.format_exc())
+
+    # てかslackに吐くとかもデキそう。
+
+    # DEBUG=True でいつも見てるエラーHTMLを取得するならこう。
+    from django.views import debug
+    error_html = debug.technical_500_response(request, *sys.exc_info()).content
+    # こうすれば DEBUG=False だというのにエラー画面が出る!
+    from django.http import HttpResponse
+    return HttpResponse(error_html)
+```
+
+いやーーこれ相当苦労したから解決して嬉しいわー。
+
+
+### 自作400ビュー作成
+
+500エラーと同じで、デフォルトのビューをユーザ定義ビューにすげ替える。
+
+```python
+# urls.py
+from django.conf.urls import handler404
+from app import views
+handler404 = views.page_not_found
+```
+
+```python
+def page_not_found(request, *args, **kw):
+    # まあこの中は好きにどうぞ。
+    return redirect('/')
+```
