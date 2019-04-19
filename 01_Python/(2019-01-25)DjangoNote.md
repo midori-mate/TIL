@@ -653,3 +653,45 @@ def page_not_found(request, *args, **kw):
     # まあこの中は好きにどうぞ。
     return redirect('/')
 ```
+
+
+### basic 認証
+
+こういうの作って
+
+```python
+import base64
+from django.contrib.auth import authenticate
+from django.http import HttpResponse
+
+
+def http401():
+    response = HttpResponse("Unauthorized", status=401)
+    response['WWW-Authenticate'] = 'Basic realm="basic auth username/password inalid"'
+    return response
+
+
+def basic_auth(request):
+    """
+    :param request:
+    :return: True is authenticated. Otherwise return False
+    """
+    if 'HTTP_AUTHORIZATION' not in request.META:
+        return False
+    (auth_scheme, base64_username_pass) = request.META['HTTP_AUTHORIZATION'].split(' ', 1)
+    if auth_scheme.lower() != 'basic':
+        return http401()
+    username_pass = base64.decodebytes(base64_username_pass.strip().encode('ascii')).decode('ascii')
+    (username, password) = username_pass.split(':', 1)
+    user = authenticate(username=username, password=password)
+    return user is not None
+```
+
+view の中でこうやって呼ぶ。
+
+```python
+if not basic_auth.basic_auth(request):
+    return basic_auth.http401()
+```
+
+ID,PW は createsuperuser で作ったやつ。
