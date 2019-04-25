@@ -695,3 +695,43 @@ if not basic_auth.basic_auth(request):
 ```
 
 ID,PW は createsuperuser で作ったやつ。
+
+
+### manage.py を使うときの settings ファイルを指定する
+
+こんな感じ。
+
+```
+$ python /vagrant/manage.py migrate --settings=config.settings.production
+```
+
+
+### Did you install mysqlclient? って出たときは?
+
+以下が読まれるよう記述。settings に書くのが主流みたい。
+
+```python
+import pymysql
+pymysql.install_as_MySQLdb()
+```
+
+
+### DBの初期データ、マスタデータを登録
+
+初期データの json を用意。
+
+```json
+[{"model": "app.config", "pk": 1, "fields": {"key": "show_500_error", "value": "1"}}]
+```
+
+初期データの登録。
+
+```
+$ python manage.py loaddata initial_db_data.json
+```
+
+そんなん、現在のDBのデータを json で落とせる機能がほしくなるじゃん。あります。
+
+```
+$ python manage.py dumpdata app > initial_db_data.json
+```
