@@ -2,7 +2,7 @@ Visual Studio Code Note vscodenote
 ===
 
 
-## 感想
+## 概観の推移
 
 #### 2018-04-19
 
@@ -15,6 +15,10 @@ Visual Studio Code Note vscodenote
 #### 2019-03-08
 
 ↑という感想だったけど、ペアプロが快適そうなので使ってみる。
+
+#### 2019-04-22
+
+さらに GitHub を介した設定の同期や、Sublime Text Keymap を用いた Sublime ちゃんにキーマップを似せる拡張のおかげでかなり使いやすくなった。気に入った!
 
 
 ## 下知識
