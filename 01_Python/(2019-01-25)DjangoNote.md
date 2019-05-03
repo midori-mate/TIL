@@ -735,3 +735,36 @@ $ python manage.py loaddata initial_db_data.json
 ```
 $ python manage.py dumpdata app > initial_db_data.json
 ```
+
+
+### URLの取得
+
+`http://localhost:8000/ja/?a=1` にアクセスした場合。
+
+```python
+print(request.get_host()          ) # localhost:8000
+print(request.scheme              ) # http
+print(request.path                ) # /ja/
+print(request.get_full_path()     ) # /ja/?a=1
+print(request.build_absolute_uri()) # http://localhost:8000/ja/?a=1
+```
+
+
+### Timezone によるワーニングやエラー
+
+```plaintext
+# 1. TZ情報なしの datetime を DateTimeField に渡したとき。
+RuntimeWarning: DateTimeField received a naive datetime
+# 2. DateTimeField の値とTZ情報なしの datetime を比較したとき。
+TypeError: can't compare offset-naive and offset-aware datetimes
+```
+
+- native: タイムゾーン情報を持たない
+- aware : タイムゾーン情報を持つ
+- 解決法: Django 内で datetime 作るときはタイムゾーンをもたせて aware にしよう。
+
+
+- `USE_TZ=True` にするとすべての datetime が UTC でDB登録される。
+- `TIME_ZONE='Asia/Tokyo'` にすると自動でUTCが日本時間に変換される。
+
+らしいが変換されてないぞ。
