@@ -149,3 +149,10 @@ usersettings > associations で検索 > settings.json を開く > 以下追記�
     "*.tpl": "html"
 }
 ```
+
+
+## とにかくショートカットキーを変えたい
+
+Command palette > Open Keyboard Shortcuts
+
+見やすい。
