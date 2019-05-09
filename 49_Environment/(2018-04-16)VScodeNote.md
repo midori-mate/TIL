@@ -116,12 +116,9 @@ Code alignment で導入。
 
 ## フォント問題
 
-- Windows では MyricaM M
-- Mac では Ricty
-
-![](media/VScode-font-problem.jpg)
-
 Windows
+
+![](media/vscode-font-win.jpg)
 
 |        Font        |                                Impression                                |
 |--------------------|--------------------------------------------------------------------------|
@@ -131,6 +128,8 @@ Windows
 | MyricaM M          | 上述の問題がない。                                                       |
 
 Mac
+
+![](media/vscode-font-mac.jpg)
 
 |       Font       |                     Impression                    |
 |------------------|---------------------------------------------------|
