@@ -116,27 +116,30 @@ Code alignment で導入。
 
 ## フォント問題
 
-Windows
+#### Windows では MyricaM M か Source Han Code JP
+
+|        Font        |            Impression            |
+|--------------------|----------------------------------|
+| Ricty              | 半角スペースの表示がおかしい。   |
+| Ricty Diminished   | バッククォートの表示がおかしい。 |
+| Myrica M           | 半角スペースの表示がおかしい。   |
+| MyricaM M          | OK.                              |
+| Source Han Code JP | OK. 全角:半角のサイズ差が2:3     |
 
 ![](media/vscode-font-win.jpg)
 
-|        Font        |                                Impression                                |
-|--------------------|--------------------------------------------------------------------------|
-| Myrica M           | 半角スペースが全角サイズで表示される。                                   |
-| Ricty Diminished   | バッククォートが死んでる。                                               |
-| Source Han Code JP | 半角スペースが死んでる。しかも日本語のサイズが英字*3のサイズで見づらい。 |
-| MyricaM M          | 上述の問題がない。                                                       |
 
-Mac
+#### Mac では Ricty, Ricty Diminished か Source Han Code JP
+
+|        Font        |           Impression           |
+|--------------------|--------------------------------|
+| Ricty              | OK.                            |
+| Ricty Diminished   | OK.                            |
+| Myrica M           | 半角スペースの表示がおかしい。 |
+| MyricaM M          | 半角スペースの表示がおかしい。 |
+| Source Han Code JP | OK. 全角:半角のサイズ差が2:3   |
 
 ![](media/vscode-font-mac.jpg)
-
-|       Font       |                     Impression                    |
-|------------------|---------------------------------------------------|
-| Myrica M         | Winと同じ問題。                                   |
-| MyricaM M        | Winでは問題なかったのに、半角スペースが死んでる。 |
-| Ricty Diminished | WinのSource Han Code JPと同じ問題。               |
-| Ricty            | 上述の問題がない。                                |
 
 
 ## tpl を html シンタックスハイライトにする
