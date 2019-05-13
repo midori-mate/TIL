@@ -158,3 +158,15 @@ usersettings > associations で検索 > settings.json を開く > 以下追記�
 Command palette > Open Keyboard Shortcuts
 
 見やすい。
+
+
+
+## 言語ごとにタブサイズ インデントサイズの設定
+
+Command palette > configure language specific settings > 言語を選択
+
+```json
+"[python]": {
+    "editor.tabSize": 4
+},
+```
