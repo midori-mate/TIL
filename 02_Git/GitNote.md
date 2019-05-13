@@ -346,6 +346,21 @@ GitLab はこれさえ叶えば完璧。
     `.gitlab/merge_request_templates/***.md`
     ***部分が issue と merge request のところで選べるようになる。
 
+***
+
+## GitHub ノート
+
+
+### Slackと連携
+
+参考
+
+```
+https://get.slack.help/hc/ja/articles/232289568-GitHub-%E3%81%A8-Slack-%E3%82%92%E9%80%A3%E6%90%BA%E3%81%95%E3%81%9B%E3%82%8B#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B
+```
+
+- [https://slack.github.com/](https://slack.github.com/) にアクセス。
+- /github subscribe owner/repo issues,pulls,statuses,public,commits:all,releases,comments,branches,reviews
 
 ***
 
