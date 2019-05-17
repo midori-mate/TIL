@@ -27,13 +27,20 @@ $ hub pull-request
 
 ```gitconfig
 [alias]
-    mkpr = !"f() { git checkout $1; git checkout -b $2; git commit --allow-empty -m \"Make PR\"; git push origin $2; hub pull-request; }; f"
+    # $1 : Default branch (where make new branch from)
+    # $2 : New branch
+    # $3 : If you want to add options to pull-request command
+    #    : --reviewer(-r) --assign(-a) --milestone(-M) --labels(-l) --draft(-d)
+    #    : --browse(-o)   --message(-m) "Title"        --edit(-e) < path/to/message-template.md
+    # tip: When you have .github/PULL_REQUEST_TEMPLATE.md, no need to add -m and -e. Probabil.
+    # ref: https://hub.github.com/hub-pull-request.1.html
+    mkpr = !"f() { git checkout $1; git checkout -b $2; git commit --allow-empty -m \"Make PR\"; git push origin $2; hub pull-request $3; }; f"
 ```
 
 使い方はこう。
 
 ```bash
-$ git mkpr ORIGINALBRANCH BRANCHNAME
+$ git mkpr ORIGINALBRANCH BRANCHNAME "-r xxx,xxx -a xxx,xxx -l xxx,xxx"
 ```
 
 `subl` の設定をしておけばこのあと PR の編集画面が開く。
