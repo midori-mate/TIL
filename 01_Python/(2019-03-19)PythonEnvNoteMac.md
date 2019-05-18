@@ -56,7 +56,7 @@ eval "$(pyenv virtualenv-init -)"
 オマケ .bash_profile の更新コマンド。
 
 ```
-source ~/.profile
+source ~/.bash_profile
 ```
 
 
