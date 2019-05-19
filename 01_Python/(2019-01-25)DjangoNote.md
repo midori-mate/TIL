@@ -768,3 +768,19 @@ TypeError: can't compare offset-naive and offset-aware datetimes
 - `TIME_ZONE='Asia/Tokyo'` にすると自動でUTCが日本時間に変換される。
 
 らしいが変換されてないぞ。
+
+
+### dumpdata
+
+```bash
+$ python /vagrant/manage.py dumpdata app.auth_user > /vagrant/initial_db_data.json --settings=config.settings.for_production
+CommandError: Unknown model: app.auth_user
+```
+
+auth_user じゃなくて `auth.user`
+
+成功したやつ。
+
+```bath
+$ python /vagrant/manage.py dumpdata auth.user --indent 4 --settings=config.settings.for_production > /vagrant/initial_db_data.json
+```
