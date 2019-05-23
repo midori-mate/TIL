@@ -206,3 +206,15 @@ Mac のほうはもともと `swap_line_up` `swap_line_down` があったので�
 #### HTML の整形
 
 HTMLPrettify
+
+#### Ctrl + k のカタカナが死んでる
+
+- 編集の Delete to End(行末まで削除)が `ctrl + k` になってる感じ。
+- keybind には Delete to End がない。
+- `ctrl + k` もない。
+- いろいろいじってたら Delete to End が `super + k` になってるのに `ctrl + k` で行末まで消える。
+- バグでしょこれ。
+
+#### Sync Settings
+
+https://packagecontrol.io/packages/Sync%20Settings
