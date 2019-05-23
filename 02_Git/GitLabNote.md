@@ -33,7 +33,7 @@ GitLabNote
 
 Slack側
 
-1. https://slack.com/apps/A0F7XDUAZ--web-
+1. https://slack.com/apps/A0F7XDUAZ-incoming-webhooks
 1. Add Configuration
 
 Gitlab側
