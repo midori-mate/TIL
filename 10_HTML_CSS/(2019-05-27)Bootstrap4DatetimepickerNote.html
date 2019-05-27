@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./Dependencies/bootstrap-4/bootstrap-4.css">
+  <link rel="stylesheet" href="./Dependencies/font-awesome-4/css/font-awesome.css">
+  <link rel="stylesheet" href="./Dependencies/bootstrap-4-datetimepicker/bootstrap-datetimepicker.min.css">
+</head>
+
+<body>
+  <div class="container mt-5">
+    <main role="main">
+      <form>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><span data-feather="clock"></span></span>
+              </div>
+              <input type="text" class="form-control" id="minimum-setup" placeholder="最小構成" required="">
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><span data-feather="clock"></span></span>
+              </div>
+              <input type="text" class="form-control" id="time-only" placeholder="時間のみ" required="">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><span data-feather="clock"></span></span>
+              </div>
+              <input type="text" class="form-control" id="ymdhm" placeholder="年月日と時間 10分刻み" required="">
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><span data-feather="clock"></span></span>
+              </div>
+              <input type="text" class="form-control" id="" placeholder="" required="">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><span data-feather="clock"></span></span>
+              </div>
+              <input type="text" class="form-control" id="" placeholder="" required="">
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><span data-feather="clock"></span></span>
+              </div>
+              <input type="text" class="form-control" id="" placeholder="" required="">
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Bootstrap4 Datetimepicker Note</p>
+      </footer>
+    </main>
+  </div>
+
+
+
+  <!-- jquery と bootstrap4 -->
+  <script src="./Dependencies/jquery-3.4.1.min.js"></script>
+  <script src="./Dependencies/bootstrap-4/bootstrap-4.bundle.js"></script>
+
+  <!-- datetimepicker は moment.js に依存している。 -->
+  <script src="./Dependencies/moment-2.24.0/moment.min.js"></script>
+  <script src="./Dependencies/moment-2.24.0/ja.js"></script>
+  <script src="./Dependencies/bootstrap-4-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+  <script>
+    feather.replace()
+  </script>
+
+  <!-- Bootstrap4 Datetimepicker Note  -->
+  <script>
+    $(function () {
+      $('#minimum-setup').datetimepicker();
+      $('#time-only').datetimepicker({
+        // format はここ http://momentjs.com/docs/#/displaying/format/
+        format: 'LT',
+        // option はここ http://eonasdan.github.io/bootstrap-datetimepicker/Options/
+        stepping: 10,
+      });
+      $('#ymdhm').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        stepping: 10,
+      });
+    });
+  </script>
+</body>
+</html>
