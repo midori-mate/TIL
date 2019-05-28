@@ -45,7 +45,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><span data-feather="clock"></span></span>
               </div>
-              <input type="text" class="form-control" id="" placeholder="" required="">
+              <input type="text" class="form-control" id="month-only" placeholder="年月のみ" required="">
             </div>
           </div>
         </div>
@@ -96,17 +96,29 @@
 
   <!-- Bootstrap4 Datetimepicker Note  -->
   <script>
+    //
+    // 基本的にここを参考に
+    //     http://eonasdan.github.io/bootstrap-datetimepicker/Options/
+    // format はここを
+    //     http://momentjs.com/docs/#/displaying/format/
+    //
+    //
+
     $(function () {
       $('#minimum-setup').datetimepicker();
       $('#time-only').datetimepicker({
-        // format はここ http://momentjs.com/docs/#/displaying/format/
         format: 'LT',
-        // option はここ http://eonasdan.github.io/bootstrap-datetimepicker/Options/
         stepping: 10,
       });
       $('#ymdhm').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
         stepping: 10,
+      });
+      $('#month-only').datetimepicker({
+        format: 'YYYY-MM',
+        maxDate: $.now(),
+        // defaultDate: '',     default を設定しても maxDate に上書かれてしまう。
+        useCurrent: false,   // useCurrent を false にすると maxDate による上書きが消える。
       });
     });
   </script>
