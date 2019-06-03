@@ -209,12 +209,13 @@ HTMLPrettify
 
 #### Ctrl + k のカタカナが死んでる
 
-- 編集の Delete to End(行末まで削除)が `ctrl + k` になってる感じ。
-- keybind には Delete to End がない。
-- `ctrl + k` もない。
-- いろいろいじってたら Delete to End が `super + k` になってるのに `ctrl + k` で行末まで消える。
-- バグでしょこれ。
+これは適切なユーザキーバインドの設定で解決した。 **Default (OSX).sublime-keymap** は Default のフォルダに置かないとダメ。もしかしたら sync settings で同期されるのは User フォルダだけかもなので、シンボリックリンクを張る。
+
+```bash
+ln -s "path/to/Packages/User/Default (OSX).sublime-keymap" "path/to/Packages/Default/Default (OSX).sublime-keymap"
+```
 
 #### Sync Settings
 
 https://packagecontrol.io/packages/Sync%20Settings
+
