@@ -26,3 +26,17 @@ $ ln -s "ターゲット" "シンボ名"
 $ wget -r -np {URL}
     # r = recursive, np = no parent
 ```
+
+
+## curl
+
+```bash
+curl -i -b cookie -X PUT http://localhost:1337/api/v1/timecard -H "Content-type:application/json" -d @timecard.json
+
+curl -i -b cookie -X PUT http://localhost:1337/api/v1/timecard -H "Content-type:application/json" -d @timecard.json
+
+# -i --include : HTTP ヘッダを出力に含める
+# -b --cookie  : クッキーを利用
+# -X --request : HTTP メソッド
+# -H --header  : ヘッダ情報付与
+```
