@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <div><span id="clock-second"></span></div>
+  <div><span id="clock-minute"></span></div>
+
+  <script src="./Dependencies/moment-2.24.0/moment.min.js"></script>
+  <!-- http://momentjs.com/timezone/
+       moment-timezone.js とりあえず最小のを、ってこれを選ぶと tz を文字列で設定できないっぽい。
+       moment-timezone-with-data.js これにするとタイムゾーンを文字列で設定できるよ。
+   -->
+  <script src="./Dependencies/moment-2.24.0/moment-timezone-with-data.js"></script>
+
+  <!-- Moment Timezone Note  -->
+  <script>
+    console.log('-------------------- いま --------------------');
+
+    console.log(
+      '現在のシステム時間:',
+      moment(),
+    );
+
+    console.log(
+      '↑のだと見づらいからフォーマット:',
+      moment().format(),
+    );
+
+    // timezone 文字列は https://en.wikipedia.org/wiki/List_of_tz_database_time_zones から。
+    for (timezone of ['America/Los_Angeles','Asia/Tokyo','Europe/London']) {
+      console.log(
+        '今、世界は:',
+        moment().tz(timezone).format(),
+        timezone,
+      );
+    }
+
+
+    console.log('-------------------- 自作 moment --------------------');
+
+    // これは YYYY-MM-DD HH:MM じゃないとだめ! warning が出る。
+    console.log(
+      'システム TZ で任意時間:',
+      moment('2019-01-01 00:00').format(),
+    );
+    // moment({years: 2013, months: 2, days: 8, hours: 9, minutes: 30, seconds: 26}) // オブジェクトで設定
+    // moment(1404817278000)          // UNIX時間 (ミリ秒)
+    // moment.unix(1404817278)        // UNIX時間 (秒)
+
+
+    console.log('-------------------- UTC --------------------');
+
+    console.log(
+      '現在の UTC 日本からいうと9時間前:',
+      moment.utc().format(),
+    );
+
+    console.log(
+      'UTC で任意時間:',
+      moment.utc('2019-01-01 00:00').format(),
+    );
+
+    for (timezone of ['America/Los_Angeles','Asia/Tokyo','Europe/London']) {
+      console.log(
+        'UTC を TZ 変換:',
+        moment.utc('2019-01-01 00:00').tz(timezone).format(),
+        timezone,
+      );
+    }
+
+
+    console.log('-------------------- フォーマット --------------------');
+
+    for (f of ['YYYY.MM.DD HH:mm:ss', 'd', 'dd', 'ddd',]) {
+      console.log(
+        f + ':',
+        moment.utc('2019-01-01 00:00').format(f),
+      );
+      console.log(
+        '日本時間に TZ チェンジ:',
+        moment.utc('2019-01-01 00:00').tz('Asia/Tokyo').format(f),
+      );
+    }
+
+
+    // --------------------------
+    // オマケ 時計表示
+    // --------------------------
+
+    function showTimeBySecond() {
+      document.getElementById('clock-second').innerHTML = moment().format('YYYY.MM.DD HH:mm:ss');
+    }
+    function showTimeByMinute() {
+      document.getElementById('clock-minute').innerHTML = moment().format('YYYY.MM.DD HH:mm');
+    }
+
+    // 初期表示
+    showTimeBySecond();
+    showTimeByMinute();
+
+    // 秒が変わる瞬間にカウントを開始します。
+    setTimeout(function () {
+      showTimeBySecond();
+      setInterval(showTimeBySecond, 1000);
+    }, 1000 - moment().milliseconds());
+    // 分が変わる瞬間にカウントを開始します。
+    setTimeout(function () {
+      showTimeByMinute();
+      setInterval(showTimeByMinute, 60000);
+    }, 60000 - (moment().seconds() * 1000 + moment().milliseconds()));
+
+  </script>
+</body>
+</html>
