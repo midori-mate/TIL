@@ -130,7 +130,7 @@ table_editor_csv_to_table   : デフォルトは ctrl+k,| なんだがそれは�
 Table Editor: Enable for current syntax
 ```
 
-CSVを選択し `table_editor_csv_to_table` に設定してるショートカット。
+CSVを選択し `table_editor_csv_to_table` に設定してるショートカット。(Ctrl+S にしてるよ)
 
 ```
 # これが
