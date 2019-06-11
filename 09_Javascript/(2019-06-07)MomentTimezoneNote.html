@@ -96,6 +96,34 @@
     }
 
 
+    console.log('-------------------- ISO フォーマット --------------------');
+
+    // ISO 8601は、日付と時刻の表記に関する ISO の国際規格。
+    //     UTC が YYYYMMDDThhmmssZ あるいは YYYY-MM-DDThh:mm:ssZ
+    //     他タイムゾーンが YYYYMMDDThhmmss+0900 あるいは YYYY-MM-DDThh:mm:ss+0900
+    // この形式だと moment が扱いやすいからおすすめ。
+
+    console.log(
+      'ISO8601 フォーマット',
+      moment.utc('2019-01-01 00:00').toISOString(),
+    );
+
+    console.log(
+      'toISOString は tz 化してるのに無理やり UTC にしやがる',
+      moment.utc('2019-01-01 00:00').tz('Asia/Tokyo').toISOString(),
+    );
+
+    console.log(
+      'format() がちゃんと求める iso 形式にしてくれる',
+      moment.utc('2019-01-01 00:00').tz('Asia/Tokyo').format(),
+    );
+
+    console.log(
+      'UTC 形式も Z で表してくれる じゃあ toISOString いらなくね',
+      moment.utc('2019-01-01 00:00').format(),
+    );
+
+
     // --------------------------
     // オマケ 時計表示
     // --------------------------
