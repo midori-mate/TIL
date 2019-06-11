@@ -15,10 +15,18 @@
        moment-timezone.js とりあえず最小のを、ってこれを選ぶと tz を文字列で設定できないっぽい。
        moment-timezone-with-data.js これにするとタイムゾーンを文字列で設定できるよ。
    -->
+   <!-- これのあとに moment を読み込み直しちゃったりすると動かなくなるので注意。 -->
   <script src="./Dependencies/moment-2.24.0/moment-timezone-with-data.js"></script>
 
   <!-- Moment Timezone Note  -->
   <script>
+    const timezones = [
+      'America/Los_Angeles',
+      'Asia/Tokyo',
+      'Europe/London',
+      'Etc/UTC',
+    ];
+
     console.log('-------------------- いま --------------------');
 
     console.log(
@@ -32,7 +40,7 @@
     );
 
     // timezone 文字列は https://en.wikipedia.org/wiki/List_of_tz_database_time_zones から。
-    for (timezone of ['America/Los_Angeles','Asia/Tokyo','Europe/London']) {
+    for (timezone of timezones) {
       console.log(
         '今、世界は:',
         moment().tz(timezone).format(),
@@ -65,7 +73,7 @@
       moment.utc('2019-01-01 00:00').format(),
     );
 
-    for (timezone of ['America/Los_Angeles','Asia/Tokyo','Europe/London']) {
+    for (timezone of timezones) {
       console.log(
         'UTC を TZ 変換:',
         moment.utc('2019-01-01 00:00').tz(timezone).format(),
