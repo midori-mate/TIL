@@ -232,6 +232,9 @@ git config user.email midori.mate@gmail.com
     name = [USER NAME]
     email = [EMAIL]
 
+### 24. リモートへ強引に push
+    $ git push --force-with-lease origin master
+
 
 ***
 

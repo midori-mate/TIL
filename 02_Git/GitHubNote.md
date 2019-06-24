@@ -88,3 +88,17 @@ https://get.slack.help/hc/ja/articles/232289568-GitHub-%E3%81%A8-Slack-%E3%82%92
 
 - [https://slack.github.com/](https://slack.github.com/) にアクセス。
 - /github subscribe owner/repo issues,pulls,statuses,public,commits:all,releases,comments,branches,reviews
+
+いいな、と思った設定
+
+```plaintext
+/github unsubscribe owner/repo
+
+
+# 全ブランチの push は要らんなあってとき。
+/github subscribe owner/repo issues,pulls,statuses,public,releases,comments,reviews
+```
+
+
+
+
