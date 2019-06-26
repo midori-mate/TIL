@@ -182,7 +182,7 @@ git config user.email midori.mate@gmail.com
     $ git reflog                    HEADの履歴を見る。これで戻りたいところを指定できる。
 
 ### 17. PatchMaker 使ってサーバにパッチを上げるときの手順 
-    $ git graph | grep tag          前回のタグのハッシュを確認
+    $ git graph | grep tag:         前回のタグのハッシュを確認
     $ git diffno REVISION           前回と変わったファイルを取得
     ・PatchMakerに貼って実行。
     ・パッチファイルをサーバに移動。
