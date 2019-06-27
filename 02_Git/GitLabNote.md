@@ -6,6 +6,7 @@ GitLabNote
 - ユーザフォロー機能入れろ。マジで。
 - 好きなプロジェクトをユーザトップに表示させろ。マジで。
 
+これだけ埋まればぼくにとって GitLab が完璧。
 
 ## GitHub 開発フロー
 
@@ -48,3 +49,23 @@ Gitlab側
 - `.gitlab/issue_templates/***.md`
 - `.gitlab/merge_request_templates/***.md`
 - `***` 部分が issue と merge request のところで選べるようになる。
+
+
+## GitHub にリポジトリをミラーリングする
+
+### 参考
+
+[https://docs.gitlab.com/ce/workflow/repository_mirroring.html](https://docs.gitlab.com/ce/workflow/repository_mirroring.html#setting-up-a-push-mirror-from-gitlab-to-github-core)
+
+### やること
+
+1. GitHub > Settings > Developer settings > Personal access tokens
+1. `public_repo` にチェックをつけて token 作成。
+1. GitLab > リポジトリへ > Settings > Repository > Mirroring repositories
+
+- Git repository URL: `https://<your_github_username>@github.com/<your_github_group>/<your_github_project>.git`
+- Mirror direction: push
+- Authentication method: Password
+- Password: さっき作ったトークン
+
+以降 push に応じて GitHub にも送られる。

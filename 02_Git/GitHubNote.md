@@ -98,7 +98,3 @@ https://get.slack.help/hc/ja/articles/232289568-GitHub-%E3%81%A8-Slack-%E3%82%92
 # 全ブランチの push は要らんなあってとき。
 /github subscribe owner/repo issues,pulls,statuses,public,releases,comments,reviews
 ```
-
-
-
-
