@@ -36,50 +36,69 @@ Sequelize のドキュメントはブラウザのページタイトルが変わ�
 
 ## コマンド
 
+### インストール
+
 ```bash
 # インストール
-$ npm install --save-dev sequelize sequelize-cli
+$ npm install --save-dev sequelize mysql2 sequelize-cli
 
-# 確認(もしグローバルにインストールするなら sequelize だけで動くけどね)
+# cli は別途グローバルにインストールするのが正道らしいよ。
+$ npm install sequelize-cli -g
+
+# 確認
+$ sequelize
+# もし save-dev したならこう
 $ node_modules/.bin/sequelize
+```
 
-# DB の情報を書く config.json 生成。
-$ node_modules/.bin/sequelize init:config
+### model, migration file
 
-# DB 作成。 schema 用の migration file とかはなくて config.json の設定が使われる。
-$ node_modules/.bin/sequelize db:create
-
-# DB 削除。
-$ node_modules/.bin/sequelize db:drop
-
+```bash
 # model, migration 同時作成。
-$ node_modules/.bin/sequelize model:generate --name ModelName --attributes Field1:string,Field2:integer
+$ sequelize model:generate --name ModelName --attributes Field1:string,Field2:integer
 
 # migration だけ作成。 attributes はこっちにはない。
 # ここの name はモデル名じゃなくて migration file 名になるから create- とかつけるといいかも。
-$ node_modules/.bin/sequelize migration:generate --name create-ModelName
+$ sequelize migration:generate --name create-ModelName
+```
+
+### 実行系
+
+```bash
+# DB の情報を書く config.json 生成。(後述するけど必須じゃない。設定は全部オプションと migration file で書ける。)
+$ sequelize init:config
+
+# DB 作成。 schema 用の migration file とかはなくて config.json の設定が使われる。
+$ sequelize db:create
+
+# DB 削除。
+$ sequelize db:drop
 
 # migration file を使って migrate
-$ node_modules/.bin/sequelize db:migrate
+$ sequelize db:migrate
 # migration file 指定。これは「このファイルまで」だよ。時刻がこれより前のやつは全部実行される。
-$ node_modules/.bin/sequelize db:migrate --to 20190628070134-create-ModelName.js
+$ sequelize db:migrate --to 20190628070134-create-ModelName.js
 
 # migration file が間違ってたから戻したいわ。
 # いっこ戻す。
-$ node_modules/.bin/sequelize db:migrate:undo
+$ sequelize db:migrate:undo
 # 全部戻す。
-$ node_modules/.bin/sequelize db:migrate:undo:all
+$ sequelize db:migrate:undo:all
 # 「このファイルまで」戻す。
-$ node_modules/.bin/sequelize db:migrate:undo:all --to 20190628070134-create-ModelName.js
+$ sequelize db:migrate:undo:all --to 20190628070134-create-ModelName.js
 # 裏技
 # DB の SequelizeMeta を直接編集。
-
-# ちっとオプションをつけたコマンド。
-# --env config.json のキー名を指定する。
-# --url config.json に
-$ node_modules/.bin/sequelize db:migrate --env XXX --url 'mysql://user:pw@host/dbname'
 ```
 
+### 実行系(config.json を使わない系)
+
+database の情報は全部 connection string で書けるし、文字コードは migration file で書ける。
+
+```bash
+$ sequelize db:create  --url 'mysql://user:pw@host/dbname'
+$ sequelize db:drop    --url 'mysql://user:pw@host/dbname'
+$ sequelize db:migrate --url 'mysql://user:pw@host/dbname'
+```
 
 ## config.json
 
@@ -102,6 +121,26 @@ $ node_modules/.bin/sequelize db:migrate --env XXX --url 'mysql://user:pw@host/d
     }
   },
 }
+```
+
+## 文字コードを変更する migration file
+
+```javascript
+'use strict';
+
+module.exports = {
+  // eslint-disable-next-line no-unused-vars
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.sequelize.query(
+      `ALTER DATABASE ${queryInterface.sequelize.config.database}
+        CHARACTER SET utf8 COLLATE utf8_general_ci;`
+    );
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  down: (queryInterface, Sequelize) => {
+  },
+};
 ```
 
 
