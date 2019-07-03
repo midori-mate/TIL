@@ -784,3 +784,24 @@ auth_user じゃなくて `auth.user`
 ```bath
 $ python /vagrant/manage.py dumpdata auth.user --indent 4 --settings=config.settings.for_production > /vagrant/initial_db_data.json
 ```
+
+
+### DATABASES 設定に ssl を指定する例
+
+たまたま見つけた Azure Database for MySQL へ ssl を使ってアクセスする記事なんだけど、「OPTIONS ssl はどうやって使うんだろう」への答えがあったのでメモっとく。
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'quickstartdb',
+        'USER': 'myadmin@mydemoserver',
+        'PASSWORD': 'yourpassword',
+        'HOST': 'mydemoserver.mysql.database.azure.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'ssl': {'ssl-ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}
+        }
+    }
+}
+```
