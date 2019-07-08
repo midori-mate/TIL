@@ -116,6 +116,8 @@ $ sequelize db:migrate --url 'mysql://user:pw@host/dbname'
   },
   // json ファイルにパスワードとか書きたくないなら --url オプションで補ってね。
   "production": {
+    // ただこれを使うことで環境変数を取れるっぽい? 未検証だよ。
+    "use_env_variable": "DATABASE_URL",
     "dialectOptions": {
       "charset": "utf8"
     }
