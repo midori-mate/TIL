@@ -7,6 +7,9 @@ GitNote
 ```
 git config user.name midori-mate
 git config user.email midori.mate@gmail.com
+[user]
+    name = midori-mate
+    email = midori.mate@gmail.com
 ```
 
 
