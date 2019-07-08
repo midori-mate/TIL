@@ -235,6 +235,13 @@ git config user.email midori.mate@gmail.com
 ### 24. リモートへ強引に push
     $ git push --force-with-lease origin master
 
+### 25. Access denied が出たとき
+
+これムカつくよなー。 Denied なのは分かってっから、ユーザ名とパスワードを入力させろっつの。そういうときは remote url をユーザ名含めた url に書き換える。
+
+```bash
+$ git remote set-url origin https://username@github.com/hoge/abc.git
+```
 
 ***
 
