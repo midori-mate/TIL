@@ -4,11 +4,18 @@ GitHubNote
 
 ## hub コマンド
 
+### Mac
+
 ```bash
 $ brew install hub
 $ which hub
 /usr/local/bin/hub
 ```
+
+### Windows
+
+- [https://github.com/github/hub/releases](https://github.com/github/hub/releases)
+- ぱそこ再起動。
 
 
 ## コマンドラインから PR する準備
