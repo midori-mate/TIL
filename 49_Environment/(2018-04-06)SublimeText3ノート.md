@@ -3,7 +3,7 @@ SublimeText3Note SublimeNote SublimeTextNote
 
 ## 80ドル
 
-- 設定、パッケージ、ビルドシステムを Chrome のように常時同期できるようになったら。
+- 設定、パッケージ、ビルドシステムを Chrome のように常時同期できるようになったら。 -> sync settings で OK!
 - windows10 で日本語入力の小窓がインラインになったら。 -> 2019-03-14 OK!
 - windows10 タスクバー右クリックで新しいウィンドウを開けるようになったら。
 - windows10 現在開いているファイルをエクスプローラで開けるようになったら。
@@ -28,7 +28,7 @@ SublimeText3Note SublimeNote SublimeTextNote
 
 C#.sublime-build
 
-```json
+```javascript
 {
     // This build system will build your cs file to exe file and will run it
     "file_regex": "^(...*?)[(]([0-9]*),([0-9]*)[)]",
@@ -89,7 +89,7 @@ C#.sublime-build
 
 ・ 置換は Command+opt+f だけど他のとかぶるから変更する。
 
-```json
+```javascript
 // { "keys": ["super+alt+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 { "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 ```
@@ -100,67 +100,24 @@ Better CoffeScript をパッケージインストール。ファイルの種類�
 
 #### 05. Table Editor パッケージ
 
-CSVを見るためにわざわざ Excel とかいうクソ重ソフトを開いてないか?  Sublimeちゃんでいけるで。
+便利だけれど keymap がかなり被るから設定しとけ。
 
-`install > Table Editor`
-
-こいつはかなり keymap が他とかぶるから変更したほうがいい。
-
-1. `Sublime Text 3/Packages/Table Editor/Default (OSX).sublime-keymap` 作成。
-    - Windows の場合は `Default (Windows).sublime-keymap` ね。
-2. 中身は `Preference > Package Settings > Table Editor > Key Bindings - Default` の内容。
-    - うまくいかんかったらここにデフォルトのキーマップがおいてある。
-        - [https://github.com/vkocubinsky/SublimeTableEditor](https://github.com/vkocubinsky/SublimeTableEditor)
-
-```
-# 変更ガイド
-
-# md の table
-table_editor_next_field     : 次のセルに移動。デフォルトは tab で動作しない。 super+right とかよさげ。
-table_editor_previous_field : 前のセルに移動。 super+left とかよさげ。
-table_editor_next_row       : 次の行に移動。とにかく enter から ctrl+enter とかに変える。
-
-# csv の整形
-table_editor_csv_to_table   : デフォルトは ctrl+k,| なんだがそれはカタカナ変換だ!!!!! 他のキーに変える。
+```bash
+# keymap のユーザ設定ファイルを作成。
+# NOTE: User フォルダ内の Default-TableEditor (OSX).sublime-keymap の ln をユーザ設定ファイルとする。
+$ mkdir -p "/Users/midori/Library/Application Support/Sublime Text 3/Packages/Table Editor"
+$ ln -s "/Users/midori/Library/Application Support/Sublime Text 3/Packages/User/Default-TableEditor (OSX).sublime-keymap" "/Users/midori/Library/Application Support/Sublime Text 3/Packages/Table Editor/Default (OSX).sublime-keymap"
 ```
 
-コマンドパレットでこれ打ってから
+使う key だけ設定。
 
-```
-Table Editor: Enable for current syntax
-```
-
-CSVを選択し `table_editor_csv_to_table` に設定してるショートカット。(Ctrl+S にしてるよ)
-
-```
-# これが
-a,b,c
-1111111111111,1111111111,22222
-3sdfasd,asfsdaf,fsafa
-```
-
-```
-# こうなる
-| a             | b          | c     |
-| 1111111111111 | 1111111111 | 22222 |
-| 3sdfasd       | asfsdaf    | fsafa |
-```
-
-コマンドパレットでこれ打ってから
-
-```
-Table Editor: Enable for current syntax
-Table Editor: Set table syntax 'Simple' for current view
-```
-
-こういうのを用意して
-
-```
-|||
-|-
-```
-
-この中のどっかで `table_editor_next_field`, `table_editor_previous_field`, `table_editor_next_row` に設定したショートカットを打つ。テーブルの上を Excel のように移動できるぞ。
+|            command             |      keys      |
+|--------------------------------|----------------|
+| table_editor_next_field        | super+right    |
+| table_editor_previous_field    | super+left     |
+| table_editor_next_row          | ctrl+enter     |
+| table_editor_csv_to_table      | ctrl+s         |
+| その他 ctrl+s が入っているやつ | コメントアウト |
 
 #### 06. つーかショートカットがかぶるのマジ面倒くさいんだけど
 
