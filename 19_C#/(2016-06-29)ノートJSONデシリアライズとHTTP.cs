@@ -65,3 +65,49 @@ public class MyJson
         public string day { get; set; }
     }
 }
+
+// asp.net でも出会った。
+// 
+// 1. 参照を追加
+// 2. using 追加
+// 3. クラスを DataContract 化 
+// 4. フィールドを DataMember 化
+// 
+// かいてるうちにすげー面倒くさくなってきた。
+// C# なんてどうでもいい…… Python やりたい…… ゼッタイもっとラクに json 化させてくれる……
+// まあいつか困ったときのためにシンプルな json 化だけ下にメモっとくよ。
+// 
+
+using System.Runtime.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Json;
+
+[DataContract]
+public class SignModel
+{
+    [DataMember(Name = "ContactId")]
+    public string ContactId { get; set; }
+
+    [DataMember(Name = "SignStatus")]
+    public string SignStatus { get; set; }
+}
+
+public class SignData : AbstractModel
+{
+    public List<SignModel> Models { get; set; }
+
+    public string ModelsJson
+    {
+        get
+        {
+            // この部分が json 化だよ。
+            using (var stream = new MemoryStream())
+            {
+                var serializer = new DataContractJsonSerializer(Models.GetType());
+                serializer.WriteObject(stream, Models);
+                return Encoding.UTF8.GetString(stream.ToArray());
+            }
+
+        }
+    }
+}
