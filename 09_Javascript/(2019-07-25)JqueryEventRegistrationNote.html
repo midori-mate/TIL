@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+  <!---------------------------------------------------------------
+    Jquery イベント登録理解ノート
+
+
+    これまでの理解
+      ・ $(A).on(click, func) Jquery イベントは「A がクリックされたら func する」というイベントをグローバルに用意することである。
+    実際のところ
+      ・ $(A).on(click, func) Jquery イベントは既存の A DOM の click イベントに func を登録することである。
+    だから
+      ・ イベント登録したあとに追加された A をクリックしても func は起こらない。
+   --------------------------------------------------------------->
+
+
+  <input class="A" type="checkbox">
+  <div id="B"></div>
+
+
+  <script>
+     // input.A がチェックされたら「わー」って言う。
+    $('input.A').on('change', function () {
+        console.log('わー');
+    });
+
+    // div#B の中に input.A をもういっこ作成。
+    $('div#B').html('<input class="A" type="checkbox">');
+
+    // ここで下のほうの input.A をクリックしても「わー」は出ない。
+    // 下の input.A にはイベントが登録されていないため。
+    // 下の input.A にもイベントを登録したかったら新たにイベントを登録しないとダメ。
+
+    // これではじめてどちらの input.A でも「わー」が出るようになる。
+    $('input.A').on('change', function () {
+        console.log('わー');
+    });
+  </script>
+</body>
+</html>
+
