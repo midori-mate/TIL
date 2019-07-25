@@ -96,12 +96,24 @@ https://get.slack.help/hc/ja/articles/232289568-GitHub-%E3%81%A8-Slack-%E3%82%92
 - [https://slack.github.com/](https://slack.github.com/) にアクセス。
 - /github subscribe owner/repo issues,pulls,statuses,public,commits:all,releases,comments,branches,reviews
 
-いいな、と思った設定
+使い始めるとき
 
 ```plaintext
-/github unsubscribe owner/repo
+# チャンネル作る
 
+# チャンネルの中で /github を打つ
+# このチャンネルに github さんを含めますか? って訊かれるのでイエス。
+/github
 
-# 全ブランチの push は要らんなあってとき。
+# subscribe のコマンドを打つ
+# この repo がまだ slack 連携に含まれてなかったら、 github ページに飛んで手続きを行う。チェックをつける程度。
 /github subscribe owner/repo issues,pulls,statuses,public,releases,comments,reviews
+
+# もういっぺん subscribe
+# これで OK
+/github subscribe owner/repo issues,pulls,statuses,public,releases,comments,reviews
+
+# unsubscribe
+# subscribe のオプションを付け直したいときも一度これを
+/github unsubscribe owner/repo
 ```
