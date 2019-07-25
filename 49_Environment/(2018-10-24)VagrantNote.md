@@ -144,3 +144,19 @@ Network Utility.app > Portsscan タブ > アドレスを 127.0.0.1 > ポート�
 $ lsof -i:[PORT番号]
 $ kill [上で出てきたプロセスのPID]
 ```
+
+## Windows 10 で Virtualbox が起動しねえ
+
+どうせクソ Windows のせいだろ。
+
+```plaintext
+Stderr: VBoxManage.exe: error: WHvCapabilityCodeHypervisorPresent is FALSE! Make sure you have enabled the 'Windows Hypervisor Platform' feature. (VERR_NEM_NOT_AVAILABLE).
+VBoxManage.exe: error: VT-x is not available (VERR_VMX_NO_VMX)
+VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component ConsoleWrap, interface IConsole
+```
+
+1. Control panel
+1. プログラムと機能
+1. Windowsの機能の有効化または無効化
+1. Uncheck Hyper-V
+1. Reboot
