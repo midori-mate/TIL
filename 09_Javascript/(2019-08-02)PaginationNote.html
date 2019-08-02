@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+</head>
+<body>
+  <!-- 右寄せするには style="justify-content:flex-end;" -->
+  <!-- class は勝手につく。 -->
+  <ul id="twbs"></ul>
+  <!-- X ～ Y まで表示 -->
+  <div id="info"></div>
+
+  <script type="text/javascript">
+    // 
+    // twbsPagination インストール、マニュアル
+    // http://josecebe.github.io/twbs-pagination/
+    // 
+    // このライブラリのダメなところ: 名前が覚えられん twbs ってなんだよ。
+    // 
+
+    // 
+    // ■ pagination tips
+    // サーバへ送るもの
+    //     pageNum(ページ番号) 検索条件(あれば)
+    // サーバがやること
+    //     検索条件つかって recordsTotal(全件数)を取得
+    //     pageSize(1ページの表示件数)を定義
+    //     skipNum(スキップ件数)を計算: pageSize * (pageNum - 1)
+    //     skipNum と検索条件つかって records(実データ)を取得 
+    //     maxPageNum(ページ総数)を計算: ceil(recordsTotal / pageSize)
+    // クライアントへ送るもの
+    //     recordsTotal, skipNum, records, maxPageNum
+    // クライアントがやること
+    //     実データを表示(records)
+    //     ページネーションを表示 drawPagination(pageNum, maxPageNum)
+    //     「～件表示中」を表示 drawInfo(recordsTotal, skipNum, records.length)
+    // 
+
+    $(function () {
+      drawPagination(1, 10);
+      drawInfo(800, 40, 20);
+    });
+
+    function drawPagination(pageNum, maxPageNum) {
+
+      // 一度更にします。
+      $('#twbs').twbsPagination('destroy');
+
+      // ページネーションを描画します。
+      $('#twbs').twbsPagination({
+          startPage : pageNum,
+          totalPages: maxPageNum,
+          first: '最初',
+          prev : '前',
+          next : '次',
+          last : '最後',
+          // これつけないと onPageClick の関数が初期表示時に実行されるアホ不具合がある。
+          initiateStartPageClick: false,
+          onPageClick: function (event, pageNum) {
+              // ここで ajax とか実行すればいいね。
+              console.log(pageNum);
+          },
+      });
+    }
+
+    function drawInfo(recordsTotal, skipNum, length) {
+      $('#info').text(`${recordsTotal} 件中 ${skipNum + 1} から ${skipNum + length} まで表示`);
+    }
+  </script>
+</body>
+</html>
+
