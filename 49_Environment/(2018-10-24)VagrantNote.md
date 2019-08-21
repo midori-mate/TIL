@@ -160,3 +160,24 @@ VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component ConsoleWrap,
 1. Windowsの機能の有効化または無効化
 1. Uncheck Hyper-V
 1. Reboot
+
+## Windows 10 で Virtualbox が起動しねえ(怒)
+
+やっぱりクソ Windows のせい。
+
+```plaintext
+There was an error while executing `VBoxManage`, a CLI used by Vagrant
+for controlling VirtualBox. The command and stderr is shown below.
+
+Command: ["startvm", "73d34f0d-9c60-4ede-a829-8f733dcf8e80", "--type", "headless"]
+
+Stderr: VBoxManage.exe: error: Call to WHvSetupPartition failed: ERROR_SUCCESS (Last=0xc000000d/87) (VERR_NEM_VM_CREATE_FAILED)
+VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component ConsoleWrap, interface IConsole
+```
+
+PowerShell 管理者権限で以下コマンド。
+
+```
+Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+```
+
