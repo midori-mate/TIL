@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ビット演算の解説 | 西京電子工学大学</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+  <script>
+    var originalPageTitle = document.title;
+
+    function changeTitle() {
+      document.title = document.hidden ? 'もどってきて♥' : originalPageTitle;
+    }
+
+    $(function () {
+      $(document).on('visibilitychange', function () {
+        setTimeout(changeTitle, 200);
+      });
+    });
+  </script>
+</body>
+</html>
+
