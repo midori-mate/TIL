@@ -28,3 +28,8 @@ pipenv install MODULE1 MODULE2 ...
 # Start virtual env.
 pipenv shell
 ```
+
+```bash
+# Remove virtual env.
+pipenv --rm
+```
