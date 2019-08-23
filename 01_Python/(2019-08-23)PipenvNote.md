@@ -23,3 +23,8 @@ pipenv install
 # Install pip modules.
 pipenv install MODULE1 MODULE2 ...
 ```
+
+```bash
+# Start virtual env.
+pipenv shell
+```
