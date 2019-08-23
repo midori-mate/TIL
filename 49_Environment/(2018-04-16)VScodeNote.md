@@ -170,3 +170,15 @@ Command palette > configure language specific settings > 言語を選択
     "editor.tabSize": 4
 },
 ```
+
+
+## Pylint による Unable to import
+
+- `which python` で表示されるパスをコピー
+- .vscode/settings.json に追加。
+
+```json
+{
+    "python.pythonPath": "/Path/To/python"
+}
+```
