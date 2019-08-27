@@ -28,4 +28,4 @@ class Homework:
 
 myHomework = Homework()
 myHomework.grade = 50
-# myHomework.grade = 150  ValueError: grade は0〜100じゃないとダメ。
+# myHomework.grade = 150  # ValueError: grade は0〜100じゃないとダメ。
