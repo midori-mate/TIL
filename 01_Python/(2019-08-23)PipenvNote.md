@@ -6,6 +6,9 @@ Pipenv Note
 ```bash
 # Get pipenv
 pip install pipenv
+
+# Mac 
+brew install pipenv
 ```
 
 ```bash
@@ -33,3 +36,5 @@ pipenv shell
 # Remove virtual env.
 pipenv --rm
 ```
+
+
