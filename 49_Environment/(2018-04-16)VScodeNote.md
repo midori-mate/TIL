@@ -182,3 +182,8 @@ Command palette > configure language specific settings > 言語を選択
     "python.pythonPath": "/Path/To/python"
 }
 ```
+
+
+## Markdown preview
+
+コマンドパレットで `markdown`。
