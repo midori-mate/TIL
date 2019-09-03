@@ -117,3 +117,14 @@ https://get.slack.help/hc/ja/articles/232289568-GitHub-%E3%81%A8-Slack-%E3%82%92
 # subscribe のオプションを付け直したいときも一度これを
 /github unsubscribe owner/repo
 ```
+
+
+## Organization と individual
+
+Organization private と individual private を同時に使うことになったので、違いをメモしていく。
+
+|                    |    Organization    |      Individual     |
+|--------------------|--------------------|---------------------|
+| 外部のユーザを招く | 有料シート枠が必要 | 3人まで無料追加可能 |
+| PR の Draft 機能   | 使える             | 使えない            |
+|                    |                    |                     |
