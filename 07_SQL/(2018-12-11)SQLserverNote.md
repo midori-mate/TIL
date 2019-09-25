@@ -102,3 +102,9 @@ CROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) st
 WHERE creation_time >= 'yyyy-mm-dd'  -- 別になくてもいいけどね
 ORDER BY creation_time DESC -- 別になくてもいいけどね
 ```
+
+#### オートインクリメントにする
+
+```sql
+column_name bigint IDENTITY(1,1) NOT NULL
+```
