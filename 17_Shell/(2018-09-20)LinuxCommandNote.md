@@ -25,6 +25,8 @@ $ rm -rf "" (ディレクトリを再帰的に消す場合。rmは複数可能)
 $ ln -s "ターゲット" "シンボ名"
 $ wget -r -np {URL}
     # r = recursive, np = no parent
+
+$ sudo tail -f "ファイルパス"
 ```
 
 
