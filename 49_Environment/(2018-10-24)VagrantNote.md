@@ -181,3 +181,5 @@ PowerShell 管理者権限で以下コマンド。
 Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 ```
 
+↑のでうまくいかなかったので、 Vagrant と Virtualbox 両方のアンインストール、再インストールをしたら動いた。
+
