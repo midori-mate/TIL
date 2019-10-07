@@ -157,7 +157,7 @@ usersettings > associations で検索 > settings.json を開く > 以下追記�
 
 Command palette > Open Keyboard Shortcuts
 
-見やすい。
+見やすい。これは**ショートカット名でもショートカットキーでも検索できる**最高のキーバインディング設定画面だ。
 
 
 
