@@ -141,5 +141,13 @@ Alcatraz からサクッとインストールできるが……もうプラグ�
 
 ## 場合別 tips
 
+### sync settings の代用
+
+- [Xcodeの設定を複数の端末で共有する](https://qiita.com/stupid_student2/items/196df5c445e120cf7052)
+
+xcode はクソ。このくらいの機能つけとけよ。 GitHub さんひいては MS に頭下げてさあ。
 
 
+### 各々で xcode を開いて開発をはじめてしまうと provisioning profile を共有できない
+
+- [複数台のMacでiOSアプリを開発する方法](http://stpsysdev.blogspot.com/2015/09/macios.html)
