@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    /**
+     * Deferred を使い、非同期処理内においても機能する sleep です。
+     * 指定ミリ秒が経過したところで返り値の promise が resolved になります。
+     *
+     * @param {number} ms 待機するミリ秒数です。
+     */
+    var mySleep = function (ms) {
+      var deferred = new $.Deferred;
+      setTimeout(function() {
+        deferred.resolve();
+      }, ms);
+      return deferred.promise();
+    };
+
+    // 使い方。返り値の promise が resolved になった(done に入った)ところで処理を継続します。
+    // setTimeout でも同じような結果になるけれど、 Deferred を使ったものは非同期処理がガンガン出てくる中でも動く……というイメージ……
+    var promise = mySleep(2000);
+    promise.done(function () {
+      // ここに待機後の処理を記述します。
+      console.log('2000 ミリ秒経ったよ。');
+    });
+  </script>
+</body>
+</html>
+
