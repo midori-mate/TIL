@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    今回やりたいこと
+    - Ajax で同じページに何度もアクセスする。回数は任意。
+    - 各 Ajax アクセスは順繰りに実行する。非同期に全部一度に実行しない。
+    - 各 Ajax アクセスの間に何ミリ秒か待機する。
+
+    注意
+    これを Chrome で開いてテストすると、 CORS policy エラーが出る。
+    Ajax でよそのドメインにアクセスすることを Chrome が防いでいるため。
+    以下拡張機能を Chrome に導入するとテストができる。
+    https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="./date-format.js"></script>
+  <script>
+    /**
+     * 定数です。
+     * アクセスする回数と、アクセス間の待機時間。
+     */
+    REPEAT_TIMES = 5
+    REPEAT_INTERVAL_MS = 1000
+
+    /**
+     * Ajax で Json を取得する関数です。
+     *
+     * @param {number} repeatTime 何回目の実行か。ちゃんと順繰りに実行できていることを確認するために渡しています。
+     */
+    var access = function (repeatTime) {
+      // Deferred の初期値は「実行中」です。
+      var deferred = new $.Deferred;
+      $.ajax({
+        // NOTE: これはテストなんで、アクセスしている url に意味はありません。
+        // てきとうに Json を返すページを指定しているだけです。
+        url: 'http://weather.livedoor.com/forecast/webservice/json/v1?city=160010',
+        type: 'GET',
+        dataType: 'json',
+      })
+      .done(function (data) {
+        // 成功ログです。ちゃんと間隔を空けて実行できているか確認するためにログを記述しています。
+        console.log(myDateFormat.format(new Date(), 'yyyy-MM-dd hh:mm:ss.sss') + ' ' + repeatTime + '回目の成功');
+        // 成功後、いくらか待機してから Deferred の状態を「解決」にします。
+        var promise = sleep();
+        promise.done(function () {
+          deferred.resolve();
+        });
+      })
+      .fail(function () {
+        // Deferred の状態を「失敗」にします。
+        deferred.reject();
+      });
+      return deferred.promise();
+    };
+
+    /**
+     * 指定されたミリ秒だけ待機してから Deferred の状態を「解決」にします。
+     * 使い方は以下。
+     *
+     * var promise = sleep();
+     * promise.done(function () {
+     *   // sleep 後にやりたいことをここへ書く。
+     * });
+     */
+    var sleep = function () {
+      var deferred = new $.Deferred;
+      setTimeout(function() {
+        deferred.resolve();
+      }, REPEAT_INTERVAL_MS);
+      return deferred.promise();
+    };
+
+    /**
+     * REPEAT_TIMES ぶんアクセスを繰り返します。
+     *
+     * @param {number} repeatTime 今回のアクセスは何回目か。
+     */
+    var execAjaxSequentially = function (repeatTime) {
+      var promise = access(repeatTime);
+      promise.done(function () {
+        // アクセスが成功したあと、繰り返しの終了処理を行います。
+        var nextRepeatTime = repeatTime + 1;
+        if (nextRepeatTime > REPEAT_TIMES) {
+          return;
+        }
+        // 次のアクセスを行います。
+        execAjaxSequentially(nextRepeatTime);
+      });
+    };
+
+    execAjaxSequentially(/* repeatTime= */1);
+  </script>
+</body>
+</html>
+
