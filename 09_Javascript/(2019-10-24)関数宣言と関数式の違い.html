@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <script>
+    // 関数宣言。
+    function foo() {
+      console.log('foo');
+    }
+    foo();
+
+    // 関数式。
+    var bar = function () {
+      console.log('bar');
+    };
+    bar();
+
+    // 関数宣言は巻き上げ(ホイスト)が起こる。
+    // そのため、定義よりも先に呼び出しが可能。
+    baz();
+    function baz() {
+      console.log('baz');
+    }
+  </script>
+</body>
+</html>
+
