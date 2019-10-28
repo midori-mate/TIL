@@ -36,5 +36,3 @@ pipenv shell
 # Remove virtual env.
 pipenv --rm
 ```
-
-
