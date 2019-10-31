@@ -26,6 +26,24 @@ echo web: gunicorn config.wsgi --log-file - > Procfile
 echo web: gunicorn ここに python で実行するファイル名:app --log-file - > Procfile
 ```
 
+### Procfile が理解できない
+
+参考: [Procfile format](https://devcenter.heroku.com/articles/procfile#procfile-format)
+
+- `<process type>: <command>` というフォーマットである。
+- `gunicorn config.wsgi` とか `gunicorn file_name:app` の部分は gunicorn のコマンド。
+- `--log-file` はログを吐くというオプション。 `-` は stdout を指す。
+
+### gunicorn が理解できない
+
+```bash
+# Flask の場合。
+gunicorn <ファイル名>:<コード内で Flask(...) を格納している変数名>
+
+# Django の場合。
+gunicorn <wsgi.py の入ってるディレクトリ名>.<wsgi.py のファイル名(wsgi)>
+```
+
 ## Heroku コマンド
 
 ```bash
