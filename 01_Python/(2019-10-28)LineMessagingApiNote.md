@@ -3,14 +3,15 @@ LineMessagingApiNote
 
 どこもかしこもわかりづらいサイトばっかりだった。ちゃんとまとめる。
 
+
 ## LINE Developers でチャネルを作成
 
-この作業をしているとき「Line Developers」と「Line for business」がややこしい。どちらにも「チャネル」に相当するものがあるから。
+この作業をしているとき「Line Developers」と「Line Official Account Manager」がややこしい。どちらにも「チャネル」に相当するものがあるから。今回使うのは Developers のほう。
 
 - Line Developers: [https://developers.line.biz/](https://developers.line.biz/)
-- Line for business: [https://manager.line.biz/](https://manager.line.biz/)
+- Line Official Account Manager: [https://manager.line.biz/](https://manager.line.biz/)
 
-そして「チャネル」「プロバイダ」あたりの用語もややこしい。プロバイダがチャネルの親にあたる。ひとつのプロバイダに対し複数のチャネルを作成できる。チャネルが、 LINE の対話相手になる。
+そして「チャネル」「プロバイダ」あたりの用語もややこしい。チャネルはプロバイダの子要素にあたる。ひとつのプロバイダに対し複数のチャネルを作成できる。チャネルが LINE の対話相手になる。
 
 ![](media/line01.jpg)
 
@@ -32,27 +33,46 @@ LineMessagingApiNote
 
 ![](media/line10.jpg)
 
+
 ## Python スクリプト作成
 
-ぼくの場合、 pipenv を使うので。
+ぼくの場合、 pipenv を使うのでこんなふうに環境を準備。
 
 ```bash
 pipenv install flask line-bot-sdk gunicorn
 pipenv shell
 ```
 
-Python スクリプトは my_flask_script.py って名前にしてみた。
+Python スクリプトは my_flask_script.py って名前にしてみた。ベースのコードは [line-bot-sdk のドキュメント](https://github.com/line/line-bot-sdk-python#synopsis)から取得し、そこへ手を加えた。
 
 ```python
 from flask import Flask, request, abort
+
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,
+)
+
+# 環境変数取得のため。
 import os
-from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+
+# ログを出力するため。
+import logging
+import sys
 
 app = Flask(__name__)
 
-# Get from environment variables.
+# ログを標準出力へ。heroku logs --tail で確認するため。
+# app.logger.info で出力するため、レベルは INFO にする。
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.INFO)
+
+# 大事な情報は環境変数から取得。
 CHANNEL_ACCESS_TOKEN = os.environ['CHANNEL_ACCESS_TOKEN']
 CHANNEL_SECRET = os.environ['CHANNEL_SECRET']
 
@@ -84,7 +104,8 @@ def callback_post():
 
 
 @handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
+def reply_message(event):
+    # reply のテスト。
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text='こちらこーるばっく処理からお送りします:'+event.message.text))
@@ -93,6 +114,7 @@ def handle_message(event):
 if __name__ == '__main__':
     app.run()
 ```
+
 
 ## Heroku 用ファイル作成
 
@@ -106,6 +128,9 @@ pip freeze > requirements.txt
 # Procfile: プログラムの実行方法を記載。
 echo web: gunicorn my_flask_script:app --log-file - > Procfile
 ```
+
+Procfile は `web: python my_flask_script.py` ではなぜだか動かなかった。
+
 
 ## Heroku へアップ
 
@@ -132,12 +157,12 @@ git push heroku master
 heroku apps:destroy --app line-messaging-py-py-py
 ```
 
-トップページのメソッドも作ってあるので、確認してみる。
+トップページのメソッドも作ってあるので開いてみる。
 
 ![](media/line11.jpg)
 
 
-## Heroku URL を Webhook URL として LINE Developers へ登録
+## URL をチャネルへ登録
 
 チャネル基本設定のページで Webhook URL を登録し、 Webhook送信 を有効にする。上の Python スクリプトで、 callback を受け付ける URL は `/callback` にしたので、今回の Webhook URL は `https://line-messaging-py-py-py.herokuapp.com/callback` になる。
 
@@ -157,27 +182,60 @@ heroku apps:destroy --app line-messaging-py-py-py
 Python で書いたコールバック処理を通過してメッセージが返されたことがわかる。いまはチャネルの設定がデフォルトなので色々自動返信されちゃっているけれど、それはのちのち編集したらいい。
 
 
-## push_message を使う
+## event と userId の内容
 
-上で書いた Python スクリプトだけでは、返事しかできない。そうではなく、サーバ側から能動的にメッセージを送れるようにしたいところ。上の `handle_message` メソッドを以下のように書き換える。
+my_flask_script.py では、 `app.logger.info` によって、このスクリプトへ送られてきた情報を出力している。 `heroku logs --tail` で確認できる。
+
+```json
+{
+    "events": [
+        {
+            "type": "message",
+            "replyToken": "********************************",
+            "source": {
+                "userId": "*********************************",
+                "type": "user"
+            },
+            "timestamp": 1572247838104,
+            "message": {
+                "type": "text",
+                "id": "**************",
+                "text": "foo bar baz"
+            }
+        }
+    ],
+    "destination": "*********************************"
+}
+```
+
+この中の `userId` はあとで push_message に使いたいので、控えておく。コード内で取得したい場合、以下のように取得する。
 
 ```python
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    # userId を取得。
-    user_id = event.source.user_id
+event.source.user_id
+```
 
-    # reply のテスト。
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='こちらこーるばっく処理からお送りします:'+event.message.text))
 
-    # push のテスト。 userId を保存しておけば、いつでもユーザへメッセージを送れる。
-    line_bot_api.push_message(
-        user_id,
-        TextSendMessage(text='ぷっしゅめっせーじです。'))
+## push_message を使う
+
+上で書いた Python スクリプトだけでは、返事しかできない。そうではなく、サーバ側から能動的にメッセージを送れるようにしたいところ。もちろんこれは Heroku にアップする必要はなく、ローカルから試せる。
+
+```python
+from linebot import LineBotApi
+from linebot.models import TextSendMessage
+
+CHANNEL_ACCESS_TOKEN = '上で使った CHANNEL_ACCESS_TOKEN と同じ'
+USER_ID = '上で控えた userId の値'
+
+line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
+
+line_bot_api.push_message(
+    USER_ID,
+    TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
 ```
 
 ![](media/line16.jpg)
 
-まあ、この作りでは結局返事をしているだけなのだけれど、ユーザごとにユニークである `user_id` を保存しておきさえすればサーバ側からいつでもメッセージを送付することができることがわかる。
+このとおり、ユーザごとにユニークである `user_id` を保存しておきさえすればサーバ側からいつでもメッセージを送付することができることがわかる。
+
+
+---
