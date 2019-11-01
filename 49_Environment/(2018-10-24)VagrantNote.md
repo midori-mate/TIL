@@ -62,6 +62,11 @@ $ vagrant reload
 
 # provision だけやり直したい。
 $ vagrant provision
+
+# box 確認
+$ vagrant box list
+# box 削除
+$ vagrant box remove 名前
 ```
 
 ## PHP が欲しいときの provision.sh
@@ -182,4 +187,3 @@ Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 ```
 
 ↑のでうまくいかなかったので、 Vagrant と Virtualbox 両方のアンインストール、再インストールをしたら動いた。
-
