@@ -6,7 +6,9 @@
 - 友達登録したユーザに個別のメッセージを送りたい。
 - API とか利用して、プログラムからそれを行いたい。
 
-![](media/line17.jpg)
+図説するとこんな感じになる。
+
+![](media/line17.png)
 
 ## なぜ LINE Messaging API
 
@@ -15,21 +17,24 @@
 - **LINE Notify**
     - 自分か自分の含まれるグループへメッセージを送れる。
     - プログラムから送れる。
-    - しかし他人には送れなさそう。
+    - しかし友達へ個別に送ることはできなさそう。
 - **LINE公式アカウント**
     - 公式アカウントを作り、友達登録をしたユーザに一斉送付が出来る。個人メッセもできる。
-    - しかしそれらはすべてブラウザから手打ちで、自動で個人にメッセする API はなさそう。
+    - しかしそれらはすべてブラウザから手打ちで、自動で個人にメッセすることはできないみたい。
 - **LINE Messaging API**
-    - やりたいことができる。
+    - 公式アカウントの中に含まれる機能。
+    - 「やりたいこと」ができる。
+
+というわけで、まず LINE公式アカウントを作成して、それから LINE Messaging API を利用することになる。
 
 ## 料金
 
-[LINE公式アカウントとは丨料金紹介](https://www.linebiz.com/lp/line-official-account/plan/)に載っている。たぶん、 BOT 機能(自動返信)については無料でいくらでも使えて、 push 機能(能動的送信)については1,000通まで無料で使える。
+[LINE公式アカウントとは丨料金紹介](https://www.linebiz.com/lp/line-official-account/plan/)に載っている。たぶん、自動返信については無料でいくらでも使えて、 push 機能(能動的送信)については1,000通まで無料で使える。
 
 
 ## LINE Developers でチャネルを作成
 
-この作業をしているとき「Line Developers」と「Line for business」がややこしい。どちらにも「チャネル」に相当するものがあるから。今回使うのは Developers のほう。
+この作業をするとき、「LINE Developers」のページと「LINE Official Account Manager」のページがややこしい。
 
 - Line Developers: [https://developers.line.biz/](https://developers.line.biz/)
 - Line for business: [https://manager.line.biz/](https://manager.line.biz/)
