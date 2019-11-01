@@ -130,19 +130,19 @@ Git上での変更点をエディタに表示。必須ってわけじゃない�
 スクロールバーを右クリック > スクロールバーオプション > 垂直スクロールバー
 
 
-## カラースキーム
+### カラースキーム
 
 - vssettings を [DL サイト](https://studiostyl.es/schemes)から取得。
     - [Selenitic](https://studiostyl.es/schemes/selenitic) とかよかったよ。
 - Tools > Import and Export Settings > Import selected ... > No, just ...
 
 
-## タブを横から上へ
+### タブを横から上へ
 
 タブ一覧のところを右クリックすると Customize ってでる。そこから位置を変えられる。
 
 
-## aspx(html)のタブでタブ移動ショートカットが機能させる
+### aspx(html)のタブでタブ移動ショートカットが機能させる
 
 未解決。
 
@@ -153,3 +153,8 @@ Git上での変更点をエディタに表示。必須ってわけじゃない�
 - ショートカットキーを「Ctrl+PgUp」「Ctrl+PgDn」
 
 このへん。
+
+
+### 空白文字を表示
+
+上のメニューバー > 詳細 > 空白文字の表示
