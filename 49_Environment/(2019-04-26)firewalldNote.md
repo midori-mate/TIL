@@ -27,3 +27,16 @@ firewall-cmd --add-service=http  --zone=public --permanent
 firewall-cmd --add-service=https --zone=public --permanent
 firewall-cmd --add-service=mysql --zone=public --permanent
 ```
+
+## Ubuntu
+
+Ubuntu には firewall-cmd がなかった……
+
+```bash
+# 状態確認。
+sudo ufw status
+
+# 起動、停止
+sudo ufw enable
+sudo ufw reload
+```
