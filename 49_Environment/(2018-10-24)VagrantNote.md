@@ -187,3 +187,14 @@ Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 ```
 
 ↑のでうまくいかなかったので、 Vagrant と Virtualbox 両方のアンインストール、再インストールをしたら動いた。
+
+
+## オリジナル box の作り方
+
+```bash
+# オリジナル box にしたい vm があるディレクトリで……
+vagrant package VM_NAME --output BOX_NAME.box
+
+# たとえば
+vagrant package default --output ubuntu18.box
+```
