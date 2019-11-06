@@ -26,6 +26,8 @@ echo web: gunicorn config.wsgi --log-file - > Procfile
 echo web: gunicorn ここに python で実行するファイル名:app --log-file - > Procfile
 ```
 
+- `--log-file` はログを吐くというオプション。 `-` は stdout を指す。
+
 ### Procfile が理解できない
 
 参考: [Procfile format](https://devcenter.heroku.com/articles/procfile#procfile-format)
