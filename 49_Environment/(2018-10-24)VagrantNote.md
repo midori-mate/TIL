@@ -192,9 +192,15 @@ Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 ## オリジナル box の作り方
 
 ```bash
-# オリジナル box にしたい vm があるディレクトリで……
+# オリジナル box にしたい vm があるディレクトリで……指定しなければ default, package.box になる。
 vagrant package VM_NAME --output BOX_NAME.box
 
 # たとえば
 vagrant package default --output ubuntu18.box
+
+# つくった box を vagrant へ登録。
+vagrant box add BOX_NAME package.box
+
+# box 一覧確認。
+vagrant box list
 ```
