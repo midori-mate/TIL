@@ -1,4 +1,6 @@
 """lambda の中で変数を使うときの罠
+
+参考: https://stackoverflow.com/questions/938429/scope-of-lambda-functions-and-their-parameters
 """
 
 
