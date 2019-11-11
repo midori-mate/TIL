@@ -204,3 +204,12 @@ vagrant box add BOX_NAME package.box
 # box 一覧確認。
 vagrant box list
 ```
+
+## default: VM not created. Moving on...
+
+Vagrant が起動している状態で .vagrant を移動しちゃったら halt も destroy もできなくなった。
+
+.vagrant の中の .vagrant/machines/default/virtualbox/id が無いのが原因らしかった。今回は移動させた .vagrant が残っていたからそれを戻したら halt が機能したけれど、それが失われたら以下リンクを参照すればいいかも。
+
+- https://ato-u-ma.com/1471.html
+
