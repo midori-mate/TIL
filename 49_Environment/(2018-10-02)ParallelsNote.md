@@ -55,6 +55,18 @@ Parallels Note
 - https://my.parallels.com/ のページにログイン。そしたらぼくのキーはバージョン12のやつだった。きっちり永久ライセンスと書いてある。
 
 
+## Parallels Toolbox をアクティブ化できない
+
+```plaintext
+Parallels Toolbox の古いバージョン用に作成されたライセンスキーを使用しようとしています。
+この Mac で Parallels Toolbox をアクティブ化するには、追加のライセンスをご購入いただく必要があります。
+```
+
+ようは、古いバージョンの Toolbox が欲しいわけだ。
+
+- https://my.parallels.com/ のページにログイン。そこからダウンロードできる Parallels Toolbox for Mac 2.0.4 (PD12 compatible) は自分のライセンスキーでアクティベートできる。
+
+
 ## Windows10 を使うまでのメモ
 
 - https://my.parallels.com/ にログイン。
