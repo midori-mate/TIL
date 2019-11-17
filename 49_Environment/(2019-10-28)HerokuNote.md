@@ -57,4 +57,7 @@ heroku config:set SLACK_WEBHOOK_URL="https://hooks.slack.com/services/***"
 
 # 削除
 heroku apps:destroy --app アプリ名
+
+# 既存の app をリポジトリに登録
+heroku git:remote -a アプリ名
 ```
