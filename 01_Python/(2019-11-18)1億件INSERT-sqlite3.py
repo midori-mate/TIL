@@ -33,7 +33,7 @@ def sqlite_1():
     with closing(sqlite3.connect(':memory:')) as con:
 
         # テーブル作成。
-        con.execute('CREATE TABLE tbl(id INTEGER PRIMARY KEY AUTOINCREMENT, c1, c2, c3, c4, c5)')
+        con.execute('CREATE TABLE tbl(id INTEGER PRIMARY KEY AUTOINCREMENT, c1 TEXT, c2 TEXT, c3 TEXT, c4 TEXT, c5 TEXT)')
 
         # INSERT データ作成。
         values = (
@@ -52,7 +52,7 @@ def sqlite_2():
     """AI あり、全件同時。"""
 
     with closing(sqlite3.connect(':memory:')) as con:
-        con.execute('CREATE TABLE tbl(id INTEGER PRIMARY KEY AUTOINCREMENT, c1, c2, c3, c4, c5)')
+        con.execute('CREATE TABLE tbl(id INTEGER PRIMARY KEY AUTOINCREMENT, c1 TEXT, c2 TEXT, c3 TEXT, c4 TEXT, c5 TEXT)')
         values = (
             { 'c1':'c1','c2':'c2','c3':'c3','c4':'c4','c5':'c5', }
             for i in range(INSERT_NUM)
@@ -67,7 +67,7 @@ def sqlite_3():
 
     with closing(sqlite3.connect(':memory:')) as con:
         # AI を外して table 定義します。
-        con.execute('CREATE TABLE tbl(id INTEGER PRIMARY KEY, c1, c2, c3, c4, c5)')
+        con.execute('CREATE TABLE tbl(id INTEGER PRIMARY KEY, c1 TEXT, c2 TEXT, c3 TEXT, c4 TEXT, c5 TEXT)')
         values = (
             { 'id':i,'c1':'c1','c2':'c2','c3':'c3','c4':'c4','c5':'c5', }
             for i in range(INSERT_NUM)

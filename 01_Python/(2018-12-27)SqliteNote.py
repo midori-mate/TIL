@@ -127,6 +127,8 @@ def insert():
 
 
 # これが欲しいんだろ? テーブル名の一覧と、フィールドの一覧。
+# あとこんなんでも取得できるよ。
+# PRAGMA table_info('tbl_name')
 def get_table_info(con):
     sql = ' '.join([
         'SELECT',
